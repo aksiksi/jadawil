@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>Results</title>
+    </head>
+    <body>
+        {% if errors %}
+            <p>Error in course(s): {{ errors }}. Please try again.</p>
+        {% else %}
+            <h2>Returned schedules: {{ schedules|len }}</h2>
+            {% if schedules %}
+                <h3>Total credit hours: {{ schedules[0].values()|sum }}</h3>
+                <p>Retrieved in {{ end }} seconds.</p>
+                {% for schedule in schedules %}
+                <table border=1>
+                    <tr>
+                        <th>Title</th>
+                        <th>CRN</th>
+                        <th>Section</th>
+                        <th>Instructor</th>
+                        <th>Time</th>
+                        <th>Days</th>
+                        <th>Location</th>
+                        <th>Duration</th>
+                    </tr>
+                    {% for section in schedule.values() %}
+                    <tr>
+                        <td>{{ section.title }}</td>
+                        <td>{{ section.crn }}</td>
+                        <td>{{ section.section }}</td>
+                        <td>{{ section.instructor }}</td>
+                        <td>{{ section.time }}</td>
+                        <td>{{ section.days }}</td>
+                        <td>{{ section.location }}</td>
+                        <td>{{ section.duration }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <hr />
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    </body>
+</html>

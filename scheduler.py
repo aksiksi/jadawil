@@ -152,12 +152,14 @@ class Scheduler():
         '''Start the scheduler.'''
         # Get course info, filtered by gender
         courses = self.get_course_lab_info(self.courses)
-        pprint(courses)
         
+        # Make sure possible combinations not too high
         product = 1
         for course in courses.values():
             product *= len(course)
-        print product
+
+        if product > 1e6:
+            return None
 
         # Get titles and corresponding sections
         course_titles, course_info = courses.keys(), courses.values()

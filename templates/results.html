@@ -37,6 +37,8 @@
                 </table>
                 <hr />
                 {% endfor %}
+            {% else %}
+                <p>Too many possible schedule combinations. Please remove a course and try again.</p>
             {% endif %}
         {% endif %}
     </body>

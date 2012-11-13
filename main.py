@@ -31,4 +31,4 @@ def submit():
         return render_template('results.html', schedules=schedules, end=end)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run('0.0.0.0', port=12766)

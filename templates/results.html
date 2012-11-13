@@ -4,10 +4,10 @@
     </head>
     <body>
         {% if errors %}
-            <p>Error in course(s): {{ errors }}. Please try again.</p>
+            <p>Error in course code(s): {{ errors }}. Please try again.</p>
         {% else %}
-            <h2>Returned schedules: {{ schedules|len }}</h2>
             {% if schedules %}
+                <h2>Returned schedules: {{ schedules|len }}</h2>
                 <h3>Total credit hours: {{ schedules[0].values()|sum }}</h3>
                 <p>Retrieved in {{ end }} seconds.</p>
                 {% for schedule in schedules %}
@@ -20,7 +20,6 @@
                         <th>Time</th>
                         <th>Days</th>
                         <th>Location</th>
-                        <th>Duration</th>
                     </tr>
                     {% for section in schedule.values() %}
                     <tr>
@@ -31,7 +30,6 @@
                         <td>{{ section.time }}</td>
                         <td>{{ section.days }}</td>
                         <td>{{ section.location }}</td>
-                        <td>{{ section.duration }}</td>
                     </tr>
                     {% endfor %}
                 </table>

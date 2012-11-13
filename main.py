@@ -22,7 +22,7 @@ def submit():
         start = time.time()
         courses = [each for each in request.form.values() if len(each) > 1]
         gender = request.form.get('gender')
-        errors = scheduler.validate_inputs(courses)
+        errors = ', '.join(scheduler.validate_inputs(courses))
         if not errors:
             schedules = scheduler.Scheduler(courses, gender).start()
         else:

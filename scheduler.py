@@ -91,7 +91,7 @@ class Scheduler():
 
             # Filter course_sections by gender and availability (!TBA for loc, time, and instructor)
             for crn, section in course_sections.items():
-                if section['gender'] == self.gender and 'TBA' not in [section['time'], section['location'], section['instructor']]:
+                if section['gender'] == self.gender and all(['TBA' not in each for each in [section['time'], section['location']]]):
                     filtered_course_sections[crn] = section
 
             # Loop through filtered sections

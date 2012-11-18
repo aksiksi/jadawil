@@ -2,12 +2,12 @@
     <head>
         <title>Scheduler</title>
     </head>
-    <body style="margin: 30px 30px 30px 30px;">
-        <h1>Welcome to UAEUSched!</h1>
+    <body style="margin-left: 30px; margin-top: 30px;">
+        <h1>Welcome to Jadawil!</h1>
         <p>This is an <em>extremely</em> early version of my upcoming project. I've deployed this because of the early registration period. Please report any bugs to cyph0nik[at]gmail[fullstop]com. Sorry for the bland design!</p>
         <h2>Instructions</h2>
         <ol>
-            <li>Enter the course codes (ex: PHYS 1110 - make sure there's a space) of the courses you'd like to take in Spring 2013.</li>
+            <li>Enter the course codes of the courses you'd like to take in Spring 2013.</li>
             <li>Hit the submit button to get a list of upto 15 possible schedules.</li>
         </ol>
         <h2>Notes</h2>
@@ -15,7 +15,6 @@
         <ol>
             <li>There is a direct conflict between two courses and no alternatives are available.</li>
             <li>The scheduler did not find any valid schedules within the 10 second limit.</li>
-            <li>There are no sections currently open for the course.</li>
         </ol>
         <h3>Enter some courses to begin:</h3>
         <form action="/submit" method="POST">
@@ -25,19 +24,18 @@
                 <option value="G">Female</option>
             </select>
             <p>Courses:</p>
-            <input type="text" name="1" value=""/>
-            <input type="text" name="2" value=""/>
-            <input type="text" name="3" value=""/>
-            <input type="text" name="4" value=""/>
-            <input type="text" name="5" value=""/>
+            <input type="text" name="1" value="MECH 390"/>
+            <input type="text" name="2" value="PHYS 1120"/>
+            <input type="text" name="3" value="GENG 215"/>
+            <input type="text" name="4" value="HIS 133"/>
+            <input type="text" name="5" value="MATH 2210"/>
             <br />
-            <input type="text" name="6" value=""/>
-            <input type="text" name="7" value=""/>
-            <input type="text" name="8" value=""/>
+            <input type="text" name="6" value="BIOE 370"/>
+            <input type="text" name="7" value="GENG 220"/>
+            <input type="text" name="8" value="CHEM 1701"/>
             <input type="text" name="9" value=""/>
             <input type="text" name="10" value=""/>
             <p><button type="submit">Submit</button></p>
         </form>
-        <a href="http://www.freedomain.co.nr/" target="_blank" title="Free Domain Name .co.nr"><img src="http://nnaaraa.imdrv.net/co-nr.gif" width="88" height="31" border="0" alt="Free Domain Name .co.nr" /></a>
     </body>
 </html>

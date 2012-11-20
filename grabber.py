@@ -47,9 +47,12 @@ def html_to_pickle(source):
                             for key in info:
                                 # Fill up any empty info
                                 if info[key] == u'\xa0':
-                                    # Append a 'L' to section
+                                    # Append a 'L' to section or crn
                                     if key == 'section' or key == 'crn':
                                         info[key] = 'L' + previous_info[key]
+                                    # Add lab to title
+                                    elif key == 'title':
+                                        info[key] = previous_info[key] + ' (Lab)'
                                     else:
                                         info[key] = previous_info[key]
             
@@ -116,7 +119,7 @@ def source_grabber():
     # Get page source
     response = br.response()
     source = response.read()
-    
+
     return source
 
 def main():

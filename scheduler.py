@@ -15,7 +15,7 @@ def validate_inputs(courses):
     # Catch any input errors and return them
     for course in courses:
         try:
-            abbrev, code = course.strip(' ').split(' ')
+            abbrev, code = course.upper().strip(' ').split(' ')
             all_courses[abbrev][code]
         except:
             errors.append(course)
@@ -83,7 +83,7 @@ class Scheduler():
 
         # Loop through required courses
         for course in courses:
-            abbrev, code = course.strip(' ').split(' ')
+            abbrev, code = course.upper().strip(' ').split(' ')
             course_sections = all_courses[abbrev][code]
             course_labs = {}
 
@@ -181,7 +181,3 @@ class Scheduler():
                 break
 
         return schedules
-
-if __name__ == '__main__':
-    s = Scheduler(['PHYS 1120', 'GENG 215', 'MATH 1110', 'CHEM 1701', 'MATH 2210', 'GENG 220', 'PHYS 1110'], 'B')
-    schedules = s.start()

@@ -159,7 +159,7 @@ class Scheduler():
             product *= len(course)
 
         if product > 1e6:
-            return None
+            return -1
 
         # Get titles and corresponding sections
         course_titles, course_info = courses.keys(), courses.values()

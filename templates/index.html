@@ -8,13 +8,15 @@
         <h2>Instructions</h2>
         <ol>
             <li>Enter the course codes of the courses you'd like to take in Spring 2013.</li>
-            <li>Hit the submit button to get a list of upto 15 possible schedules.</li>
+            <li>A few examples of what a course code can look like: PSY 300, MATH 1120, MECH 390, ELEC 305. Uppercase or lowercase doesn't matter - just make sure that there's a space in between.</li>
+            <li>Hit the submit button to get a list of upto 15 possible schedules. If the site returns less than 15 schedules, know that these are the only possible combinations.</li>
         </ol>
         <h2>Notes</h2>
         <p>If you get no results, one of the following has occured:</p>
         <ol>
             <li>There is a direct conflict between two courses and no alternatives are available.</li>
             <li>The scheduler did not find any valid schedules within the 10 second limit.</li>
+            <li>There are too many possible combinations.</li>
         </ol>
         <h3>Enter some courses to begin:</h3>
         <form action="/submit" method="POST">

@@ -31,17 +31,21 @@ def html_to_pickle(source):
             if cols.count(u'\xa0') in [11, 12]:
                 # Find info of previous entry
                 previous_info = courses[index-1]
+                abbrev, code, crn, days = previous_info['abbrev'], previous_info['code'], \
+                                          previous_info['crn'], info['days']
 
                 # Check if previous entry is indeed the correct parent
                 if previous_info.values().count(u'\xa0') not in [11, 12]:
-                    abbrev, code, crn, days = previous_info['abbrev'], previous_info['code'], previous_info['crn'], info['days']
                     
                     # Verify duration to make sure it's not a final exam date
                     if info['duration'] == previous_info['duration']:
                         
                         # If the instructor is the same, simply add the second day to the original entry
-                        if info['instructor'] == previous_info['instructor']:
-                            courses_by_abbrev[abbrev][code][crn]['days'] += days # Append day to previous day
+                        if info['instructor'] in [previous_info['instructor'], 'TBA']:
+                            # Append day to previous day only if different
+                            if info['days'] != previous_info['days']:
+                                courses_by_abbrev[abbrev][code][crn]['days'] += days
+                        
                         # Otherwise, make it a lab section (see: ITBP 319)
                         else:
                             for key in info:
@@ -55,7 +59,24 @@ def html_to_pickle(source):
                                         info[key] = previous_info[key] + ' (Lab)'
                                     else:
                                         info[key] = previous_info[key]
-            
+                
+                # If the previous entry is "invalid", go back two steps
+                else:
+                    # Update the entry's info
+                    previous_info = courses[index-2]
+
+                    # Verify that this is the corrent parent
+                    if previous_info.values().count(u'\xa0') not in [11, 12]:
+                        # Add the info needed
+                        abbrev, code, crn, days = previous_info['abbrev'], previous_info['code'], \
+                                                  previous_info['crn'], info['days']
+                        
+                        # If time and instructor are the same, check days
+                        if [info['time'], info['instructor']] == [previous_info['time'], previous_info['instructor']]:
+                            # If the days are not the same, append the current day to previous
+                            if info['days'] != previous_info['days']:
+                                courses_by_abbrev[abbrev][code][crn]['days'] += days
+
             # Add course to course dict under correct abbrev, code, and crn
             if info['abbrev'] not in courses_by_abbrev:
                 courses_by_abbrev[info['abbrev']] = {info['code']: {info['crn']: info}}

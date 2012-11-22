@@ -4,6 +4,7 @@ import itertools
 import random
 from datetime import datetime
 from pprint import pprint
+from collections import defaultdict, OrderedDict
 
 def validate_inputs(courses):
     '''Make sure inputs are valid courses.'''
@@ -44,10 +45,10 @@ class TimeRange():
                     self.end = self.datetimes[time]
             index += 1
 
-    def __contains__(self, *args):
-        '''Return True if any of the inputs lies in the range.'''
-        # Construct list of time dicts
+    def construct(self, *args):
+        '''Construct a list of datetime objects for given arguments.'''
         times = []
+        
         for time in args:
             if time not in self.datetimes:
                 time_obj = datetime.strptime(time, '%I:%M %p')
@@ -56,13 +57,24 @@ class TimeRange():
             else:
                 times.append(self.datetimes[time])
 
+        return times
+
+    def contains(self, *args):
+        '''Return True if any of the inputs lies in the range.'''
+        # Construct list of datetime objects
+        datetimes = self.construct(*args)
+        
         # Check for conflicts
-        for time in times:
+        for time in datetimes:
             if (self.start <= time <= self.end):
                 return True
+        
         return False
 
-    def __show__(self):
+    def __gt__(self, other):
+        return self.start > other.end
+
+    def __str__(self):
         '''Return time range as string.'''
         return '{0}-{1}'.format(datetime.strftime(self.start, '%I:%M %p'), datetime.strftime(self.end, '%I:%M %p'))
 
@@ -117,14 +129,14 @@ class Scheduler():
         # Create a TimeRange object for section1 if it's not in timeranges
         text_time = section1['time']
         if text_time in self.timeranges:
-            t = self.timeranges.get(text_time)
+            timerange = self.timeranges.get(text_time)
         else:
-            t = TimeRange(start1, end1)
-            self.timeranges[text_time] = t
+            timerange = TimeRange(start1, end1)
+            self.timeranges[text_time] = timerange
 
         # Check if there is a conflict in days and/or time
         if any(day in section2['days'] for day in section1['days']):
-            if t.__contains__(start2, end2):
+            if timerange.contains(start2, end2):
                 return True
         else:
             return False
@@ -143,10 +155,60 @@ class Scheduler():
         return False
 
     def generate_products(self, course_info):
+        '''Return all possible schedule combinations as a generator.'''
         possible_products = list(itertools.product(*course_info))
         random.shuffle(possible_products)
         for product in possible_products:
             yield product
+
+    def convert_to_week_based(self, schedules):
+        '''Convert normal schedules to week-based schedules.'''
+        days_of_week = [('U', 'Sunday'), ('M', 'Monday'), ('T', 'Tuesday'),
+                        ('W', 'Wednesday'), ('R', 'Thursday')]
+        week_schedules = []
+
+        for schedule in schedules:
+            # Initialize week_schedule - need it to be in order
+            week_schedule = OrderedDict()
+            for letter, word in days_of_week:
+                week_schedule[word] = []
+
+            # Populate days of the week with courses
+            for course in schedule.values():
+                days = list(course['days'])
+                for letter, word in days_of_week:
+                    if letter in days:
+                        week_schedule[word].append(course)
+            
+            # Sort each schedule
+            sorted_week_schedule = OrderedDict()
+            for day, day_schedule in week_schedule.items():
+                sorted_week_schedule[day] = self.sort_courses_in_day(day_schedule)
+
+            week_schedules.append(sorted_week_schedule)
+
+        return week_schedules
+
+    def sort_courses_in_day(self, schedule):
+        '''Given a list of courses in a day, returns the courses in chronological order.'''
+        sorted_schedule = [0 for _ in range(len(schedule))]
+
+        for course in schedule:
+            # Track position of course; this basically tracks how many courses this course is after
+            position = 0
+            
+            # Get timeranges from dict (they're definitely there already)
+            current_timerange = self.timeranges[course['time']]
+            other_timeranges = [self.timeranges[each['time']] for each in schedule if each != course]
+
+            # Compare current course to the rest of them
+            for timerange in other_timeranges:
+                if current_timerange > timerange:
+                    position += 1
+
+            sorted_schedule.insert(position, course)
+
+        return [course for course in sorted_schedule if course]
 
     def start(self):
         '''Start the scheduler.'''
@@ -180,4 +242,8 @@ class Scheduler():
             if len(schedules) == 15 or (time.time() - start) >= 10:
                 break
 
-        return schedules
+        return self.convert_to_week_based(schedules)
+
+if __name__ == '__main__':
+    s = Scheduler(['PHYS 1110', 'MATH 1110', 'MECH 390', 'HIS 133', 'ITBP 319'], 'B').start()
+    print s

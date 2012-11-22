@@ -3,25 +3,33 @@ import scheduler
 import time
 
 app = Flask(__name__)
+app.debug = True
 
 @app.template_filter('len')
 def length(iterable):
     return len(iterable)
 
 @app.template_filter('sum')
-def add(schedule_info):
+def add(schedule):
     total_credits = 0
-    for course in schedule_info:
-        credits = course['credits']
+    added = []
+    
+    for day in schedule:
+        for course in day:
+            credits = course['credits']
+            title = course['title']
 
-        # In case of 0.00/3.00 like in CHEM 2702
-        if '/' in credits:
-            if 'L' in course['section']: # If course is a lab
-                total_credits += float(credits.partition('/')[0])
-            else:
-                total_credits += float(credits.partition('/')[2])
-        else:
-            total_credits += float(credits)
+            if title not in added:
+                # In case of 0.00/3.00 like in CHEM 2702
+                if '/' in credits:
+                    if 'L' in course['section']: # If course is a lab
+                        total_credits += float(credits.partition('/')[0])
+                    else:
+                        total_credits += float(credits.partition('/')[2])
+                else:
+                    total_credits += float(credits)
+
+                added.append(title)
     
     return total_credits
 
@@ -44,3 +52,6 @@ def submit():
         
         end = time.time() - start
         return render_template('results.html', schedules=schedules, end=end)
+
+if __name__ == '__main__':
+    app.run()

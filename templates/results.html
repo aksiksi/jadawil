@@ -1,6 +1,15 @@
 <html>
     <head>
         <title>Results</title>
+        <style>
+            td {
+                font-size: 12px;
+            }
+
+            table {
+                width: 60%;
+            }
+        </style>
     </head>
     <body style="margin: 30px 30px 30px 30px;">
         {% if errors %}
@@ -11,26 +20,23 @@
                 <h3>Total credit hours: {{ schedules[0].values()|sum }}</h3>
                 <p>Retrieved in {{ end }} seconds.</p>
                 {% for schedule in schedules %}
-                <table border=1>
+                <table border=0>
                     <tr>
-                        <th>Title</th>
-                        <th>CRN</th>
-                        <th>Section</th>
-                        <th>Instructor</th>
-                        <th>Time</th>
-                        <th>Days</th>
-                        <th>Location</th>
+                        <th>Sunday</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
                     </tr>
-                    {% for section in schedule.values() %}
-                    <tr>
-                        <td>{{ section.title }}</td>
-                        <td>{{ section.crn }}</td>
-                        <td>{{ section.section }}</td>
-                        <td>{{ section.instructor }}</td>
-                        <td>{{ section.time }}</td>
-                        <td>{{ section.days }}</td>
-                        <td>{{ section.location }}</td>
-                    </tr>
+                    {% for day in schedule.values() %}
+                        <td>
+                            {% for course in day %}
+                                <p>{{ course.title }}</p>
+                                <p>{{ course.time }}</p>
+                                <p>{{ course.instructor }}</p>
+                                <hr />
+                            {% endfor %}
+                        </td>
                     {% endfor %}
                 </table>
                 <hr />

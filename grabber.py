@@ -57,6 +57,8 @@ def html_to_pickle(source):
                                     # Add lab to title
                                     elif key == 'title':
                                         info[key] = previous_info[key] + ' (Lab)'
+                                    elif key == 'credits':
+                                        info[key] = '0.00'
                                     else:
                                         info[key] = previous_info[key]
                 

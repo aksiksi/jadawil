@@ -13,10 +13,16 @@ def add(schedule_info):
     total_credits = 0
     for course in schedule_info:
         credits = course['credits']
-        if '/' in credits: # In case of 0.00/3.00 like in CHEM 2702
-            total_credits += float(credits.partition('/')[2])
+
+        # In case of 0.00/3.00 like in CHEM 2702
+        if '/' in credits:
+            if 'L' in course['section']: # If course is a lab
+                total_credits += float(credits.partition('/')[0])
+            else:
+                total_credits += float(credits.partition('/')[2])
         else:
             total_credits += float(credits)
+    
     return total_credits
 
 @app.route('/')

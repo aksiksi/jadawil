@@ -10,7 +10,14 @@ def length(iterable):
 
 @app.template_filter('sum')
 def add(schedule_info):
-    return sum([float(info['credits']) for info in schedule_info])
+    total_credits = 0
+    for course in schedule_info:
+        credits = course['credits']
+        if '/' in credits: # In case of 0.00/3.00 like in CHEM 2702
+            total_credits += float(credits.partition('/')[2])
+        else:
+            total_credits += float(credits)
+    return total_credits
 
 @app.route('/')
 def main():

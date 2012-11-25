@@ -8,10 +8,10 @@
             <p>Error in course code(s): {{ errors }}. Please try again.</p>
     {% else %}
         {% if schedules %}
-            <h2>Returned schedules: {{ schedules|len }}</h2>
-            <h3>Total credit hours: {{ schedules[0].values()|sum }}</h3>
+            <h3>Returned schedules: {{ schedules|len }}</h3>
+            <h4>Total credit hours: {{ schedules[0].values()|sum }}</h4>
             {% for schedule in schedules %}
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="width: 60%;">
                 <thead>
                     <tr>
                         <th>Sunday</th>
@@ -25,19 +25,16 @@
                     <tr>
                         {% for day in schedule.values() %}
                             <td>
-                                <table>
-                                    <tr>
-                                        {% for course in day %}
-                                        <td>
-                                            <p>{{ course.title }}</p>
-                                            <p>{{ course.time }}</p>
-                                            <p>{{ course.instructor }}</p>
-                                            <p>{{ course.crn }}</p>
-                                            <p>{{ course.section }}</p>
-                                        </td>
-                                        {% endfor %}
-                                    </tr>
-                                </table>
+                                {% for course in day %}
+                                    <p>{{ course.title }}</p>
+                                    <p>{{ course.time }}</p>
+                                    <p>{{ course.instructor }}</p>
+                                    <p>{{ course.crn }}</p>
+                                    <p>{{ course.section }}</p>
+                                    {% if not loop.last %}
+                                        <hr />
+                                    {% endif %}
+                                {% endfor %}
                             </td>
                         {% endfor %}
                     </tr>

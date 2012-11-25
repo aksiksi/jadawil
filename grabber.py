@@ -21,15 +21,16 @@ def html_to_pickle(source):
     courses_by_abbrev = {}
 
     for index, course in enumerate(courses):
+        # Get the cols from each course row
         cols = [each.text for each in course.select('.dddefault')]
         
         # Create dict for each valid section and add to final dict
         if len(cols) == 17:
             info = {header:col for header, col in zip(headers, cols)}
             
-            # If there are 11 empty columns, check if this entry is related to previous entry; if it is, do some magic
+            # If there are 11 or 12 empty columns, check if this entry is related to previous entry; if it is, do some magic
             if cols.count(u'\xa0') in [11, 12]:
-                # Find info of previous entry
+                # Find info of previous entry (already in the form of a dict)
                 previous_info = courses[index-1]
                 abbrev, code, crn, days = previous_info['abbrev'], previous_info['code'], \
                                           previous_info['crn'], info['days']
@@ -41,12 +42,11 @@ def html_to_pickle(source):
                     if info['duration'] == previous_info['duration']:
                         
                         # If the instructor is the same, simply add the second day to the original entry
-                        if info['instructor'] in [previous_info['instructor'], 'TBA']:
+                        if info['instructor'] in [previous_info['instructor'], 'TBA'] and days != previous_info['days']:
                             # Append day to previous day only if different
-                            if info['days'] != previous_info['days']:
-                                courses_by_abbrev[abbrev][code][crn]['days'] += days
+                            courses_by_abbrev[abbrev][code][crn]['days'] += days
                         
-                        # Otherwise, make it a lab section (see: ITBP 319)
+                        # Otherwise, make it a lab section (see: ITBP 319 Spring 2013)
                         else:
                             for key in info:
                                 # Fill up any empty info
@@ -57,6 +57,7 @@ def html_to_pickle(source):
                                     # Add lab to title
                                     elif key == 'title':
                                         info[key] = previous_info[key] + ' (Lab)'
+                                    # Set credits to 0 for lab
                                     elif key == 'credits':
                                         info[key] = '0.00'
                                     else:
@@ -64,7 +65,7 @@ def html_to_pickle(source):
                 
                 # If the previous entry is "invalid", go back two steps
                 else:
-                    # Update the entry's info
+                    # Get the info of entry two back
                     previous_info = courses[index-2]
 
                     # Verify that this is the corrent parent
@@ -91,7 +92,10 @@ def html_to_pickle(source):
 
             courses[index] = info
 
-    # Write dict to pickle
+    # Remove all useless courses saved to '\xa0' key
+    del courses_by_abbrev[u'\xa0']
+
+    # Write final dict to pickle
     cPickle.dump(courses_by_abbrev, open('classes.pickle', 'wb'))
 
 def source_grabber():

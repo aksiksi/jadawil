@@ -110,7 +110,7 @@ class Scheduler():
             for crn, section in filtered_course_sections.items():
                 # If lab section, add to lab dict and remove from section dict
                 if 'L' in section['section']:
-                    course_labs[crn] = filtered_course_sections.pop(crn) 
+                    course_labs[crn] = filtered_course_sections.pop(crn)
 
             # Add labs (if any) to filtered_courses; key is course name with 'Lab' appended
             if filtered_course_sections: # Make sure that there are sections
@@ -190,15 +190,21 @@ class Scheduler():
         return week_schedules
 
     def sort_courses_in_day(self, schedule):
-        '''Given a list of courses in a day, returns the courses in chronological order.'''
+        '''Given a list of courses in a day, return the courses in chronological order.'''
         sorted_schedule = [0 for _ in range(len(schedule))]
 
         for course in schedule:
             # Track position of course; this basically tracks how many courses this course is after
             position = 0
             
-            # Get timeranges from dict (they're definitely there already)
-            current_timerange = self.timeranges[course['time']]
+            # Get timeranges from dict (they're definitely there already - maybe not?)
+            if course['time'] in self.timeranges:
+                current_timerange = self.timeranges[course['time']]
+            else:
+                # Pass in start and end time to object
+                timerange = TimeRange(*course['time'].split('-'))
+                self.timeranges[course['time']] = timerange
+
             other_timeranges = [self.timeranges[each['time']] for each in schedule if each != course]
 
             # Compare current course to the rest of them

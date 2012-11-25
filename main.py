@@ -9,6 +9,16 @@ app.debug = True
 def length(iterable):
     return len(iterable)
 
+@app.template_filter('crns')
+def crns(schedule):
+    crns = []
+    for day in schedule.values():
+        for course in day:
+            if course['crn'] not in crns:
+                crns.append(course['crn'])
+
+    return '\t'.join(crns)
+
 @app.template_filter('sum')
 def add(schedule):
     total_credits = 0

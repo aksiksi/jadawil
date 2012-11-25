@@ -1,10 +1,13 @@
-<html>
-    <head>
-        <title>Scheduler</title>
-    </head>
-    <body style="margin-left: 30px; margin-top: 30px;">
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="hero-unit">
         <h1>Welcome to Jadawil!</h1>
-        <p>This is an <em>extremely</em> early version of my upcoming project. I've deployed this because of the early registration period. Please report any bugs to cyph0nik[at]gmail[fullstop]com. Sorry for the bland design!</p>
+        <p>Scheduling courses has never been simpler.</p>
+    </div>
+    <div class="well">
         <h2>Instructions</h2>
         <ol>
             <li>Enter the course codes of the courses you'd like to take in Spring 2013.</li>
@@ -18,26 +21,28 @@
             <li>The scheduler did not find any valid schedules within the 10 second limit.</li>
             <li>There are too many possible combinations.</li>
         </ol>
-        <h3>Enter some courses to begin:</h3>
+    </div>
+    <div class="well">
+        <h2>Scheduler</h2>
         <form action="/submit" method="POST">
-            Gender:
+            <p>Gender:</p>
             <select name="gender">
                 <option value="B">Male</option>
                 <option value="G">Female</option>
             </select>
             <p>Courses:</p>
-            <input type="text" name="1" value="MECH 390"/>
-            <input type="text" name="2" value=""/>
-            <input type="text" name="3" value=""/>
-            <input type="text" name="4" value=""/>
-            <input type="text" name="5" value=""/>
-            <br />
-            <input type="text" name="6" value=""/>
-            <input type="text" name="7" value=""/>
-            <input type="text" name="8" value=""/>
-            <input type="text" name="9" value=""/>
-            <input type="text" name="10" value=""/>
-            <p><button type="submit">Submit</button></p>
+                <input type="text" name="1" placeholder="Example: MECH 390"/>
+                <input type="text" name="2" value=""/>
+                <input type="text" name="3" value=""/>
+                <input type="text" name="4" value=""/>
+                <br />
+                <input type="text" name="5" value=""/>
+                <input type="text" name="6" value=""/>
+                <input type="text" name="7" value=""/>
+                <input type="text" name="8" value=""/>
+                <p><button type="btn-submit" class="btn">Submit</button></p>
         </form>
-    </body>
-</html>
+        <p>Results will appear under this form.</p>
+    </div>
+    {% block results %}{% endblock %}
+{% endblock %}

@@ -11,7 +11,7 @@
             <h3>Returned schedules: {{ schedules|len }}</h3>
             <h4>Total credit hours: {{ schedules[0].values()|sum }}</h4>
             {% for schedule in schedules %}
-            <table class="table table-bordered" style="width: 60%;">
+            <table class="table table-bordered" style="width: 60%; font-size: 13px;">
                 <thead>
                     <tr>
                         <th>Sunday</th>

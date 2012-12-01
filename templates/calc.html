@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}GPA Calculator{% endblock %}
+
+{% block nav %}
+    <li><a href="/">Home</a></li>
+    <li class="active"><a href="/gpacalc">GPA Calculator</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="well">
+        <h2>GPA Calculator</h2>
+        <p>Enter grade and credit hours in each pair of boxes.</p>
+        {% block gpa %}{% endblock %}
+        <form action="/gpacalc" method="POST">
+            <input type="text" name="g1" placeholder="Grade (ex: 90)">
+            <input type="text" name="c1" placeholder="Credit Hours (ex: 3)">
+            <br />
+            <input type="text" name="g2">
+            <input type="text" name="c2">
+            <br />
+            <input type="text" name="g3">
+            <input type="text" name="c3">
+            <br />
+            <input type="text" name="g4">
+            <input type="text" name="c4">
+            <br />
+            <input type="text" name="g5">
+            <input type="text" name="c5">
+            <br />
+            <input type="text" name="g6">
+            <input type="text" name="c6">
+            <br />
+            <input type="text" name="g7">
+            <input type="text" name="c7">
+            <br />
+            <input type="text" name="g8">
+            <input type="text" name="c8">
+
+            <p><button type="btn-submit" class="btn">Submit</button></p>
+        </form>
+    </div>
+{% endblock %}

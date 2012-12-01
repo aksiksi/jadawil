@@ -2,6 +2,11 @@
 
 {% block title %}Home{% endblock %}
 
+{% block nav %}
+    <li class="active"><a href="/">Home</a></li>
+    <li><a href="/gpacalc">GPA Calculator</a></li>
+{% endblock %}
+
 {% block content %}
     <div class="hero-unit">
         <h1>Welcome to Jadawil!</h1>
@@ -33,14 +38,14 @@
             </select>
             <p>Courses:</p>
                 <input type="text" name="1" placeholder="Example: MECH 390"/>
-                <input type="text" name="2" value=""/>
-                <input type="text" name="3" value=""/>
-                <input type="text" name="4" value=""/>
+                <input type="text" name="2" />
+                <input type="text" name="3" />
+                <input type="text" name="4" />
                 <br />
-                <input type="text" name="5" value=""/>
-                <input type="text" name="6" value=""/>
-                <input type="text" name="7" value=""/>
-                <input type="text" name="8" value=""/>
+                <input type="text" name="5" />
+                <input type="text" name="6" />
+                <input type="text" name="7" />
+                <input type="text" name="8" />
                 <p><button type="btn-submit" class="btn">Submit</button></p>
         </form>
     </div>

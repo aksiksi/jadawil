@@ -17,7 +17,7 @@ def crns(schedule):
             if course['crn'] not in crns:
                 crns.append(course['crn'])
 
-    return '\t'.join(crns)
+    return ' '.join(crns)
 
 @app.template_filter('sum')
 def add(schedule):
@@ -63,5 +63,43 @@ def submit():
         end = time.time() - start
         return render_template('results.html', schedules=schedules, end=end)
 
+def determine_grade(grade):
+    if grade >= 90:
+        return 4
+    elif 85 <= grade < 90:
+        return 3.5
+    elif 80 <= grade < 85:
+        return 3
+    elif 75 <= grade < 80:
+        return 2.5
+    elif 70 <= grade < 75:
+        return 2
+    elif 65 <= grade < 70:
+        return 1.5
+    elif 60 <= grade < 65:
+        return 1
+    else:
+        return 0
+
+@app.route('/gpacalc', methods=['POST', 'GET'])
+def calculator():
+    if request.method == 'POST':
+        try:
+            grades = [determine_grade(int(value)) for key, value in request.form.items() if 'g' in key and value]
+            credits = [int(value) for key, value in request.form.items() if 'c' in key and value]
+            total_credits = sum(credits)
+            grade_points = 0
+
+            for i in range(len(grades)):
+                grade_points += (grades[i] * credits[i])
+
+            gpa = grade_points / float(total_credits)
+
+            return render_template('gpa.html', gpa=round(gpa, 2))
+        except:
+            pass
+
+    return render_template('calc.html')
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

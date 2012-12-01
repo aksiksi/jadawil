@@ -3,7 +3,6 @@ import scheduler
 import time
 
 app = Flask(__name__)
-app.debug = True
 
 @app.template_filter('len')
 def length(iterable):
@@ -102,4 +101,4 @@ def calculator():
     return render_template('calc.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

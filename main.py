@@ -46,7 +46,11 @@ def add(schedule):
 def main():
     return render_template('index.html')
 
-@app.route('/submit', methods=['GET', 'POST'])
+@app.route('/ar')
+def arabic():
+    return render_template('index_ar.html')
+
+@app.route('/submit', methods=['POST'])
 def submit():
     if request.method == 'POST':
         start = time.time()
@@ -80,9 +84,17 @@ def determine_grade(grade):
     else:
         return 0
 
-@app.route('/gpacalc', methods=['POST', 'GET'])
+@app.route('/calc')
 def calculator():
-    if request.method == 'POST':
+    return render_template('calc.html')
+
+@app.route('/ar/calc')
+def calculator_arabic():
+    return render_template('calc_ar.html')
+
+@app.route('/gpacalc', methods=['POST'])
+def calculator_results():
+    # if request.method == 'POST':
         try:
             grades = [determine_grade(int(value)) for key, value in request.form.items() if 'g' in key and value]
             credits = [int(value) for key, value in request.form.items() if 'c' in key and value]
@@ -95,10 +107,8 @@ def calculator():
             gpa = grade_points / float(total_credits)
 
             return render_template('gpa.html', gpa=round(gpa, 2))
-        except:
-            pass
-
-    return render_template('calc.html')
+        except Exception, e:
+            raise e
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

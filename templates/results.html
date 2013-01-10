@@ -4,7 +4,7 @@
 
 {% block nav %}
     <li class="active"><a href="/">Home</a></li>
-    <li><a href="/gpacalc">GPA Calculator</a></li>
+    <li><a href="/calc">GPA Calculator</a></li>
 {% endblock %}
 
 {% block content %}
@@ -12,7 +12,7 @@
     {% if errors %}
             <p>Error in course code(s): {{ errors }}. Please try again.</p>
     {% else %}
-        {% if schedules %}
+        {% if schedules > 0 %}
             <h3>Returned schedules: {{ schedules|len }}</h3>
             <h4>Total credit hours: {{ schedules[0].values()|sum }}</h4>
             {% for schedule in schedules %}
@@ -48,14 +48,14 @@
             </table>
             <br />
             {% endfor %}
+            <p>Retrieved in {{ end }} seconds.</p>
         {% else %}
             {% if schedules == -1 %}
-                <p>There are too many possible schedule combinations (more than 1 million).</p>
+                <p>There are too many possible schedule combinations (more than 1 million). Please remove a course and try again.</p>
             {% else %}
                 <p>There is a direct conflict between two or more courses with no alternatives available.</p>
             {% endif %}
         {% endif %}
-        <p>Retrieved in {{ end }} seconds.</p>
     {% endif %}
 </div>
 {% endblock %}

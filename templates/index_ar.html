@@ -1,19 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}الصفحة الرئيسية{% endblock %}
 
 {% block nav %}
-    <li class="active"><a href="/">Home</a></li>
-    <li><a href="/calc">GPA Calculator</a></li>
+    <li class="active"><a href="/ar">الصفحة الرئيسية</a></li>
+    <li><a href="/ar/calc">حساب المعدل</a></li>
 {% endblock %}
 
 {% block content %}
     <div class="hero-unit">
-        <h1>Welcome to Jadawil!</h1>
-        <p>Scheduling courses has never been simpler.</p>
+        <h1>!مرحباً بك في خدمة جداول</h1>
     </div>
     <div class="well">
-        <h2>Instructions</h2>
+        <h2>التعليمات</h2>
         <ol>
             <li>Enter the course codes of the courses you'd like to take in Spring 2013.</li>
             <li>A few examples of what a course code can look like: PSY 300, MATH 1120, MECH 390, ELEC 305. Uppercase or lowercase doesn't matter - just make sure that there's a space in between.</li>

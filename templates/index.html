@@ -13,22 +13,6 @@
         <p>Scheduling courses has never been simpler.</p>
     </div>
     <div class="well">
-        <h2>Instructions</h2>
-        <ol>
-            <li>Enter the course codes of the courses you'd like to take in Spring 2013.</li>
-            <li>A few examples of what a course code can look like: PSY 300, MATH 1120, MECH 390, ELEC 305. Uppercase or lowercase doesn't matter - just make sure that there's a space in between.</li>
-            <li>Hit the submit button to get a list of upto 15 possible schedules. If the site returns less than 15 schedules, know that these are the only possible combinations.</li>
-        </ol>
-        <h2>Notes</h2>
-        <p>If you get no results, one of the following has occured:</p>
-        <ol>
-            <li>There is a direct conflict between two courses and no alternatives are available.</li>
-            <li>The scheduler did not find any valid schedules within the 10 second limit.</li>
-            <li>There are too many possible combinations.</li>
-        </ol>
-        <p>You can access this site using either of these URLS: <a href="http://www.jadawil.co.nr/">Jadawil</a> or <a href="http://www.uaeusched.co.nr/">UAEUSched</a>.</p>
-    </div>
-    <div class="well">
         <h2>Scheduler</h2>
         <form action="/submit" method="POST">
             <p>Gender:</p>
@@ -48,6 +32,23 @@
                 <input type="text" name="8" />
                 <p><button type="btn-submit" class="btn">Submit</button></p>
         </form>
+    </div>
+    <div class="well">
+        <h2>Instructions</h2>
+        <ol>
+            <li>Enter the course codes of the courses you'd like to take in Spring 2013.</li>
+            <li>A few examples of what a course code can look like: PSY 300, MATH 1120, MECH 390, ELEC 305. Uppercase or lowercase doesn't matter - just make sure that there's a space in between.</li>
+            <li>Hit the submit button to get a list of upto 15 possible schedules. If the site returns less than 15 schedules, know that these are the only possible combinations.</li>
+        </ol>
+        <h2>Notes</h2>
+        <p>If you get no results, one of the following has occured:</p>
+        <ol>
+            <li>There is a direct conflict between two courses and no alternatives are available.</li>
+            <li>The scheduler did not find any valid schedules within the 10 second limit.</li>
+            <li>There are too many possible combinations.</li>
+        </ol>
+        <p>You can access this site using either of these URLs: <a href="http://www.jadawil.co.nr/">Jadawil</a> or <a href="http://www.uaeusched.co.nr/">UAEUSched</a>.</p>
+        <p>Please keep in mind that this service is still in a very early stage of development, meaning that you will encounter bugs.</p>
     </div>
     <a style="position: absolute; top: 10000px; right: 10000px;" href="http://www.freedomain.co.nr/" target="_blank" title="Free Domain Registration"><img src="http://eacza.imdrv.net/346/4.gif" width="88" height="31" border="0" alt="Free Domain Registration" /></a>
 {% endblock %}

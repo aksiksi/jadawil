@@ -226,7 +226,7 @@ class Scheduler():
         for course in courses.values():
             product *= len(course)
 
-        if product > 1e6:
+        if product > 2e6:
             return -1
 
         # Get titles and corresponding sections
@@ -240,12 +240,12 @@ class Scheduler():
         for each in generate_products:
             schedule = {}
             # Build a schedule based on products
-            for title, crn in zip(course_titles, each):
+            for title, crn in itertools.izip(course_titles, each):
                 schedule[title] = courses[title][crn]
             # Check for conflicts in schedule
             if not self.check_schedule_conflicts(schedule):
                 schedules.append(schedule)
-            if len(schedules) == 15 or (time.time() - start) >= 10:
+            if (time.time() - start) >= 10:
                 break
 
         return self.convert_to_week_based(schedules)

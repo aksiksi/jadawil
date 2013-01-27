@@ -12,7 +12,7 @@
     {% if errors %}
             <p>Error in course code(s): {{ errors }}. Please try again.</p>
     {% else %}
-        {% if schedules > 0 %}
+        {% if schedules > 0 and schedules %}
             <h3>Returned schedules: {{ schedules|len }}</h3>
             <h4>Total credit hours: {{ schedules[0].values()|sum }}</h4>
             {% for schedule in schedules %}
@@ -51,7 +51,7 @@
             <p>Retrieved in {{ end }} seconds.</p>
         {% else %}
             {% if schedules == -1 %}
-                <p>There are too many possible schedule combinations (more than 1 million). Please remove a course and try again.</p>
+                <p>There are too many possible schedule combinations (more than 2 million). Please remove a course and try again.</p>
             {% else %}
                 <p>There is a direct conflict between two or more courses with no alternatives available.</p>
             {% endif %}

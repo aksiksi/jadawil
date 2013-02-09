@@ -65,7 +65,7 @@ def html_to_pickle(source):
                 
                 # If the previous entry is "invalid", go back two steps
                 else:
-                    # Get the info of entry two back
+                    # Get the info of the entry two steps back
                     previous_info = courses[index-2]
 
                     # Verify that this is the corrent parent

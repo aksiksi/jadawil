@@ -31,13 +31,22 @@
                         {% for day in schedule.values() %}
                             <td>
                                 {% for course in day %}
-                                    <p>{{ course.title }}</p>
-                                    <p>{{ course.time }}</p>
-                                    <p>{{ course.instructor }}</p>
-                                    <p>{{ course.crn }}</p>
-                                    <p>Section {{ course.section }}</p>
                                     {% if not loop.last %}
-                                        <hr />
+                                        <div class="entry">
+                                            <p style="padding-top: 10px;">{{ course.title }}</p>
+                                            <p>{{ course.time }}</p>
+                                            <p>{{ course.instructor }}</p>
+                                            <p>{{ course.crn }}</p>
+                                            <p>{{ course.location }}</p>
+                                            <p>Section {{ course.section }}</p>
+                                        </div>
+                                    {% else %}
+                                        <p style="padding-top: 10px;">{{ course.title }}</p>
+                                        <p>{{ course.time }}</p>
+                                        <p>{{ course.instructor }}</p>
+                                        <p>{{ course.crn }}</p>
+                                        <p>{{ course.location }}</p>
+                                        <p>Section {{ course.section }}</p>
                                     {% endif %}
                                 {% endfor %}
                             </td>
@@ -53,7 +62,7 @@
             {% if schedules == -1 %}
                 <p>There are too many possible schedule combinations (more than 2 million). Please remove a course and try again.</p>
             {% else %}
-                <p>There is a direct conflict between two or more courses with no alternatives available.</p>
+                <p>There is either a direct conflict between two or more courses with no alternatives available, or no schedules could be found in the 10 second time limit. Running the scheduler again may help.</p>
             {% endif %}
         {% endif %}
     {% endif %}

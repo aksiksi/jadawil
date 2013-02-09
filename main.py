@@ -94,7 +94,6 @@ def calculator_arabic():
 
 @app.route('/gpacalc', methods=['POST'])
 def calculator_results():
-    # if request.method == 'POST':
         try:
             grades = [determine_grade(int(value)) for key, value in request.form.items() if 'g' in key and value]
             credits = [int(value) for key, value in request.form.items() if 'c' in key and value]

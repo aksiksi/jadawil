@@ -32,21 +32,23 @@
                             <td>
                                 {% for course in day %}
                                     {% if not loop.last %}
-                                        <div class="entry">
-                                            <p style="padding-top: 10px;">{{ course.title }}</p>
-                                            <p>{{ course.time }}</p>
-                                            <p>{{ course.instructor }}</p>
-                                            <p>{{ course.crn }}</p>
-                                            <p>{{ course.location }}</p>
-                                            <p>Section {{ course.section }}</p>
+                                        <div class="entry" style="padding-top: 10px;">
+                                            {{ course.title }}<br />
+                                            {{ course.time }}<br />
+                                            {{ course.instructor }}<br />
+                                            {{ course.crn }}<br />
+                                            {{ course.location }}<br />
+                                            Section {{ course.section }}<br />
                                         </div>
                                     {% else %}
-                                        <p style="padding-top: 10px;">{{ course.title }}</p>
-                                        <p>{{ course.time }}</p>
-                                        <p>{{ course.instructor }}</p>
-                                        <p>{{ course.crn }}</p>
-                                        <p>{{ course.location }}</p>
-                                        <p>Section {{ course.section }}</p>
+                                        <div style="padding-top: 10px;">
+                                            {{ course.title }}<br />
+                                            {{ course.time }}<br />
+                                            {{ course.instructor }}<br />
+                                            {{ course.crn }}<br />
+                                            {{ course.location }}<br />
+                                            Section {{ course.section }}<br />
+                                        </div>
                                     {% endif %}
                                 {% endfor %}
                             </td>

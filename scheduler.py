@@ -245,7 +245,7 @@ class Scheduler():
             # Check for conflicts in schedule
             if not self.check_schedule_conflicts(schedule):
                 schedules.append(schedule)
-            if (time.time() - start) >= 10:
+            if (time.time() - start) >= 10 or len(schedules) >= 50:
                 break
 
         return self.convert_to_week_based(schedules)

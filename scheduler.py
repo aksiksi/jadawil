@@ -6,22 +6,35 @@ from datetime import datetime
 from pprint import pprint
 from collections import defaultdict, OrderedDict
 
-def validate_inputs(courses):
+def validate_inputs(courses, constants):
     '''Make sure inputs are valid courses.'''
     with open('classes.pickle') as f:
         all_courses = cPickle.load(f)
 
-    errors = []
+    course_errors = []
+    crn_errors = []
     
-    # Catch any input errors and return them
+    # Catch any course errors and return them
     for course in courses:
         try:
             abbrev, code = course.upper().strip(' ').split(' ')
             all_courses[abbrev][code]
         except:
-            errors.append(course)
+            course_errors.append(course)
 
-    return errors
+    # Catch CRN errors
+    for crn in constants:
+        found = False
+        for course in courses:
+            if course not in course_errors:
+                abbrev, code = course.upper().strip(' ').split(' ')
+                course_info = all_courses[abbrev][code]
+                if any([crn == each for each in course_info]):
+                    found = True
+        if not found:
+            crn_errors.append(crn)
+
+    return course_errors, crn_errors
 
 class TimeRange():
     '''Simple class for checking if a time (or times) lie(s) within a time range.'''
@@ -81,8 +94,9 @@ class TimeRange():
 class Scheduler():
     timeranges = {}
 
-    def __init__(self, courses, gender):
+    def __init__(self, courses, constants, gender):
         self.courses = courses
+        self.constants = constants
         self.gender = gender
 
     def get_course_lab_info(self, courses):
@@ -219,7 +233,19 @@ class Scheduler():
     def start(self):
         '''Start the scheduler.'''
         # Get course info, filtered by gender
-        courses = self.get_course_lab_info(self.courses)
+        unfiltered_courses = self.get_course_lab_info(self.courses)
+        courses = {}
+
+        # Append any constant sections to courses
+        for code, info in unfiltered_courses.items():
+            needed = [crn for crn in info if crn in self.constants]
+            if needed:
+                course_info = {}
+                for crn in needed:
+                    course_info[crn] = info[crn]
+            else:
+                course_info = info
+            courses[code] = course_info
         
         # Make sure possible combinations not too high
         product = 1

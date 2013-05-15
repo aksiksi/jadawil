@@ -4,6 +4,15 @@ import time
 
 app = Flask(__name__)
 
+@app.template_filter('timeslots')
+def timeslots(schedule):
+    t = []
+    for courses in schedule.values():
+        for course in courses:
+            if course['time'] not in t:
+                t.append(scheduler.TimeRange(course['time']))
+    return [str(obj) for obj in sorted(t)]
+
 @app.template_filter('len')
 def length(iterable):
     return len(iterable)
@@ -46,22 +55,27 @@ def add(schedule):
 def main():
     return render_template('index.html')
 
-@app.route('/ar')
-def arabic():
-    return render_template('index_ar.html')
+# @app.route('/ar')
+# def arabic():
+#     return render_template('index_ar.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():
     if request.method == 'POST':
         start = time.time()
-        courses = set([each for each in request.form.values() if len(each) > 1])
-        gender = request.form.get('gender')
-        errors = ', '.join(scheduler.validate_inputs(courses))
         
-        if not errors:
-            schedules = scheduler.Scheduler(courses, gender).start()
+        courses = set([each[1] for each in request.form.items() if len(each[1]) > 1 and int(each[0]) in range(1, 9)])
+        constants = set([each[1] for each in request.form.items() if len(each[1]) > 1 and int(each[0]) > 8])
+        gender = request.form.get('gender')
+        
+        errors = scheduler.validate_inputs(courses, constants)
+        course_errors = ', '.join(errors[0])
+        crn_errors = ', '.join(errors[1])
+        
+        if not (course_errors or crn_errors):
+            schedules = scheduler.Scheduler(courses, constants, gender).start()
         else:
-            return render_template('results.html', errors=errors)
+            return render_template('results.html', course_errors=course_errors, crn_errors=crn_errors)
         
         end = time.time() - start
         return render_template('results.html', schedules=schedules, end=end)
@@ -88,9 +102,9 @@ def determine_grade(grade):
 def calculator():
     return render_template('calc.html')
 
-@app.route('/ar/calc')
-def calculator_arabic():
-    return render_template('calc_ar.html')
+# @app.route('/ar/calc')
+# def calculator_arabic():
+#     return render_template('calc_ar.html')
 
 @app.route('/gpacalc', methods=['POST'])
 def calculator_results():

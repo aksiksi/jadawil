@@ -9,8 +9,13 @@
 
 {% block content %}
 <div class="well">
-    {% if errors %}
-            <p>Error in course code(s): {{ errors }}. Please try again.</p>
+    {% if course_errors and crn_errors %}
+            <p>Error in course code(s): {{ course_errors }}. Please try again.</p>
+            <p>Error in CRN(s): {{ crn_errors }}. Please try again.</p>
+    {% elif crn_errors %}
+        <p>Error in CRN(s): {{ crn_errors }}. Please try again.</p>
+    {% elif course_errors %}
+            <p>Error in course code(s): {{ course_errors }}. Please try again.</p>
     {% else %}
         {% if schedules > 0 and schedules %}
             <h3>Returned schedules: {{ schedules|len }}</h3>
@@ -32,22 +37,23 @@
                             <td>
                                 {% for course in day %}
                                     {% if not loop.last %}
-                                        <div class="entry" style="padding-top: 10px;">
+                                        <div class="entry" style="padding: 0px 0px; border-bottom: none;">
                                             {{ course.title }}<br />
                                             {{ course.time }}<br />
                                             {{ course.instructor }}<br />
                                             {{ course.crn }}<br />
                                             {{ course.location }}<br />
                                             Section {{ course.section }}<br />
+                                            <hr />
                                         </div>
                                     {% else %}
-                                        <div style="padding-top: 10px;">
+                                        <div style="padding-top: 0px;">
                                             {{ course.title }}<br />
                                             {{ course.time }}<br />
                                             {{ course.instructor }}<br />
                                             {{ course.crn }}<br />
                                             {{ course.location }}<br />
-                                            Section {{ course.section }}<br />
+                                            Section {{ course.section }}
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -57,7 +63,6 @@
                     <p><b>CRNS:</b> {{ schedule|crns }}</p>
                 </tbody>
             </table>
-            <br />
             {% endfor %}
             <p>Retrieved in {{ end }} seconds.</p>
         {% else %}

@@ -74,54 +74,55 @@ def submit():
         
         if not (course_errors or crn_errors):
             schedules = scheduler.Scheduler(courses, constants, gender).start()
+            print schedules
         else:
             return render_template('results.html', course_errors=course_errors, crn_errors=crn_errors)
         
         end = time.time() - start
         return render_template('results.html', schedules=schedules, end=end)
 
-def determine_grade(grade):
-    if grade >= 90:
-        return 4
-    elif 85 <= grade < 90:
-        return 3.5
-    elif 80 <= grade < 85:
-        return 3
-    elif 75 <= grade < 80:
-        return 2.5
-    elif 70 <= grade < 75:
-        return 2
-    elif 65 <= grade < 70:
-        return 1.5
-    elif 60 <= grade < 65:
-        return 1
-    else:
-        return 0
+# def determine_grade(grade):
+#     if grade >= 90:
+#         return 4
+#     elif 85 <= grade < 90:
+#         return 3.5
+#     elif 80 <= grade < 85:
+#         return 3
+#     elif 75 <= grade < 80:
+#         return 2.5
+#     elif 70 <= grade < 75:
+#         return 2
+#     elif 65 <= grade < 70:
+#         return 1.5
+#     elif 60 <= grade < 65:
+#         return 1
+#     else:
+#         return 0
 
-@app.route('/calc')
-def calculator():
-    return render_template('calc.html')
+# @app.route('/calc')
+# def calculator():
+#     return render_template('calc.html')
 
-# @app.route('/ar/calc')
-# def calculator_arabic():
-#     return render_template('calc_ar.html')
+# # @app.route('/ar/calc')
+# # def calculator_arabic():
+# #     return render_template('calc_ar.html')
 
-@app.route('/gpacalc', methods=['POST'])
-def calculator_results():
-        try:
-            grades = [determine_grade(int(value)) for key, value in request.form.items() if 'g' in key and value]
-            credits = [int(value) for key, value in request.form.items() if 'c' in key and value]
-            total_credits = sum(credits)
-            grade_points = 0
+# @app.route('/gpacalc', methods=['POST'])
+# def calculator_results():
+#         try:
+#             grades = [determine_grade(int(value)) for key, value in request.form.items() if 'g' in key and value]
+#             credits = [int(value) for key, value in request.form.items() if 'c' in key and value]
+#             total_credits = sum(credits)
+#             grade_points = 0
 
-            for i in range(len(grades)):
-                grade_points += (grades[i] * credits[i])
+#             for i in range(len(grades)):
+#                 grade_points += (grades[i] * credits[i])
 
-            gpa = grade_points / float(total_credits)
+#             gpa = grade_points / float(total_credits)
 
-            return render_template('gpa.html', gpa=round(gpa, 2))
-        except Exception, e:
-            raise e
+#             return render_template('gpa.html', gpa=round(gpa, 2))
+#         except Exception, e:
+#             raise e
 
 if __name__ == '__main__':
     app.run(debug=True)

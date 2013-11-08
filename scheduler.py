@@ -230,6 +230,15 @@ class Scheduler():
 
         return [course for course in sorted_schedule if course]
 
+    def combs(self, l, c, p=0):
+        '''Generate unique combinations of length 2.'''
+        if p == len(l):
+            return c
+        else:
+            for n in l[p+1:]:
+                c.append([l[p], n])
+            return self.combs(l, c, p+1)
+
     def start(self):
         '''Start the scheduler.'''
         # Get course info, filtered by gender
@@ -258,6 +267,26 @@ class Scheduler():
         # Get titles and corresponding sections
         course_titles, course_info = courses.keys(), courses.values()
 
+        # Save sections
+        section_info = []
+        for v in course_info:
+            for s in v.values():
+                section_info.append(s)
+
+        # Section combinations
+        combs = self.combs(section_info, [])
+        conflicts = []
+
+        # Catch section overlaps for later
+        for c in combs:
+            s1, s2 = c
+            t1 = TimeRange(*s1['time'].split('-'))
+
+            # Check for conflict in both days and time
+            if any([d in s2['days'] for d in s1['days']]):
+                if t1.contains(*s2['time'].split('-')):
+                    conflicts.append([s1, s2])
+
         # Start finding valid schedules
         schedules = []
         start = time.time()
@@ -274,8 +303,13 @@ class Scheduler():
             if (time.time() - start) >= 10 or len(schedules) >= 50:
                 break
 
-        return self.convert_to_week_based(schedules)
+        results = self.convert_to_week_based(schedules)
+
+        # If no results, then there are conflicts
+        if not results:
+            return results, conflicts
+        else:
+            return results, []
 
 if __name__ == '__main__':
     s = Scheduler(['PHYS 1110', 'MATH 1110', 'MECH 390', 'HIS 133', 'ITBP 319'], 'B').start()
-    print s

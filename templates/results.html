@@ -4,7 +4,6 @@
 
 {% block nav %}
     <li class="active"><a href="/">Home</a></li>
-    <li><a href="/calc">GPA Calculator</a></li>
 {% endblock %}
 
 {% block content %}
@@ -70,6 +69,15 @@
                 <p>There are too many possible schedule combinations (more than 2 million). Please remove a course and try again.</p>
             {% else %}
                 <p>There is either a direct conflict between two or more courses with no alternatives available, or no schedules could be found in the 10 second time limit. Running the scheduler again may help.</p>
+
+                <h4>Possible conflicts:</h4>
+                <ol>
+                    {% for c in conflicts %}
+                        <li>
+                            Section {{ c[0].section }} of {{ c[0].title }} ({{ c[0].abbrev + ' ' + c[0].code }}) with Section {{ c[1].section }} of {{ c[1].title }} ({{ c[1].abbrev + ' ' + c[1].code }}).
+                        </li>
+                    {% endfor %}
+                </ol>
             {% endif %}
         {% endif %}
     {% endif %}

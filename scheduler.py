@@ -273,7 +273,7 @@ class Scheduler():
             for s in v.values():
                 section_info.append(s)
 
-        # Section combinations
+        # Section combinations and conflicts
         combs = self.combs(section_info, [])
         conflicts = []
 

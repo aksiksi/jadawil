@@ -60,7 +60,7 @@ def submit():
     if request.method == 'POST':
         start = time.time()
         
-        courses = set([each[1] for each in request.form.items() if len(each[1]) > 1 and int(each[0]) in range(1, 9)])
+        courses = set([each[1].lower() for each in request.form.items() if len(each[1]) > 1 and int(each[0]) in range(1, 9)])
         constants = set([each[1] for each in request.form.items() if len(each[1]) > 1 and int(each[0]) > 8])
         gender = request.form.get('gender')
         

@@ -1,7 +1,7 @@
 from flask import request, render_template, url_for, redirect, Flask
 import scheduler
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
@@ -61,6 +61,9 @@ def main():
     # Get last update date
     with open('last.txt') as f:
         d = datetime.fromtimestamp((float(f.readline())))
+
+    # Add 4 hours to account for local time
+    d = d + timedelta(hours=4)
 
     return render_template('index.html', d=d)
 

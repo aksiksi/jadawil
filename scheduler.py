@@ -218,6 +218,7 @@ class Scheduler():
                 # Pass in start and end time to object
                 timerange = TimeRange(*course['time'].split('-'))
                 self.timeranges[course['time']] = timerange
+                current_timerange = timerange
 
             other_timeranges = [self.timeranges[each['time']] for each in schedule if each != course]
 
@@ -312,4 +313,10 @@ class Scheduler():
             return results, []
 
 if __name__ == '__main__':
-    s = Scheduler(['PHYS 1110', 'MATH 1110', 'MECH 390', 'HIS 133', 'ITBP 319'], 'B').start()
+    s = Scheduler(['elec 562', 'elec 462', 'elec 472', 'ecom 432', 'elec 375', 'ecom 442', 'elec 370'], [], 'B').start()
+    print s
+
+
+
+
+

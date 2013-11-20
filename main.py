@@ -1,6 +1,7 @@
 from flask import request, render_template, url_for, redirect, Flask
 import scheduler
 import time
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -51,9 +52,17 @@ def add(schedule):
     
     return total_credits
 
+@app.template_filter('date')
+def date(d):
+    return d.strftime('%A %dth %B %Y at %H:%M:%S')
+
 @app.route('/')
 def main():
-    return render_template('index.html')
+    # Get last update date
+    with open('last.txt') as f:
+        d = datetime.fromtimestamp((float(f.readline())))
+
+    return render_template('index.html', d=d)
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -74,6 +83,7 @@ def submit():
             return render_template('results.html', course_errors=course_errors, crn_errors=crn_errors)
         
         end = time.time() - start
+
         return render_template('results.html', schedules=schedules, conflicts=conflicts, end=end)
 
 if __name__ == '__main__':

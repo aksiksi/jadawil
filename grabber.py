@@ -3,6 +3,7 @@ import cookielib
 import cPickle
 from bs4 import BeautifulSoup
 from collections import defaultdict
+from secret import username, password
 
 def html_to_pickle(source):
     '''Collect data from HTML source and write it to a pickle.'''
@@ -93,7 +94,8 @@ def html_to_pickle(source):
             courses[index] = info
 
     # Remove all useless courses saved to '\xa0' key
-    del courses_by_abbrev[u'\xa0']
+    if '\xa0' in courses_by_abbrev:
+        del courses_by_abbrev[u'\xa0']
 
     # Write final dict to pickle
     cPickle.dump(courses_by_abbrev, open('classes.pickle', 'wb'))
@@ -101,9 +103,7 @@ def html_to_pickle(source):
 def source_grabber():
     '''Grab the course search source code using a Mechanize browser.'''
     # Required inputs
-    terms = ['201320', '201310'] # Terms (spring, fall, etc.)
-    username = '201150160'
-    password = 'kasserine'
+    terms = ['201510', '201420'] # Terms (Fall 2015, Spring 2014, etc.)
 
     # Browser instance
     br = mechanize.Browser()
@@ -123,7 +123,7 @@ def source_grabber():
     br.open('https://ssb.uaeu.ac.ae/prod/bwskfcls.p_sel_crse_search')
 
     # Login
-    br.select_form(nr=0)
+    br.select_form(name='loginform')
     br['sid'] = username
     br['PIN'] = password
     br.submit()
@@ -136,11 +136,15 @@ def source_grabber():
     br['p_term'] = [terms[0]]
     br.submit()
 
+    # Move to advanced search page
+    br.select_form(nr=1)
+    br.submit(name='SUB_BTN', label='Advanced Search')
+
     # Find possible selections for select control, then select all subjects and search
     br.select_form(nr=1)
-    select = br.controls[11]
+    select = br.controls[13]
     options = [item.name for item in select.items]
-    br.controls[11].value = options
+    br.controls[13].value = options
     br.submit()
 
     # Get page source

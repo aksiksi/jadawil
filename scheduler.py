@@ -6,14 +6,14 @@ from datetime import datetime
 from pprint import pprint
 from collections import defaultdict, OrderedDict
 
-def validate_inputs(courses, constants):
+def validate_inputs(courses, constants, term):
     '''Make sure inputs are valid courses.'''
-    with open('classes.pickle') as f:
+    with open('classes-{}.pickle'.format(term)) as f:
         all_courses = cPickle.load(f)
 
     course_errors = []
     crn_errors = []
-    
+
     # Catch any course errors and return them
     for course in courses:
         try:
@@ -39,7 +39,7 @@ def validate_inputs(courses, constants):
 class TimeRange():
     '''Simple class for checking if a time (or times) lie(s) within a time range.'''
     datetimes = {}
-    
+
     def __init__(self, start, end):
         '''Add datetime object to datetimes dict if not already there.'''
         index = 0
@@ -61,7 +61,7 @@ class TimeRange():
     def construct(self, *args):
         '''Construct a list of datetime objects for given arguments.'''
         times = []
-        
+
         for time in args:
             if time not in self.datetimes:
                 time_obj = datetime.strptime(time, '%I:%M %p')
@@ -76,12 +76,12 @@ class TimeRange():
         '''Return True if any of the inputs lies in the range.'''
         # Construct list of datetime objects
         datetimes = self.construct(*args)
-        
+
         # Check for conflicts
         for time in datetimes:
             if (self.start <= time <= self.end):
                 return True
-        
+
         return False
 
     def __gt__(self, other):
@@ -94,15 +94,16 @@ class TimeRange():
 class Scheduler():
     timeranges = {}
 
-    def __init__(self, courses, constants, gender):
+    def __init__(self, courses, constants, gender, term):
         self.courses = courses
         self.constants = constants
         self.gender = gender
+        self.term = term
 
     def get_course_lab_info(self, courses):
         '''Return course and lab information in dict form.'''
         # Get course data from file
-        with open('classes.pickle') as f:
+        with open('classes-{}.pickle'.format(self.term)) as f:
             all_courses = cPickle.load(f)
 
         filtered_courses = {}
@@ -193,7 +194,7 @@ class Scheduler():
                 for letter, word in days_of_week:
                     if letter in days:
                         week_schedule[word].append(course)
-            
+
             # Sort each schedule
             sorted_week_schedule = OrderedDict()
             for day, day_schedule in week_schedule.items():
@@ -210,7 +211,7 @@ class Scheduler():
         for course in schedule:
             # Track position of course; this basically tracks how many courses this course is after
             position = 0
-            
+
             # Get timeranges from dict (they're definitely there already - maybe not?)
             if course['time'] in self.timeranges:
                 current_timerange = self.timeranges[course['time']]
@@ -256,7 +257,7 @@ class Scheduler():
             else:
                 course_info = info
             courses[code] = course_info
-        
+
         # Make sure possible combinations not too high
         product = 1
         for course in courses.values():

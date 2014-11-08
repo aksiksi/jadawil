@@ -32,7 +32,7 @@ def crns(schedule):
 def add(schedule):
     total_credits = 0
     added = []
-    
+
     for day in schedule:
         for course in day:
             credits = course['credits']
@@ -49,7 +49,7 @@ def add(schedule):
                     total_credits += float(credits)
 
                 added.append(title)
-    
+
     return total_credits
 
 @app.template_filter('date')
@@ -71,20 +71,21 @@ def main():
 def submit():
     if request.method == 'POST':
         start = time.time()
-        
+
         courses = set([each[1].lower() for each in request.form.items() if len(each[1]) > 1 and int(each[0]) in range(1, 9)])
         constants = set([each[1] for each in request.form.items() if len(each[1]) > 1 and int(each[0]) > 8])
         gender = request.form.get('gender')
-        
-        errors = scheduler.validate_inputs(courses, constants)
+        term = request.form.get('term')
+
+        errors = scheduler.validate_inputs(courses, constants, term)
         course_errors = ', '.join(errors[0])
         crn_errors = ', '.join(errors[1])
-        
+
         if not (course_errors or crn_errors):
-            schedules, conflicts = scheduler.Scheduler(courses, constants, gender).start()
+            schedules, conflicts = scheduler.Scheduler(courses, constants, gender, term).start()
         else:
             return render_template('results.html', course_errors=course_errors, crn_errors=crn_errors)
-        
+
         end = time.time() - start
 
         return render_template('results.html', schedules=schedules, conflicts=conflicts, end=end)

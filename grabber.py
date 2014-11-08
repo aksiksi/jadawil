@@ -1,11 +1,15 @@
 import mechanize
 import cookielib
 import cPickle
+import os
 from bs4 import BeautifulSoup
 from collections import defaultdict
 from secret import username, password
 
-def html_to_pickle(source):
+# Required inputs
+terms = ['201520', '201510'] # Terms (Fall 2015, Spring 2014, etc.)
+
+def html_to_pickle(source, term):
     '''Collect data from HTML source and write it to a pickle.'''
     headers = ['status', 'crn', 'abbrev', 'code', 'section', 'gender', 'credits',
                'title', 'days', 'time', 'total', 'current', 'remaining', 'instructor',
@@ -24,11 +28,11 @@ def html_to_pickle(source):
     for index, course in enumerate(courses):
         # Get the cols from each course row
         cols = [each.text for each in course.select('.dddefault')]
-        
+
         # Create dict for each valid section and add to final dict
         if len(cols) == 17:
             info = {header:col for header, col in zip(headers, cols)}
-            
+
             # If there are 11 or 12 empty columns, check if this entry is related to previous entry; if it is, do some magic
             if cols.count(u'\xa0') in [11, 12]:
                 # Find info of previous entry (already in the form of a dict)
@@ -38,15 +42,15 @@ def html_to_pickle(source):
 
                 # Check if previous entry is indeed the correct parent
                 if previous_info.values().count(u'\xa0') not in [11, 12]:
-                    
+
                     # Verify duration to make sure it's not a final exam date
                     if info['duration'] == previous_info['duration']:
-                        
+
                         # If the instructor is the same, simply add the second day to the original entry
                         if info['instructor'] in [previous_info['instructor'], 'TBA'] and days != previous_info['days']:
                             # Append day to previous day only if different
                             courses_by_abbrev[abbrev][code][crn]['days'] += days
-                        
+
                         # Otherwise, make it a lab section (see: ITBP 319 Spring 2013)
                         else:
                             for key in info:
@@ -63,7 +67,7 @@ def html_to_pickle(source):
                                         info[key] = '0.00'
                                     else:
                                         info[key] = previous_info[key]
-                
+
                 # If the previous entry is "invalid", go back two steps
                 else:
                     # Get the info of the entry two steps back
@@ -74,7 +78,7 @@ def html_to_pickle(source):
                         # Add the info needed
                         abbrev, code, crn, days = previous_info['abbrev'], previous_info['code'], \
                                                   previous_info['crn'], info['days']
-                        
+
                         # If time and instructor are the same, check days
                         if [info['time'], info['instructor']] == [previous_info['time'], previous_info['instructor']]:
                             # If the days are not the same, append the current day to previous
@@ -93,18 +97,12 @@ def html_to_pickle(source):
 
             courses[index] = info
 
-    # Remove all useless courses saved to '\xa0' key
-    if '\xa0' in courses_by_abbrev:
-        del courses_by_abbrev[u'\xa0']
-
     # Write final dict to pickle
-    cPickle.dump(courses_by_abbrev, open('classes.pickle', 'wb'))
+    with open('classes-{}.pickle'.format(term), 'wb') as f:
+        cPickle.dump(courses_by_abbrev, f)
 
-def source_grabber():
+def source_grabber(term):
     '''Grab the course search source code using a Mechanize browser.'''
-    # Required inputs
-    terms = ['201510', '201420'] # Terms (Fall 2015, Spring 2014, etc.)
-
     # Browser instance
     br = mechanize.Browser()
 
@@ -133,7 +131,7 @@ def source_grabber():
 
     # Choose current term by manipulating first form on page then submit
     br.select_form(nr=1)
-    br['p_term'] = [terms[0]]
+    br['p_term'] = [term]
     br.submit()
 
     # Move to advanced search page
@@ -155,7 +153,11 @@ def source_grabber():
 
 def main():
     # Get source, collect data from it, then write it to pickle
-    html_to_pickle(source_grabber())
+    files = os.listdir('.')
+
+    for term in terms:
+        if 'classes-{}.pickle'.format(term) not in files:
+            html_to_pickle(source_grabber(term), term)
 
 if __name__ == '__main__':
     main()

@@ -14,6 +14,11 @@
     </div>
     <div class="well">
         <form action="/submit" method="POST">
+            <p>Term:</p>
+            <select name="term">
+                <option value="201520">Spring 2015</option>
+                <option value="201510">Fall 2014</option>
+            </select>
             <p>Gender:</p>
             <select name="gender">
                 <option value="B">Male</option>
@@ -47,6 +52,7 @@
     <div class="well">
         <h2>Updates</h2>
         <ul>
+            <li><b>[08/11/2014]</b> - Updated course data for Spring 2015, added term selection option, made some small fixes.</li>
             <li><b>[07/05/2014]</b> - The course data has been updated for Fall 2014.</li>
             <li><b>[18/11/2013]</b> - Updated course data and added seats taken to each section in results.</li>
             <li><b>[08/11/2013]</b> - Updated course data to Spring 2014 and added section conflict finder. Direct conflicts will be displayed if no schedules are found.</li>

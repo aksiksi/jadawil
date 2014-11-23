@@ -1,5 +1,5 @@
 import time
-import cPickle
+import cPickle as pickle
 import itertools
 import random
 from datetime import datetime
@@ -9,7 +9,7 @@ from collections import defaultdict, OrderedDict
 def validate_inputs(courses, constants, term):
     '''Make sure inputs are valid courses.'''
     with open('classes-{}.pickle'.format(term)) as f:
-        all_courses = cPickle.load(f)
+        all_courses = pickle.load(f)
 
     course_errors = []
     crn_errors = []
@@ -104,7 +104,7 @@ class Scheduler():
         '''Return course and lab information in dict form.'''
         # Get course data from file
         with open('classes-{}.pickle'.format(self.term)) as f:
-            all_courses = cPickle.load(f)
+            all_courses = pickle.load(f)
 
         filtered_courses = {}
 
@@ -315,7 +315,7 @@ class Scheduler():
 
 if __name__ == '__main__':
     s = Scheduler(['elec 562', 'elec 462', 'elec 472', 'ecom 432', 'elec 375', 'ecom 442', 'elec 370'], [], 'B').start()
-    print s
+    print(s)
 
 
 

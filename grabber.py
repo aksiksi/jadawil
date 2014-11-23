@@ -1,6 +1,5 @@
 import mechanize
 import cookielib
-import cPickle
 import os
 from bs4 import BeautifulSoup
 from collections import defaultdict
@@ -99,7 +98,7 @@ def html_to_pickle(source, term):
 
     # Write final dict to pickle
     with open('classes-{}.pickle'.format(term), 'wb') as f:
-        cPickle.dump(courses_by_abbrev, f)
+        pickle.dump(courses_by_abbrev, f)
 
 def source_grabber(term):
     '''Grab the course search source code using a Mechanize browser.'''
@@ -156,8 +155,7 @@ def main():
     files = os.listdir('.')
 
     for term in terms:
-        if 'classes-{}.pickle'.format(term) not in files:
-            html_to_pickle(source_grabber(term), term)
+        html_to_pickle(source_grabber(term), term)
 
 if __name__ == '__main__':
     main()

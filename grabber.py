@@ -1,5 +1,6 @@
 import mechanize
 import cookielib
+import cPickle as pickle
 import os
 from bs4 import BeautifulSoup
 from collections import defaultdict

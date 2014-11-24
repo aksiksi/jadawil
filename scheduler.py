@@ -315,7 +315,7 @@ class Scheduler():
 
 if __name__ == '__main__':
     s = Scheduler(['elec 562', 'elec 462', 'elec 472', 'ecom 432', 'elec 375', 'ecom 442', 'elec 370'], [], 'B').start()
-    print(s)
+    print s
 
 
 

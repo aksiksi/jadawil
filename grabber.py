@@ -1,3 +1,4 @@
+from __future__ import print_function
 import mechanize
 import cookielib
 import cPickle as pickle
@@ -7,13 +8,15 @@ from collections import defaultdict
 from secret import username, password
 
 # Required inputs
-terms = ['201520', '201510'] # Terms (Fall 2015, Spring 2014, etc.)
+terms = ['201610', '201520', '201510'] # Terms (Fall 2015, Spring 2014, etc.)
 
 def html_to_pickle(source, term):
     '''Collect data from HTML source and write it to a pickle.'''
     headers = ['status', 'crn', 'abbrev', 'code', 'section', 'gender', 'credits',
                'title', 'days', 'time', 'total', 'current', 'remaining', 'instructor',
                'duration', 'location', 'attribute']
+
+    print("Parsing HTML...")
 
     # Create BeautifulSoup object with lxml as parser
     soup = BeautifulSoup(source, 'lxml')
@@ -97,8 +100,8 @@ def html_to_pickle(source, term):
 
             courses[index] = info
 
-    # Write final dict to pickle
-    with open('classes-{}.pickle'.format(term), 'wb') as f:
+    # Write final dict to pickle dir
+    with open('classes/classes-{}.pickle'.format(term), 'wb') as f:
         pickle.dump(courses_by_abbrev, f)
 
 def source_grabber(term):
@@ -126,6 +129,8 @@ def source_grabber(term):
     br['PIN'] = password
     br.submit()
 
+    print("Logging in as {}".format(username))
+
     # Go to course search page
     br.open('https://ssb.uaeu.ac.ae/prod/bwskfcls.p_sel_crse_search')
 
@@ -133,6 +138,8 @@ def source_grabber(term):
     br.select_form(nr=1)
     br['p_term'] = [term]
     br.submit()
+
+    print("Selected term {}".format(term))
 
     # Move to advanced search page
     br.select_form(nr=1)
@@ -145,6 +152,8 @@ def source_grabber(term):
     br.controls[13].value = options
     br.submit()
 
+    print("Search submitted")
+
     # Get page source
     response = br.response()
     source = response.read()
@@ -153,10 +162,7 @@ def source_grabber(term):
 
 def main():
     # Get source, collect data from it, then write it to pickle
-    files = os.listdir('.')
-
-    for term in terms:
-        html_to_pickle(source_grabber(term), term)
+    html_to_pickle(source_grabber(terms[0]), terms[0])
 
 if __name__ == '__main__':
     main()

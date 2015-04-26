@@ -1,3 +1,6 @@
+# Python 3 support
+from __future__ import print_function
+
 import time
 import cPickle as pickle
 import itertools
@@ -36,7 +39,7 @@ def validate_inputs(courses, constants, term):
 
     return course_errors, crn_errors
 
-class TimeRange():
+class TimeRange(object):
     '''Simple class for checking if a time (or times) lie(s) within a time range.'''
     datetimes = {}
 
@@ -91,7 +94,7 @@ class TimeRange():
         '''Return time range as string.'''
         return '{0}-{1}'.format(datetime.strftime(self.start, '%I:%M %p'), datetime.strftime(self.end, '%I:%M %p'))
 
-class Scheduler():
+class Scheduler(object):
     timeranges = {}
 
     def __init__(self, courses, constants, gender, term):
@@ -103,7 +106,7 @@ class Scheduler():
     def get_course_lab_info(self, courses):
         '''Return course and lab information in dict form.'''
         # Get course data from file
-        with open('classes-{}.pickle'.format(self.term)) as f:
+        with open('classes/classes-{}.pickle'.format(self.term)) as f:
             all_courses = pickle.load(f)
 
         filtered_courses = {}
@@ -314,10 +317,5 @@ class Scheduler():
             return results, []
 
 if __name__ == '__main__':
-    s = Scheduler(['elec 562', 'elec 462', 'elec 472', 'ecom 432', 'elec 375', 'ecom 442', 'elec 370'], [], 'B').start()
-    print s
-
-
-
-
-
+    s = Scheduler(['math 1110', 'phys 1110', 'math 1120'], [], 'B').start()
+    print(s)

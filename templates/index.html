@@ -14,7 +14,7 @@
         <h3>Please join our <a href="https://www.facebook.com/jadawil.ae">Facebook group</a> for the latest updates! And help spread the word!</h3>
     </div>
     <div class="well">
-        <h3 style="color: red;">Jadawil will probably be closed at the end of the next semester as I'm graduating. I'm currently using my own UAEU ID and password to update the data. Please help me get the word to the university to provide another way to access eServices after I graduate so I can continue to update Jadawil!</h3>
+        <h4 style="color: red;">Jadawil will probably be closed at the end of the next semester as I'm graduating. I'm currently using my own UAEU ID and password to update the data. Please help me get the word to the university to provide another way to access eServices after I graduate so I can continue to update Jadawil!</h4>
 
         <form action="/submit" method="POST">
             <p>Term:</p>
@@ -51,14 +51,7 @@
                 <p><button type="btn-submit" class="btn">Submit</button></p>
                 <p style="font-size: 10px;">Course data last updated on <b>{{ d|date }}</b>.</p>
         </form>
-    </div>
 
-    <div class="well">
-        <h2>Instructions</h2>
-        <ol>
-            <li>Enter the course codes of the courses you'd like to take in the next (or current) semester. A few examples of what a course code can look like: PSY 300, MATH 1120, MECH 390, ELEC 305. Uppercase or lowercase doesn't matter - just make sure that there's a space in between.</li>
-            <li>Hit the submit button to get a list of upto 50 possible schedules. If the site returns less than 50 schedules, know that these are the only possible combinations.</li>
-        </ol>
         <h2>Updates</h2>
         <ul>
             <li><b>[26/04/2015]</b> - Added course data for Fall 2016.</li>
@@ -68,6 +61,19 @@
             <li><b>[08/11/2013]</b> - Updated course data to Spring 2014 and added section conflict finder. Direct conflicts will be displayed if no schedules are found.</li>
             <li><b>[13/09/2013]</b> - Updated the eServices course scraper to work with the new design and added an intro video.</li>
         </ul>
+    </div>
+
+    <div class="well">
+        <h2>Instructions</h2>
+        <ol>
+            <li>Enter the course codes of the courses you'd like to take in the next (or current) semester. A few examples of what a course code can look like: PSY 300, MATH 1120, MECH 390, ELEC 305. Uppercase or lowercase doesn't matter - just make sure that there's a space in between.</li>
+            <li>Hit the submit button to get a list of upto 50 possible schedules. If the site returns less than 50 schedules, know that these are the only possible combinations.</li>
+        </ol>
+        <p>Watch this video if it's still not clear:</p>
+        <iframe width="420" height="315" align="center" src="//www.youtube.com/embed/1t3_DZDKjeo" frameborder="0" allowfullscreen></iframe>
+        <h3>Constant CRNs</h3>
+        <p>Constant CRNs allow you to add constraints to specific courses. For example, if you want to take only sections 01 and 03 of MATH 1120 into consideration, you can add the course code as usual in the first section, and then specify which CRNs you'd like to consider in the second section.</p>
+        <p>The scheduler will automatically determine which CRN belongs to which course and applies the constraint(s) to the resulting schedules.</p>
         <h2>Notes</h2>
         <h3>Errors</h3>
         <p>If any course code or CRN is invalid, the scheduler will raise an error.</p>
@@ -77,13 +83,7 @@
             <li>The scheduler did not find any valid schedules within the 10 second limit.</li>
             <li>There are too many possible schedule combinations.</li>
         </ol>
-        <h3>Constant CRNs</h3>
-        <p>Constant CRNs allow you to add constraints to specific courses. For example, if you want to take only sections 01 and 03 of MATH 1120 into consideration, you can add the course code as usual in the first section, and then specify which CRNs you'd like to consider in the second section.</p>
-        <p>The scheduler will automatically determine which CRN belongs to which course and applies the constraint(s) to the resulting schedules.</p>
         <h3>Miscellaneous</h3>
-        <p>You can access this site using either of these URLs: <a href="http://www.jadawil.co.nr/">Jadawil</a> or <a href="http://www.uaeusched.co.nr/">UAEUSched</a>.</p>
         <p>Please keep in mind that this service is still in a very early stage of development, meaning that you will encounter bugs.</p>
-        <h2>About</h2>
-        <iframe width="420" height="315" align="center" src="//www.youtube.com/embed/1t3_DZDKjeo" frameborder="0" allowfullscreen></iframe>
     </div>
 {% endblock %}

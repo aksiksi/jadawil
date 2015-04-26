@@ -11,7 +11,7 @@ from collections import defaultdict, OrderedDict
 
 def validate_inputs(courses, constants, term):
     '''Make sure inputs are valid courses.'''
-    with open('classes-{}.pickle'.format(term)) as f:
+    with open('classes/classes-{}.pickle'.format(term)) as f:
         all_courses = pickle.load(f)
 
     course_errors = []

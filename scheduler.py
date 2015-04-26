@@ -1,5 +1,5 @@
 # Python 3 support
-from __future__ import print_function
+# from __future__ import print_function
 
 import time
 import cPickle as pickle
@@ -318,4 +318,4 @@ class Scheduler(object):
 
 if __name__ == '__main__':
     s = Scheduler(['math 1110', 'phys 1110', 'math 1120'], [], 'B').start()
-    print(s)
+    # print(s)

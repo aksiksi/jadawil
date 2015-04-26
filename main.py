@@ -78,9 +78,9 @@ def submit():
             try:
                 if len(each[1]) > 1:
                     if int(each[0]) in range(1, 9):
-                        courses.add(each[1].lower())
+                        courses.add(each[1].lower().strip())
                     else:
-                        constants.add(each[1])
+                        constants.add(each[1].strip())
             except:
                 pass
 

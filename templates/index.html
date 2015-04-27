@@ -10,10 +10,11 @@
 {% block content %}
     <div class="hero-unit">
         <h1>Welcome to Jadawil!</h1>
-        <p>Jadawil is a course scheduler for UAEU students. Check out the <a href="#instructions">instructions</a> below to get started. Enjoy!</p>
+        <p style="font-size: 1.3em;">Jadawil is a course scheduler for UAEU students. Check out the <a href="#instructions">instructions</a> below to get started. Enjoy!</p>
     </div>
     <div class="well">
-        <h4 style="color: red;">Jadawil will probably be closed at the end of the next semester as I'm graduating. I'm currently using my own UAEU ID and password to update the data. Please help me get the word to the university to provide another way to access eServices after I graduate so I can continue to update Jadawil!</h4>
+        <h3 style="color: red;"><strong>IMPORTANT</strong></h4>
+        <p>Jadawil will probably be closed at the end of the next semester as I'm graduating. I'm currently using my own UAEU ID and password to update the data. Please help me get the word to the university to provide another way to access eServices after I graduate so I can continue to update Jadawil!</p>
 
         <h3>Please join our <a href="https://www.facebook.com/jadawil.ae">Facebook group</a> for the latest updates! And help spread the word!</h3>
 
@@ -55,7 +56,7 @@
 
         <h2>Updates</h2>
         <ul>
-            <li><b>[26/04/2015]</b> - Added course data for Fall 2016.</li>
+            <li><b>[26/04/2015]</b> - Added course data for Fall 2015.</li>
             <li><b>[08/11/2014]</b> - Updated course data for Spring 2015, added term selection option, made some small fixes.</li>
             <li><b>[07/05/2014]</b> - The course data has been updated for Fall 2014.</li>
             <li><b>[18/11/2013]</b> - Updated course data and added seats taken to each section in results.</li>
@@ -66,25 +67,40 @@
 
     <div class="well">
         <h2 id="instructions">Instructions</h2>
+
         <ol>
             <li>Enter the course codes of the courses you'd like to take in the next (or current) semester. A few examples of what a course code can look like: PSY 300, MATH 1120, MECH 390, ELEC 305. Uppercase or lowercase doesn't matter - just make sure that there's a space in between.</li>
             <li>Hit the submit button to get a list of upto 50 possible schedules. If the site returns less than 50 schedules, know that these are the only possible combinations.</li>
         </ol>
+
+        <p><img src="http://i.imgur.com/qUegh9B.gif" width="600" /></p>
+
         <p>Watch this video if it's still not clear:</p>
-        <iframe width="420" height="315" src="https://www.youtube.com/embed/AF8jClNhciU" frameborder="0" allowfullscreen></iframe>
+
+        <iframe width="600" height="400" src="https://www.youtube.com/embed/AF8jClNhciU" frameborder="0" allowfullscreen></iframe>
+        <br />
+
         <h3>Constant CRNs</h3>
+
         <p>Constant CRNs allow you to add constraints to specific courses. For example, if you want to take only sections 01 and 03 of MATH 1120 into consideration, you can add the course code as usual in the first section, and then specify which CRNs you'd like to consider in the second section.</p>
+
         <p>The scheduler will automatically determine which CRN belongs to which course and applies the constraint(s) to the resulting schedules.</p>
+
         <h2>Notes</h2>
+
         <h3>Errors</h3>
+
         <p>If any course code or CRN is invalid, the scheduler will raise an error.</p>
         <p>If you get no results, one of the following has occured:</p>
+
         <ol>
             <li>There is a direct conflict between two courses and no alternatives are available.</li>
             <li>The scheduler did not find any valid schedules within the 10 second limit.</li>
             <li>There are too many possible schedule combinations.</li>
         </ol>
+
         <h3>Miscellaneous</h3>
+
         <p>Please keep in mind that this service is still in a very early stage of development, meaning that you will encounter bugs.</p>
     </div>
 {% endblock %}

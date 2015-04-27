@@ -67,6 +67,14 @@ def main():
 
     return render_template('index.html', d=d)
 
+@app.route('/getstarted')
+def getstarted():
+    return render_template('getstarted.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/submit', methods=['POST'])
 def submit():
     if request.method == 'POST':

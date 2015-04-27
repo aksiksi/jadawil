@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block nav %}
+<li><a href="/">Home</a></li>
+<li class="active"><a href="/getstarted">Get Started</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="https://www.facebook.com/jadawil.ae" style="color: #1B9294; text-decoration: underline;">Jadawil on Facebook</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="well">
+    <h2 id="instructions">Instructions</h2>
+
+    <ol>
+        <li>Enter the course codes of the courses you'd like to take in the next (or current) semester. A few examples of what a course code can look like: PSY 300, MATH 1120, MECH 390, ELEC 305. Uppercase or lowercase doesn't matter - just make sure that there's a space in between.</li>
+        <li>Hit the submit button to get a list of upto 50 possible schedules. If the site returns less than 50 schedules, know that these are the only possible combinations.</li>
+    </ol>
+
+    <p><img style="padding-top: 20px; padding-bottom: 20px;" src="http://i.imgur.com/qUegh9B.gif" width="700" /></p>
+
+    <h3>Constant CRNs</h3>
+
+    <p>Constant CRNs allow you to add constraints to specific courses. For example, if you want to take only sections 01 and 03 of MATH 1120 into consideration, you can add the course code as usual in the first section, and then specify which CRNs you'd like to consider in the second section.</p>
+
+    <p>The scheduler will automatically determine which CRN belongs to which course and applies the constraint(s) to the resulting schedules.</p>
+
+    <p>Watch this video if it's still not clear:</p>
+
+    <iframe style="padding-top: 10px; padding-bottom: 20px;" width="700" height="450" src="https://www.youtube.com/embed/AF8jClNhciU" frameborder="0" allowfullscreen></iframe>
+    <br />
+
+</div>
+
+<div class="well">
+    <h2>Notes</h2>
+
+    <h3>Errors</h3>
+
+    <p>If any course code or CRN is invalid, the scheduler will raise an error.</p>
+    <p>If you get no results, one of the following has occured:</p>
+
+    <ol>
+        <li>There is a direct conflict between two courses and no alternatives are available.</li>
+        <li>The scheduler did not find any valid schedules within the 10 second limit.</li>
+        <li>There are too many possible schedule combinations.</li>
+    </ol>
+
+    <h3>Miscellaneous</h3>
+
+    <p>Please keep in mind that this service is still in a very early stage of development, meaning that you will encounter bugs.</p>
+</div>
+{% endblock %}

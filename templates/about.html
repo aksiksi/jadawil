@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block nav %}
+<li><a href="/">Home</a></li>
+<li><a href="/getstarted">Get Started</a></li>
+<li class="active"><a href="/about">About</a></li>
+<li><a href="https://www.facebook.com/jadawil.ae" style="color: #1B9294; text-decoration: underline;">Jadawil on Facebook</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="well">
+    <p>Jadawil was made because its creator got tired of manually making a schedule every semester. As you know, that usually involves:<p>
+
+    <ol>
+        <li>Visiting eServices and searching for each course,</li>
+        <li>Writing down the times and dates for each section of each course,</li>
+        <li>Checking and double-checking whether any conflicts exist,</li>
+        <li>And finally, after at least an hour, ending up with a workable schedule.</li>
+    </ol>
+
+    <p>Jadawil reduces the laborious process outlined above into two steps:</p>
+
+    <ol>
+        <li>Input the codes of the courses you'd like to take into the page.</li>
+        <li>Hit the "Submit" button.</li>
+    </ol>
+</div>
+{% endblock %}

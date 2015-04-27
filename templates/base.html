@@ -16,13 +16,19 @@
           })();
         </script>
         <style>
-            p, ol {
-                font-size: 1.5em;
+            p {
+                font-size: 1.3em;
+                padding-bottom: 5px;
             }
 
             input[type=text] {
                 font-size: 1.2em;
                 height: 1.5em;
+            }
+
+            ol>li {
+                font-size: 1.3em;
+                padding-bottom: 0.5em;
             }
         </style>
     </head>
@@ -31,8 +37,8 @@
         <div class="navbar">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="brand">Jadawil</a>
-                    <ul class="nav">
+                    <a class="brand" style="font-size: 2em;"><strong>Jadawil</strong></a>
+                    <ul class="nav" style="font-size: 1.5em">
                         {% block nav %}{% endblock %}
                     </ul>
                 </div>
@@ -40,6 +46,6 @@
         </div>
     {% block content %}{% endblock %}
     <div class="well">
-        <p>Created by <a href="http://twitter.com/Cyph0n/">@Cyph0n</a></p>
+        <p style="padding-bottom: 0px;">Created by <a href="http://twitter.com/Cyph0n/">@Cyph0n</a></p>
     </body>
 </html>

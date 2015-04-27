@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Results{% endblock %}
+{% block title %}Schedules{% endblock %}
 
 {% block nav %}
 <li class="active"><a href="/">Home</a></li>
@@ -20,10 +20,10 @@
             <p>Error in course code(s): {{ course_errors }}. Please try again.</p>
     {% else %}
         {% if schedules > 0 and schedules %}
-            <h3>Returned schedules: {{ schedules|len }}</h3>
+            <h3>Number of schedules: {{ schedules|len }}</h3>
             <h4>Total credit hours: {{ schedules[0].values()|sum }}</h4>
             {% for schedule in schedules %}
-            <table class="table table-bordered" align="center" style="width: 60%; font-size: 13px;">
+            <table class="table table-bordered" align="center" style="width: 85%; font-size: 13px; font-size: 1.1em;">
                 <thead>
                     <tr>
                         <th>Sunday</th>
@@ -47,7 +47,7 @@
                                             {{ course.location }}<br />
                                             Taken: {{ course.current }}/{{ course.total }}<br />
                                             Section {{ course.section }}<br />
-                                            <hr />
+                                            <hr style="background-color: #4B6B96; height: 2px;"/>
                                         </div>
                                     {% else %}
                                         <div style="padding-top: 0px;">
@@ -64,11 +64,11 @@
                             </td>
                         {% endfor %}
                     </tr>
-                    <p><b>CRNs:</b> {{ schedule|crns }}</p>
+                    <p style="font-size: 1em;"><b>CRNs:</b> {{ schedule|crns }}</p>
                 </tbody>
             </table>
             {% endfor %}
-            <p>Retrieved in {{ end }} seconds.</p>
+            <p style="font-size: 1em; padding-bottom: 0px">Retrieved in {{ end }} seconds.</p>
         {% else %}
             {% if schedules == -1 %}
                 <p>There are too many possible schedule combinations (more than 2 million). Please remove a course and try again.</p>

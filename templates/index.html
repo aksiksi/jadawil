@@ -5,14 +5,14 @@
 {% block nav %}
 <li class="active"><a href="/">Home</a></li>
 <li><a href="/getstarted">Get Started</a></li>
-<li><a href="/about">About</a></li>
+<li><a href="/why">Why?</a></li>
 <li><a href="https://www.facebook.com/jadawil.ae" style="color: #1B9294; text-decoration: underline;">Jadawil on Facebook</a></li>
 {% endblock %}
 
 {% block content %}
     <div class="hero-unit">
         <h1>Welcome to Jadawil!</h1>
-        <p style="font-size: 1.3em;">Jadawil is a course scheduler for UAEU students. Click on  Get Started in the nav bar above to learn how everything works. Enjoy!</p>
+        <p style="font-size: 1.2em;">A simple course scheduler for UAEU students.</p>
     </div>
     <div class="well">
         <h3 style="color: red;"><strong>IMPORTANT</strong></h4>
@@ -24,18 +24,18 @@
 
     <div class="well">
         <form action="/submit" method="POST">
-            <p>Term:</p>
+            <p><strong>Semester</strong></p>
             <select name="term">
                 <option value="201610">Fall 2015</option>
                 <option value="201520">Spring 2015</option>
                 <option value="201510">Fall 2014</option>
             </select>
-            <p>Gender:</p>
+            <p><strong>Gender</strong></p>
             <select name="gender">
                 <option value="B">Male</option>
                 <option value="G">Female</option>
             </select>
-            <p>Courses:</p>
+            <p><strong>Courses</strong></p>
                 <input type="text" name="1" placeholder="Example: MECH 390"/>
                 <input type="text" name="2" />
                 <input type="text" name="3" />
@@ -45,7 +45,7 @@
                 <input type="text" name="6" />
                 <input type="text" name="7" />
                 <input type="text" name="8" />
-            <p>Constant CRNs:</p>
+            <p><strong>Constant CRNs</strong></p>
                 <input type="text" name="9" placeholder="Example: 27010"/>
                 <input type="text" name="10" />
                 <input type="text" name="11" />
@@ -55,7 +55,7 @@
                 <input type="text" name="14" />
                 <input type="text" name="15" />
                 <input type="text" name="16" />
-                <p><button type="btn-submit" class="btn">Submit</button></p>
+                <p align="center" style="margin-top: 15px;"><button type="btn-submit" style="font-size: 1.3em; height: 1.7em; width: 5em;" class="btn">Submit</button></p>
                 <p style="font-size: 10px;">Course data last updated on <b>{{ d|date }}</b>.</p>
         </form>
 

@@ -71,9 +71,9 @@ def main():
 def getstarted():
     return render_template('getstarted.html')
 
-@app.route('/about')
+@app.route('/why')
 def about():
-    return render_template('about.html')
+    return render_template('why.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -91,6 +91,9 @@ def submit():
                         constants.add(each[1].strip())
             except:
                 pass
+
+        if len(courses) == 0:
+            return redirect('/')
 
         gender = request.form.get('gender')
         term = request.form.get('term')

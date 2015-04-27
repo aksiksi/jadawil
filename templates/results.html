@@ -3,8 +3,10 @@
 {% block title %}Results{% endblock %}
 
 {% block nav %}
-    <li class="active"><a href="/">Home</a></li>
-    <li><a href="https://www.facebook.com/jadawil.ae">Jadawil on Facebook</a></li>
+<li class="active"><a href="/">Home</a></li>
+<li><a href="/getstarted">Get Started</a></li>
+<li><a href="/why">Why?</a></li>
+<li><a href="https://www.facebook.com/jadawil.ae" style="color: #1B9294; text-decoration: underline;">Jadawil on Facebook</a></li>
 {% endblock %}
 
 {% block content %}
@@ -21,7 +23,7 @@
             <h3>Returned schedules: {{ schedules|len }}</h3>
             <h4>Total credit hours: {{ schedules[0].values()|sum }}</h4>
             {% for schedule in schedules %}
-            <table class="table table-bordered" style="width: 60%; font-size: 13px;">
+            <table class="table table-bordered" align="center" style="width: 60%; font-size: 13px;">
                 <thead>
                     <tr>
                         <th>Sunday</th>
@@ -62,7 +64,7 @@
                             </td>
                         {% endfor %}
                     </tr>
-                    <p><b>CRNS:</b> {{ schedule|crns }}</p>
+                    <p><b>CRNs:</b> {{ schedule|crns }}</p>
                 </tbody>
             </table>
             {% endfor %}

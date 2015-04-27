@@ -32,20 +32,26 @@
             }
         </style>
     </head>
-    <body>
+    <body style="background-color: #4B6B96;">
         <!-- Navbar -->
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="brand" style="font-size: 2em;"><strong>Jadawil</strong></a>
-                    <ul class="nav" style="font-size: 1.5em">
-                        {% block nav %}{% endblock %}
-                    </ul>
+        <div class="container">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="container" style="height: 3em;">
+                        <a class="brand" style="font-size: 2em;"><strong>Jadawil</strong></a>
+                        <ul class="nav" style="font-size: 1.5em">
+                            {% block nav %}{% endblock %}
+                        </ul>
+                    </div>
                 </div>
             </div>
+
+            {% block content %}{% endblock %}
         </div>
-    {% block content %}{% endblock %}
-    <div class="well">
-        <p style="padding-bottom: 0px;">Created by <a href="http://twitter.com/Cyph0n/">@Cyph0n</a></p>
+        <div class="container">
+            <div class="well">
+                <p align="center" style="padding-bottom: 0px;">Created by <a href="http://twitter.com/Cyph0n/">@Cyph0n</a>, a proud Electrical Engineering student @ <a href="http://uaeu.ac.ae/">UAEU</a>.</p>
+            </div>
+        </div>
     </body>
 </html>

@@ -71,7 +71,7 @@
             <p style="font-size: 1em; padding-bottom: 0px">Retrieved in {{ end }} seconds.</p>
         {% else %}
             {% if schedules == -1 %}
-                <p>There are too many possible schedule combinations (more than 2 million). Please remove a course and try again.</p>
+                <p>There are too many possible schedule combinations (more than 2 million). Please remove a course, or use some constant CRNs to decrease the solution space, then try again.</p>
             {% else %}
                 <p>There is either a direct conflict between two or more courses with no alternatives available, or no schedules could be found in the 10 second time limit. Running the scheduler again may help.</p>
 

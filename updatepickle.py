@@ -1,4 +1,4 @@
-from future import __print__
+from __future__ import print_function
 import subprocess
 import time
 import grabber
@@ -15,7 +15,7 @@ def main():
     print("Updating repo and committing...")
 
     # Add pickle to git
-    subprocess.call(['git', 'add', '*.pickle'])
+    subprocess.call(['git', 'add', 'classes/*.pickle'])
     subprocess.call(['git', 'add', 'last.txt'])
 
     # Commit changes

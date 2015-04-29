@@ -103,7 +103,14 @@ def submit():
         crn_errors = ', '.join(errors[1])
 
         if not (course_errors or crn_errors):
-            schedules, conflicts = scheduler.Scheduler(courses, constants, gender, term).start()
+            result = scheduler.Scheduler(courses, constants, gender, term).start()
+
+            # In case of too many combinations
+            if result == -1:
+                return render_template('results.html', schedules=result)
+
+            schedules, conflicts = result
+
         else:
             return render_template('results.html', course_errors=course_errors, crn_errors=crn_errors)
 

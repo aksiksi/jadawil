@@ -22,6 +22,17 @@
         {% if schedules > 0 and schedules %}
             <h3>Number of schedules: {{ schedules|len }}</h3>
             <h4>Total credit hours: {{ schedules[0].values()|sum }}</h4>
+
+            {% if final_conflicts %}
+                <h4>Final exam conflicts:</h4>
+
+                <ul>
+                {% for c in final_conflicts %}
+                    <li>{{ c[0] }} and {{ c[1] }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
             {% for schedule in schedules %}
             <table class="table table-bordered" align="center" style="width: 85%; font-size: 13px; font-size: 1.1em;">
                 <thead>
@@ -47,7 +58,14 @@
                                             {{ course.location }}<br />
                                             Taken: {{ course.current }}/{{ course.total }}<br />
                                             Section {{ course.section }}<br />
-                                            <hr style="background-color: #4B6B96; height: 2px;"/>
+
+                                            {% if course.final_date %}
+                                                Final Exam: {{ course.final_date }}<br />
+                                            {% else %}
+                                                Final Exam: TBA<br />
+                                            {% endif %}
+
+                                            <hr style="background-color: #4B6B96; height: 3px; margin-top: 10px; margin-bottom: 10px"/>
                                         </div>
                                     {% else %}
                                         <div style="padding-top: 0px;">
@@ -57,7 +75,13 @@
                                             {{ course.crn }}<br />
                                             {{ course.location }}<br />
                                             Taken: {{ course.current }}/{{ course.total }}<br />
-                                            Section {{ course.section }}
+                                            Section {{ course.section }}<br />
+
+                                            {% if course.final_date %}
+                                                Final Exam: {{ course.final_date }}<br />
+                                            {% else %}
+                                                Final Exam: TBA<br />
+                                            {% endif %}
                                         </div>
                                     {% endif %}
                                 {% endfor %}

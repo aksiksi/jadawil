@@ -87,6 +87,12 @@ class TimeRange(object):
 
         return False
 
+    def __contains__(self, other):
+        if self.start <= other.start <= self.end or other.start <= self.end <= other.end:
+            return True
+
+        return False
+
     def __gt__(self, other):
         return self.start > other.end
 
@@ -95,6 +101,16 @@ class TimeRange(object):
         return '{0}-{1}'.format(datetime.strftime(self.start, '%I:%M %p'), datetime.strftime(self.end, '%I:%M %p'))
 
 class Scheduler(object):
+    '''
+
+        To be used publicly:
+
+        self.results: the schedules
+        self.success: True if no conflicts
+        self.conflicts: possible conflicts in sections
+        self.final_conflicts: any final conflicts
+
+    '''
     timeranges = {}
 
     def __init__(self, courses, constants, gender, term):
@@ -102,6 +118,7 @@ class Scheduler(object):
         self.constants = constants
         self.gender = gender
         self.term = term
+        self.success = False
 
     def get_course_lab_info(self, courses):
         '''Return course and lab information in dict form.'''
@@ -235,6 +252,38 @@ class Scheduler(object):
 
         return [course for course in sorted_schedule if course]
 
+    def is_final_conflict(self, s1, s2):
+        '''Check for conflict between two sections.'''
+        if u'final_date' not in s1 or u'final_date' not in s2:
+            return False
+
+        if s1['final_date'] != s2['final_date']:
+            return False
+
+        t1 = TimeRange(*s1['final_time'].split('-'))
+        t2 = TimeRange(*s2['final_time'].split('-'))
+
+        # True if there is an overlap
+        return t1 in t2
+
+    def find_exam_conflicts(self, courses):
+        '''Quick check between courses to ensure no final exam date conflicts.'''
+        samples = []
+
+        # Store pairs of conflicted (LOL) courses
+        conflicted = []
+
+        for course in courses.values():
+            samples.append(course.values()[0])
+
+        for s in samples:
+            for e in samples:
+                if e != s and self.is_final_conflict(e, s):
+                    if [e['title'], s['title']] not in conflicted:
+                        conflicted.append([s['title'], e['title']])
+
+        return conflicted
+
     def combs(self, l, c, p=0):
         '''Generate unique combinations of length 2.'''
         if p == len(l):
@@ -267,7 +316,8 @@ class Scheduler(object):
             product *= len(course)
 
         if product > 2e6:
-            return -1
+            self.results = -1
+            return
 
         # Get titles and corresponding sections
         course_titles, course_info = courses.keys(), courses.values()
@@ -278,19 +328,35 @@ class Scheduler(object):
             for s in v.values():
                 section_info.append(s)
 
+        # Get final exam conflicts
+        self.final_conflicts = self.find_exam_conflicts(courses)
+
+        # pprint(course_info)
+
         # Section combinations and conflicts
         combs = self.combs(section_info, [])
-        conflicts = []
+        self.conflicts = []
 
         # Catch section overlaps for later
         for c in combs:
             s1, s2 = c
-            t1 = TimeRange(*s1['time'].split('-'))
 
-            # Check for conflict in both days and time
-            if any([d in s2['days'] for d in s1['days']]):
-                if t1.contains(*s2['time'].split('-')):
-                    conflicts.append([s1, s2])
+            # Possible conditions for comparison
+            # 1. compare a lab with a course section
+            # 2. compare sections from two diff. courses
+            c1 = (s1['code'] == s2['code']) and (('L' in s1['section'] and 'L' not in s2['section']) or ('L' in s2['section'] and 'L' not in s1['section']))
+            c2 = s1['code'] != s2['code']
+
+            # Only compare if from different courses
+            if c1 or c2:
+                print(s1['time'], s1['days'], s2['time'], s2['days'])
+                t1 = TimeRange(*s1['time'].split('-'))
+                t2 = TimeRange(*s2['time'].split('-'))
+
+                # Check for conflict in both days and time
+                if any([d in s2['days'] for d in s1['days']]):
+                    if t1 in t2:
+                        self.conflicts.append([s1, s2])
 
         # Start finding valid schedules
         schedules = []
@@ -299,23 +365,24 @@ class Scheduler(object):
 
         for each in generate_products:
             schedule = {}
+
             # Build a schedule based on products
             for title, crn in itertools.izip(course_titles, each):
                 schedule[title] = courses[title][crn]
+
             # Check for conflicts in schedule
             if not self.check_schedule_conflicts(schedule):
                 schedules.append(schedule)
             if (time.time() - start) >= 10 or len(schedules) >= 50:
                 break
 
-        results = self.convert_to_week_based(schedules)
+        self.results = self.convert_to_week_based(schedules)
 
-        # If no results, then there are conflicts
-        if not results:
-            return results, conflicts
-        else:
-            return results, []
+        # If results, then there are no conflicts
+        if self.results:
+            self.success = True
 
 if __name__ == '__main__':
-    s = Scheduler(['math 1110', 'phys 1110', 'math 1120'], [], 'B').start()
+    pass
+    # s = Scheduler(['math 1110', 'phys 1110', 'math 1120'], [], 'B').start()
     # print(s)

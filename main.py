@@ -23,7 +23,7 @@ def crns(schedule):
     crns = []
     for day in schedule.values():
         for course in day:
-            if course['crn'] not in crns:
+            if course['crn'] not in crns and 'L' not in course['crn']:
                 crns.append(course['crn'])
 
     return ' '.join(crns)
@@ -102,21 +102,20 @@ def submit():
         course_errors = ', '.join(errors[0])
         crn_errors = ', '.join(errors[1])
 
-        if not (course_errors or crn_errors):
-            result = scheduler.Scheduler(courses, constants, gender, term).start()
+        if course_errors or crn_errors:
+            return render_template('results.html', course_errors=course_errors, crn_errors=crn_errors)
+        else:
+            # Run scheduler
+            s = scheduler.Scheduler(courses, constants, gender, term)
+            s.start()
 
             # In case of too many combinations
-            if result == -1:
-                return render_template('results.html', schedules=result)
+            if s.results == -1:
+                return render_template('results.html', schedules=s.results)
 
-            schedules, conflicts = result
+            end = time.time() - start
 
-        else:
-            return render_template('results.html', course_errors=course_errors, crn_errors=crn_errors)
-
-        end = time.time() - start
-
-        return render_template('results.html', schedules=schedules, conflicts=conflicts, end=end)
+            return render_template('results.html', schedules=s.results, conflicts=s.conflicts, final_conflicts=s.final_conflicts, end=end)
 
 if __name__ == '__main__':
     app.run(debug=True)

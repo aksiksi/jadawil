@@ -43,11 +43,20 @@ def html_to_pickle(source, term):
                 abbrev, code, crn, days = previous_info['abbrev'], previous_info['code'], \
                                           previous_info['crn'], info['days']
 
-                # Check if previous entry is indeed the correct parent
-                if previous_info.values().count(u'\xa0') not in [11, 12]:
+                # DEBUG
+                # c = abbrev == 'ITBP' and code == '219' and previous_info['gender'] == 'G'
+
+                # Check if previous entry is indeed the correct parent AND not a lab
+                if previous_info.values().count(u'\xa0') not in [11, 12] and 'L' not in crn:
+                    try:
+                        # Days of duration in dd/m-dd/m format
+                        duration_days = info['duration'].split('-')
+                    except:
+                        duration_days = [-1, -1]
 
                     # Verify duration to make sure it's not a final exam date
-                    if info['duration'] == previous_info['duration']:
+                    if duration_days[0] != duration_days[1]:
+                    # if info['duration'] == previous_info['duration']:
 
                         # If the instructor is the same, simply add the second day to the original entry
                         if info['instructor'] in [previous_info['instructor'], 'TBA'] and days != previous_info['days']:
@@ -71,32 +80,66 @@ def html_to_pickle(source, term):
                                     else:
                                         info[key] = previous_info[key]
 
-                # If the previous entry is "invalid", go back two steps
+                    # In case it is a final exam date
+                    else:
+                        if duration_days[0] != -1:
+                            courses_by_abbrev[abbrev][code][crn]['final_date'] = duration_days[0]
+                            courses_by_abbrev[abbrev][code][crn]['final_time'] = info['time']
+
+                # If the previous entry is "invalid" or a lab, go back two steps -- for final exam checks and additional days
                 else:
                     # Get the info of the entry two steps back
                     previous_info = courses[index-2]
 
-                    # Verify that this is the corrent parent
+                    # Verify that this is the correct parent
                     if previous_info.values().count(u'\xa0') not in [11, 12]:
                         # Add the info needed
                         abbrev, code, crn, days = previous_info['abbrev'], previous_info['code'], \
                                                   previous_info['crn'], info['days']
 
-                        # If time and instructor are the same, check days
-                        if [info['time'], info['instructor']] == [previous_info['time'], previous_info['instructor']]:
-                            # If the days are not the same, append the current day to previous
-                            if info['days'] != previous_info['days']:
-                                courses_by_abbrev[abbrev][code][crn]['days'] += days
+                        duration_days = info['duration'].split('-')
+
+                        # Maybe final exam date? If so, record that shit
+                        if duration_days[0] == duration_days[1]:
+                            courses_by_abbrev[abbrev][code][crn]['final_date'] = duration_days[0]
+                            courses_by_abbrev[abbrev][code][crn]['final_time'] = info['time']
+
+                        # If instructor same but days not same, add new day
+                        elif info['instructor'] in [previous_info['instructor'], 'TBA'] and days != previous_info['days']:
+                            courses_by_abbrev[abbrev][code][crn]['days'] += days
+
+                        # If diff. instructor, perhaps a lab??
+                        else:
+                            for key in info:
+                                # Fill up any empty info
+                                if info[key] == u'\xa0':
+                                    # Append a 'L' to section or crn
+                                    if key == 'section' or key == 'crn':
+                                        info[key] = 'L' + previous_info[key]
+                                    # Add lab to title
+                                    elif key == 'title':
+                                        info[key] = previous_info[key] + ' (Lab)'
+                                    # Set credits to 0 for lab
+                                    elif key == 'credits':
+                                        info[key] = '0.00'
+                                    else:
+                                        info[key] = previous_info[key]
+
+                    # WOW INCEPTION -- move back 3 entries to find parent (?)
+                    else:
+                        pass
+
+            abbrev, code, crn = info['abbrev'], info['code'], info['crn']
 
             # Add course to course dict under correct abbrev, code, and crn
-            if info['abbrev'] not in courses_by_abbrev:
-                courses_by_abbrev[info['abbrev']] = {info['code']: {info['crn']: info}}
+            if abbrev not in courses_by_abbrev:
+                courses_by_abbrev[abbrev] = {code: {crn: info}}
             else:
-                current = courses_by_abbrev[info['abbrev']]
-                if info['code'] in current:
-                    current[info['code']][info['crn']] = info
+                current = courses_by_abbrev[abbrev]
+                if code in current:
+                    current[code][crn] = info
                 else:
-                    current[info['code']] = {info['crn']: info}
+                    current[code] = {crn: info}
 
             courses[index] = info
 
@@ -163,6 +206,8 @@ def source_grabber(term):
 def main():
     # Get source, collect data from it, then write it to pickle
     html_to_pickle(source_grabber(terms[0]), terms[0])
+    # for term in terms:
+    #     html_to_pickle(source_grabber(term), term)
 
 if __name__ == '__main__':
     main()

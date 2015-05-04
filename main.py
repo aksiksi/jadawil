@@ -71,9 +71,9 @@ def main():
 def getstarted():
     return render_template('getstarted.html')
 
-@app.route('/why')
+@app.route('/about')
 def about():
-    return render_template('why.html')
+    return render_template('about.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():

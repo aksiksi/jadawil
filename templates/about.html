@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block nav %}
+<li><a href="/">Home</a></li>
+<li><a href="/getstarted">Get Started</a></li>
+<li class="active"><a href="/about">About</a></li>
+<li><a href="https://www.facebook.com/jadawil.ae" style="color: #1B9294; text-decoration: underline;">Jadawil on Facebook</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="well">
+    <h2>Why?</h2>
+    <p>Jadawil was made because its creator got tired of manually making a schedule every semester. As you know, that usually involves:<p>
+
+    <ol>
+        <li>Visiting eServices and searching for each course,</li>
+        <li>Writing down the times and dates for each section of each course,</li>
+        <li>Checking and double-checking whether any conflicts exist,</li>
+        <li>And finally, after at least an hour, ending up with a workable schedule.</li>
+    </ol>
+
+    <p>Jadawil reduces the laborious process outlined above into two steps:</p>
+
+    <ol>
+        <li>Input the codes of the courses you'd like to take into the page.</li>
+        <li>Hit the "Submit" button.</li>
+    </ol>
+</div>
+
+<div class="well">
+    <h2>Inital Plan</h2>
+
+    <p>Before creating Jadawil, my aim was to create a unified set of tools (Adawat) for UAEU students. This included Jadawil, a better course search engine, schedule recommendations from similar students, and more. Unfortunately the university was not interested, so I just made Jadawil.</p>
+
+    <h2>Tech</h2>
+
+    <p>Jadawil is written in <a href="https://www.python.org/">Python</a> and relies heavily on the <a href="http://flask.pocoo.org/">Flask</a> web framework. Flask basically allows the app to have an organized web interface. The website is hosted on <a href="http://heroku.com/">Heroku</a> as you may have noticed from the free URL.</p>
+
+    <p>So, how does it get the course information? I've written a sepearate program that uses my UAEU details to login to eServices, searches for ALL courses, and saves the resulting page to HTML. The HTML is then parsed using a complex set of rules (thanks eServices guys!) and the course data is finally saved in a friendly, fast, and easy to access format (Python <a href="https://docs.python.org/3/library/pickle.html">pickle</a>). I run this program manually whenever I feel the need to. It could have been automated, but I'm afraid of UAEU banning me if they catch regular logins from my username.</p>
+
+    <p>Jadawil has been actively developed and tested (by myself at least) for the past two years. You can view the source code for a version of Jadawil from last year on <a href="https://github.com/Cyph0n/jadawil">Github</a>.</p>
+</div>
+
+<div class="well">
+    <h2>Wanna Help?</h2>
+
+    <p>I absolutely suck at anything design related. If you'd like to help with layout (HTML/CSS), color palettes, or logo design, please contact me on <a href="http://twitter.com/Cyph0n">Twitter</a>.</p>
+
+    <p>If you're interested in heavily testing the app (and breaking it!), feel free to contact me.</p>
+
+    <h2>Need Help?</h2>
+
+    <p>If you're working on something in Python, C/C++, Java, Scala, or JavaScript, reach out on <a href="http://twitter.com/Cyph0n">Twitter</a> and I'll see what I can do to help. I will not solve your homework or do your projects.</p>
+</div>
+{% endblock %}

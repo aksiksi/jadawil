@@ -40,6 +40,7 @@ def html_to_pickle(source, term):
             if cols.count(u'\xa0') in [11, 12]:
                 # Find info of previous entry (already in the form of a dict)
                 previous_info = courses[index-1]
+
                 abbrev, code, crn, days = previous_info['abbrev'], previous_info['code'], \
                                           previous_info['crn'], info['days']
 
@@ -56,12 +57,15 @@ def html_to_pickle(source, term):
 
                     # Verify duration to make sure it's not a final exam date
                     if duration_days[0] != duration_days[1]:
-                    # if info['duration'] == previous_info['duration']:
 
                         # If the instructor is the same, simply add the second day to the original entry
-                        if info['instructor'] in [previous_info['instructor'], 'TBA'] and days != previous_info['days']:
-                            # Append day to previous day only if different
-                            courses_by_abbrev[abbrev][code][crn]['days'] += days
+                        if info['instructor'] in [previous_info['instructor'], 'TBA']:
+                            if days != previous_info['days']:
+                                # Append day to previous day only if different
+                                courses_by_abbrev[abbrev][code][crn]['days'] += days
+                            else:
+                                # Stupid fix for MECH labs..
+                                courses_by_abbrev[abbrev][code][crn]['days'] = days
 
                         # Otherwise, make it a lab section (see: ITBP 319 Spring 2013)
                         else:
@@ -147,6 +151,10 @@ def html_to_pickle(source, term):
     with open('classes/classes-{}.pickle'.format(term), 'wb') as f:
         pickle.dump(courses_by_abbrev, f)
 
+    # TESTING
+    # with open('testingabc.pickle', 'wb') as f:
+    #     pickle.dump(courses_by_abbrev, f)
+
 def source_grabber(term):
     '''Grab the course search source code using a Mechanize browser.'''
     # Browser instance
@@ -206,8 +214,13 @@ def source_grabber(term):
 def main():
     # Get source, collect data from it, then write it to pickle
     html_to_pickle(source_grabber(terms[0]), terms[0])
+
     # for term in terms:
     #     html_to_pickle(source_grabber(term), term)
+
+    #TESTING
+    # with open('testingabc.html') as f:
+    #     html_to_pickle(f.read(), '201610')
 
 if __name__ == '__main__':
     main()

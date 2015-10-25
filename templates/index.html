@@ -10,23 +10,16 @@
 {% endblock %}
 
 {% block content %}
-    <div class="hero-unit">
+    <!-- <div class="hero-unit">
         <h1>Welcome to Jadawil!</h1>
         <p style="font-size: 1.2em;">A simple course scheduler for UAEU students.</p>
-    </div>
-    <div class="well">
-        <h3 style="color: red;"><strong>IMPORTANT</strong></h4>
-        <p>Jadawil will probably be closed at the end of the next semester as I'm graduating. I'm currently using my own UAEU ID and password to update the data. Please help me get the word to the university to provide another way to access eServices after I graduate so I can continue to update Jadawil!</p>
-
-        <h3>Please join our <a href="https://www.facebook.com/jadawil.ae">Facebook group</a> for the latest updates! And help spread the word!</h3>
-
-    </div>
+    </div> -->
 
     <div class="well">
         <form action="/submit" method="POST">
             <p><strong>Semester</strong></p>
             <select name="term">
-                <option value="201620">Fall 2016</option>
+                <option value="201620">Spring 2016</option>
                 <option value="201610">Fall 2015</option>
                 <option value="201520">Spring 2015</option>
                 <option value="201510">Fall 2014</option>
@@ -73,6 +66,14 @@
             <li><b>[08/11/2013]</b> - Updated course data to Spring 2014 and added section conflict finder. Direct conflicts will be displayed if no schedules are found.</li>
             <li><b>[13/09/2013]</b> - Updated the eServices course scraper to work with the new design and added an intro video.</li>
         </ul>
+    </div>
+
+    <div class="well">
+        <h3 style="color: red;"><strong>IMPORTANT</strong></h4>
+        <p>Jadawil will probably be closed at the end of the next semester as I'm graduating. I'm currently using my own UAEU ID and password to update the data. Please help me get the word to the university to provide another way to access eServices after I graduate so I can continue to update Jadawil!</p>
+
+        <h3>Please join our <a href="https://www.facebook.com/jadawil.ae">Facebook group</a> for the latest updates! And help spread the word!</h3>
+
     </div>
 
     <div class="well">

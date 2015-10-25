@@ -7,8 +7,8 @@ from bs4 import BeautifulSoup
 from collections import defaultdict
 from secret import username, password
 
-# Required inputs
-terms = ['201610', '201520', '201510'] # Terms (Fall 2015, Spring 2014, etc.)
+# Terms
+terms = ['201620', '201610', '201520', '201510']
 
 def html_to_pickle(source, term):
     '''Collect data from HTML source and write it to a pickle.'''

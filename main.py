@@ -1,7 +1,9 @@
-from flask import request, render_template, url_for, redirect, Flask
-import scheduler
 import time
+import json
 from datetime import datetime, timedelta
+
+import scheduler
+from flask import request, render_template, url_for, redirect, Flask
 
 app = Flask(__name__)
 
@@ -114,6 +116,8 @@ def submit():
                 return render_template('results.html', schedules=s.results)
 
             end = time.time() - start
+
+            print json.dumps(s.results)
 
             return render_template('results.html', schedules=s.results, conflicts=s.conflicts, final_conflicts=s.final_conflicts, end=end)
 

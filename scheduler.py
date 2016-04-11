@@ -349,7 +349,6 @@ class Scheduler(object):
 
             # Only compare if from different courses
             if c1 or c2:
-                print(s1['time'], s1['days'], s2['time'], s2['days'])
                 t1 = TimeRange(*s1['time'].split('-'))
                 t2 = TimeRange(*s2['time'].split('-'))
 

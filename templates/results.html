@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Schedules{% endblock %}
+
+{% block nav %}
+<li class="active"><a href="/">Home</a></li>
+<li><a href="/getstarted">Get Started</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="https://www.facebook.com/jadawil.ae" style="color: #1B9294; text-decoration: underline;">Jadawil on Facebook</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="well">
+    {% if course_errors and crn_errors %}
+            <p>Error in course code(s): {{ course_errors }}. Please try again.</p>
+            <p>Error in CRN(s): {{ crn_errors }}. Please try again.</p>
+    {% elif crn_errors %}
+        <p>Error in CRN(s): {{ crn_errors }}. Please try again.</p>
+    {% elif course_errors %}
+            <p>Error in course code(s): {{ course_errors }}. Please try again.</p>
+    {% else %}
+        {% if schedules > 0 and schedules %}
+            <h3>Number of schedules: {{ schedules|len }}</h3>
+            <h4>Total credit hours: {{ schedules[0].values()|sum }}</h4>
+
+            {% if final_conflicts %}
+                <h4>Final exam conflicts:</h4>
+
+                <ul>
+                {% for c in final_conflicts %}
+                    <li>{{ c[0] }} and {{ c[1] }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% for schedule in schedules %}
+            <table class="table table-bordered" align="center" style="width: 85%; font-size: 13px; font-size: 1.1em;">
+                <thead>
+                    <tr>
+                        <th>Sunday</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for day in schedule.values() %}
+                            <td>
+                                {% for course in day %}
+                                    {% if not loop.last %}
+                                        <div class="entry" style="padding: 0px 0px; border-bottom: none;">
+                                            {{ course.title }}<br />
+                                            {{ course.time }}<br />
+                                            {{ course.instructor }}<br />
+                                            {{ course.crn }}<br />
+                                            {{ course.location }}<br />
+                                            Taken: {{ course.current }}/{{ course.total }}<br />
+                                            Section {{ course.section }}<br />
+
+                                            {% if course.final_date %}
+                                                Final Exam: {{ course.final_date }}<br />
+                                            {% else %}
+                                                Final Exam: TBA<br />
+                                            {% endif %}
+
+                                            <hr style="background-color: #4B6B96; height: 3px; margin-top: 10px; margin-bottom: 10px"/>
+                                        </div>
+                                    {% else %}
+                                        <div style="padding-top: 0px;">
+                                            {{ course.title }}<br />
+                                            {{ course.time }}<br />
+                                            {{ course.instructor }}<br />
+                                            {{ course.crn }}<br />
+                                            {{ course.location }}<br />
+                                            Taken: {{ course.current }}/{{ course.total }}<br />
+                                            Section {{ course.section }}<br />
+
+                                            {% if course.final_date %}
+                                                Final Exam: {{ course.final_date }}<br />
+                                            {% else %}
+                                                Final Exam: TBA<br />
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    <p style="font-size: 1em;"><b>CRNs:</b> {{ schedule|crns }}</p>
+                </tbody>
+            </table>
+            {% endfor %}
+            <p style="font-size: 1em; padding-bottom: 0px">Retrieved in {{ end }} seconds.</p>
+        {% else %}
+            {% if schedules == -1 %}
+                <p>There are too many possible schedule combinations (more than 2 million). Please remove a course, or use some constant CRNs to decrease the solution space, then try again.</p>
+            {% else %}
+                <p>There is either a direct conflict between two or more courses with no alternatives available, or no schedules could be found in the 10 second time limit. Running the scheduler again may help.</p>
+
+                <h4>Possible conflicts:</h4>
+                <ol>
+                    {% for c in conflicts %}
+                        <li>
+                            Section {{ c[0].section }} of {{ c[0].title }} ({{ c[0].abbrev + ' ' + c[0].code }}) with Section {{ c[1].section }} of {{ c[1].title }} ({{ c[1].abbrev + ' ' + c[1].code }}).
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

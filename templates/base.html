@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lan="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="static/css/bootstrap.css" />
+        <link rel="shortcut icon" href="/static/favicon.png" type="image/png">
+        <script type="text/javascript">
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-10149989-4']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+        </script>
+        <style>
+            p {
+                font-size: 1.3em;
+                padding-bottom: 5px;
+            }
+
+            input[type=text] {
+                font-size: 1.2em;
+                height: 1.5em;
+            }
+
+            ol>li {
+                font-size: 1.3em;
+                padding-bottom: 0.5em;
+            }
+        </style>
+    </head>
+    <body style="background-color: #4B6B96;">
+        <!-- Navbar -->
+        <div class="container">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="container" style="height: 3em;">
+                        <a class="brand" style="font-size: 2em;"><strong>Jadawil</strong></a>
+                        <ul class="nav" style="font-size: 1.5em">
+                            {% block nav %}{% endblock %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {% block content %}{% endblock %}
+
+            <div class="well">
+                <p align="center" style="padding-bottom: 0px;">Created by <a href="http://assil.me">Assil Ksiksi</a>, a proud alumnus of Electrical Engineering @ <a href="http://uaeu.ac.ae/">UAEU</a>.</p>
+            </div>
+        </div>
+    </body>
+</html>

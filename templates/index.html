@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block title %}Jadawil{% endblock %}
+
+{% block nav %}
+<li class="active"><a href="/">Home</a></li>
+<li><a href="/getstarted">Get Started</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="https://www.facebook.com/jadawil.ae" style="color: #1B9294; text-decoration: underline;">Jadawil on Facebook</a></li>
+{% endblock %}
+
+{% block content %}
+    <!-- <div class="hero-unit">
+        <h1>Welcome to Jadawil!</h1>
+        <p style="font-size: 1.2em;">A simple course scheduler for UAEU students.</p>
+    </div> -->
+
+    <div class="well">
+        <form action="/submit" method="POST">
+            <p><strong>Semester</strong></p>
+            <select name="term">
+                <option value="201710">Fall 2016</option>
+                <option value="201620">Spring 2016</option>
+                <option value="201610">Fall 2015</option>
+                <option value="201520">Spring 2015</option>
+                <option value="201510">Fall 2014</option>
+            </select>
+            <p><strong>Gender</strong></p>
+            <select name="gender">
+                <option value="B">Male</option>
+                <option value="G">Female</option>
+            </select>
+            <p><strong>Courses</strong></p>
+                <input type="text" name="1" placeholder="Example: MECH 390"/>
+                <input type="text" name="2" />
+                <input type="text" name="3" />
+                <input type="text" name="4" />
+                <br />
+                <input type="text" name="5" />
+                <input type="text" name="6" />
+                <input type="text" name="7" />
+                <input type="text" name="8" />
+            <p><strong>Constant CRNs</strong></p>
+                <input type="text" name="9" placeholder="Example: 27010"/>
+                <input type="text" name="10" />
+                <input type="text" name="11" />
+                <input type="text" name="12" />
+                <br />
+                <input type="text" name="13" />
+                <input type="text" name="14" />
+                <input type="text" name="15" />
+                <input type="text" name="16" />
+
+                <p style="font-size: 10px;">Course data last updated on <b>{{ d|date }}</b>.</p>
+
+                <p align="center" style="margin-top: 15px;"><button type="btn-submit" style="font-size: 1.3em; height: 1.7em; width: 5em;" class="btn">Submit</button></p>
+        </form>
+		
+		<hr>
+		<h2>Find a General Education Course</h2>
+		<form action="/submit_GE" method="POST">
+			<p><strong>College:</strong></p>
+				<select name="college">
+					<option value="COE">College of Engineering</option>
+					<option value="CBE">College of Business and Economics</option>
+					<option value="CS">College of Science</option>
+					<option value="CHSS">College of Humanities and Social Sciences</option>
+					<option value="CIT">College of Information Technology</option>
+					<option value="CED">College of Education</option>
+					<option value="CL">College of Law</option>
+					<option value="CFA">College of Food and Agriculture</option>
+				</select>
+			<p><strong>Gender:</strong></p>
+				<select name="gender">
+					<option value="B">Male</option>
+					<option value="G">Female</option>
+				</select>
+			<p><strong>GE Cluster:</strong></p>
+				<div class="radio">
+				  <label><input type="radio" name="cluster" value="cluster1">Learning and Thinking Skills Area</label>
+				</div>
+				<div class="radio">
+				  <label><input type="radio" name="cluster" value="cluster2">Humanities/Fine Arts Area</label>
+				</div>
+				<div class="radio">
+				  <label><input type="radio" name="cluster" value="cluster3">The Global Experience Area</label>
+				</div>
+				<div class="radio">
+				  <label><input type="radio" name="cluster" value="cluster4">The Natural World - Natural Sciences (not for COE majors)</label>
+				</div>
+				<div class="radio">
+				  <label><input type="radio" name="cluster" value="all" checked="checked">All Courses</label>
+				</div>
+			<p><strong>Time Range:</strong></p>
+				<table>
+					<tr>
+						<td>
+							<select name="start-time">
+								<option value="1">1:00</option>
+								<option value="2">2:00</option>
+								<option value="3">3:00</option>
+								<option value="4">4:00</option>
+								<option value="5">5:00</option>
+								<option value="6">6:00</option>
+								<option value="7">7:00</option>
+								<option value="8" selected="selected">8:00</option>
+								<option value="9">9:00</option>
+								<option value="10">10:00</option>
+								<option value="11">11:00</option>
+								<option value="12">12:00</option>
+							</select>
+						</td>
+						<td>
+							<select name="start-am-pm">
+								<option value="am">AM</option>
+								<option value="pm">PM</option>
+							</select>
+						</td>
+						<td> to </td>
+						<td>
+							<select name="end-time">
+								<option value="1">1:00</option>
+								<option value="2">2:00</option>
+								<option value="3">3:00</option>
+								<option value="4">4:00</option>
+								<option value="5">5:00</option>
+								<option value="6">6:00</option>
+								<option value="7">7:00</option>
+								<option value="8">8:00</option>
+								<option value="9">9:00</option>
+								<option value="10" selected="selected">10:00</option>
+								<option value="11">11:00</option>
+								<option value="12">12:00</option>
+							</select>
+						</td>
+						<td>
+							<select name="end-am-pm">
+								<option value="am">AM</option>
+								<option value="pm">PM</option>
+							</select>
+						</td>
+					</tr>
+				</table>				
+			<p><button type="btn-submit" class="btn">Submit</button></p>
+		</form>
+
+        <h2>Updates</h2>
+        <ul>
+            <li><b>[11/04/2016]</b> - Added course data for Fall 2016.</li>
+            <li><b>[25/10/2015]</b> - Added course data for Spring 2016.</li>
+            <li><b>[03/05/2015]</b> - Jadawil now checks for final exam conflicts. If there are any, they will be displayed at the top of results page.</li>
+            <li><b>[26/04/2015]</b> - Added course data for Fall 2015.</li>
+            <li><b>[08/11/2014]</b> - Updated course data for Spring 2015, added term selection option, made some small fixes.</li>
+            <li><b>[07/05/2014]</b> - The course data has been updated for Fall 2014.</li>
+            <li><b>[18/11/2013]</b> - Updated course data and added seats taken to each section in results.</li>
+            <li><b>[08/11/2013]</b> - Updated course data to Spring 2014 and added section conflict finder. Direct conflicts will be displayed if no schedules are found.</li>
+            <li><b>[13/09/2013]</b> - Updated the eServices course scraper to work with the new design and added an intro video.</li>
+        </ul>
+    </div>
+
+    <div class="well">
+        <h3 style="color: red;"><strong>IMPORTANT</strong></h4>
+        <p>Jadawil will probably be closed at the end of the next semester as I'm graduating. I'm currently using my own UAEU ID and password to update the data. Please help me get the word to the university to provide another way to access eServices after I graduate so I can continue to update Jadawil!</p>
+
+        <h3>Please join our <a href="https://www.facebook.com/jadawil.ae">Facebook group</a> for the latest updates! And help spread the word!</h3>
+
+    </div>
+
+    <div class="well">
+        <h2>Discussion</h2>
+
+        <div id="disqus_thread"></div>
+
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES * * */
+            var disqus_shortname = 'jadawil';
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block nav %}
+    <li class="active"><a href="/">Home</a></li>
+    <li><a href="/calc">GPA Calculator</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="well">
+	<h3>Number of found sections: {{ sections|len }}</h3>
+        <table class="table table-hover text-center" style="width: 90%; font-size: 13px;">
+			<thead style = "font-weight: bold;">
+				<tr>
+					<td>CRN</td>
+					<td>Course Title</td>
+					<td>Instructor</td>
+					<td>Registered</td>
+					<td>Time</td>
+					<td>Days</td>
+					<td>Location</td>
+				</tr>
+			</thead>
+            <tbody>
+				{% for key, value in sections.iteritems() %}
+						{% if (value['remaining']|int) < 1 %}
+						<tr class="danger">
+						{% else %}
+						<tr>
+						{% endif %}
+							<td>
+								{{ value['crn'] }}
+							<td>
+								{{ value['abbrev'] + value['code'] + " - " + value['title'] }}
+							</td>
+							<td>
+								{{ value['instructor'] }}
+							</td>
+							<td>
+								{{ value['remaining'] }}
+							<td>
+								{{ value['time'] }}
+							</td>
+							<td>
+								{{ value['days'] }}
+							</td>
+							<td>
+								{{ value['location'] }}
+							</td>
+						</tr>
+				{% endfor %}
+			</tbody>
+		</table>						
+        <p>Retrieved in {{ end }} seconds.</p>
+</div>
+{% endblock %}

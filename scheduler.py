@@ -472,6 +472,7 @@ class GEScheduler():
 				if section['time'] != 'TBA':
 					if section['gender'] == self.gender and self.compare_timeranges(section['time']):
 						filtered_course_sections[crn] = section
+		print (filtered_course_sections)
 		return filtered_course_sections
 			
 if __name__ == '__main__':

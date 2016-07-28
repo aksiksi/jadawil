@@ -136,10 +136,10 @@ def submit_GE():
 		
 		#end = time.time() - start
 		with open('last.txt') as f:
-        d = datetime.fromtimestamp((float(f.readline())))
+			d = datetime.fromtimestamp((float(f.readline())))
 
-    # Add 4 hours to account for local time
-    d = d + timedelta(hours=4)
+		# Add 4 hours to account for local time
+		d = d + timedelta(hours=4)
 		return render_template('index.html', d=d)
 
 if __name__ == '__main__':

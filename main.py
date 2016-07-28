@@ -124,7 +124,7 @@ def submit():
 @app.route('/submit_GE', methods=['POST'])
 def submit_GE():
 	if request.method == 'POST':
-		start = time.time()	
+		#start = time.time()	
 		#college = request.form['college']
 		#cluster = request.form['cluster']
 		#gender = request.form['gender']
@@ -134,7 +134,7 @@ def submit_GE():
 		
 		#GE_courses = scheduler.GEScheduler(college, cluster, gender, timerange, term).start()
 		
-		end = time.time() - start
+		#end = time.time() - start
 		return render_template('index.html')
 
 if __name__ == '__main__':

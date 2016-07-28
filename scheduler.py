@@ -455,8 +455,8 @@ class GEScheduler():
 	def start(self):
 		'''Start the GE Course Finder'''
 		# Get course data from file
-		with open('classes/classes-201710.pickle') as f:
-			all_courses = cPickle.load(f)
+		with open('classes/classes-{}.pickle'.format(self.term)) as f:
+			all_courses = pickle.load(f)
 			
 		# Get general education courses based on college and cluster	
 		courses = self.get_course_list()

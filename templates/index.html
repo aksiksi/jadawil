@@ -75,13 +75,13 @@
 			<p><strong>College:</strong></p>
 				<select name="college" id="college" onchange="show_clusters()">
 					<option value="COE">College of Engineering</option>
-					<option value="CBE">College of Business and Economics</option>
-					<option value="CS">College of Science</option>
-					<option value="CHSS">College of Humanities and Social Sciences</option>
+					<!-- <option value="CBE">College of Business and Economics</option> -->
+					<!-- <option value="CS">College of Science</option> -->
+					<!-- <option value="CHSS">College of Humanities and Social Sciences</option> -->
 					<option value="CIT">College of Information Technology</option>
-					<option value="CED">College of Education</option>
+					<!-- <option value="CED">College of Education</option> -->
 					<option value="CL">College of Law</option>
-					<option value="CFA">College of Food and Agriculture</option>
+					<!-- <option value="CFA">College of Food and Agriculture</option> -->
 				</select>
 			<div id="COE_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
@@ -120,9 +120,6 @@
 					</div>
 			</div>
 			<p><strong>Time Range:</strong></p>
-				<table class = "table table-responsive">
-					<tr>
-						<td>
 							<select name="start-time">
 								<option value="1">1:00</option>
 								<option value="2">2:00</option>
@@ -137,15 +134,11 @@
 								<option value="11">11:00</option>
 								<option value="12">12:00</option>
 							</select>
-						</td>
-						<td>
 							<select name="start-am-pm">
 								<option value="am">AM</option>
 								<option value="pm">PM</option>
 							</select>
-						</td>
-						<td> to </td>
-						<td>
+							<span style="margin:0 15px;">to</span>
 							<select name="end-time">
 								<option value="1">1:00</option>
 								<option value="2">2:00</option>
@@ -160,15 +153,10 @@
 								<option value="11">11:00</option>
 								<option value="12">12:00</option>
 							</select>
-						</td>
-						<td>
 							<select name="end-am-pm">
 								<option value="am">AM</option>
 								<option value="pm">PM</option>
-							</select>
-						</td>
-					</tr>
-				</table>				
+							</select>			
 			<p><button type="btn-submit" class="btn">Submit</button></p>
 		</form>
 		<!-- Script to show the clusters based on college chosen -->

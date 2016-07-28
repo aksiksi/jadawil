@@ -135,7 +135,7 @@ def submit_GE():
 		#GE_courses = scheduler.GEScheduler(college, cluster, gender, timerange, term).start()
 		
 		#end = time.time() - start
-		return render_template('ge_results.html')
+		return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

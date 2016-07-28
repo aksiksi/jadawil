@@ -384,9 +384,9 @@ class Scheduler(object):
 # General Education Timerange Finder
 
 class GEScheduler():
-	def __init__(self, college, cluster, gender, timerange, term):		
+	def __init__(self, college, clusters, gender, timerange, term):		
 		self.college = college
-		self.cluster = cluster
+		self.clusters = clusters
 		self.gender = gender
 		self.timerange = timerange
 		self.term = term
@@ -427,8 +427,8 @@ class GEScheduler():
 							 ]
 					 }
 			#Extract courses for the cluster chosen
-			for courses in self.cluster:
-					courses.extend(COE_GE[courses])
+			for cluster in self.cluster:
+					courses.extend(COE_GE[cluster])
 		
 			# REPEAT FOR OTHER MAJORS ONCE I GET THE REST OF THE GE PLANS
 			# -----------------------------------

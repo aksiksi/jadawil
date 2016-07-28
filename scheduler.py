@@ -427,12 +427,8 @@ class GEScheduler():
 							 ]
 					 }
 			#Extract courses for the cluster chosen
-			if self.cluster == 'all':
-				courses.extend(COE_GE['cluster1'])
-				courses.extend(COE_GE['cluster2'])
-				courses.extend(COE_GE['cluster3'])
-			else:
-				courses.extend(COE_GE[self.cluster])
+			for courses in self.cluster:
+					courses.extend(COE_GE[courses])
 		
 			# REPEAT FOR OTHER MAJORS ONCE I GET THE REST OF THE GE PLANS
 			# -----------------------------------

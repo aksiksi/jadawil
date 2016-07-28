@@ -126,7 +126,7 @@ def submit_GE():
 	if request.method == 'POST':
 		start = time.time()	
 		college = request.form['college']
-		cluster = request.form['cluster']
+		cluster = request.form.getlist('cluster')
 		gender = request.form['gender']
 		term = request.form['term']
 		# Form time range in the format "10:00 am-11:15 am"

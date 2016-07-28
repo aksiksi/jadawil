@@ -73,7 +73,7 @@
 					<option value="G">Female</option>
 				</select>
 			<p><strong>College:</strong></p>
-				<select name="college">
+				<select name="college" id="college" onchange="show_clusters()">
 					<option value="COE">College of Engineering</option>
 					<option value="CBE">College of Business and Economics</option>
 					<option value="CS">College of Science</option>
@@ -83,16 +83,30 @@
 					<option value="CL">College of Law</option>
 					<option value="CFA">College of Food and Agriculture</option>
 				</select>
-			<p><strong>GE Cluster:</strong></p>
-				<div class="checkbox">
-				  <label><input type="checkbox" name="cluster" value="cluster1">Learning and Thinking Skills Area</label>
-				</div>
-				<div class="checkbox">
-				  <label><input type="checkbox" name="cluster" value="cluster2">Humanities/Fine Arts Area</label>
-				</div>
-				<div class="checkbox">
-				  <label><input type="checkbox" name="cluster" value="cluster3">The Global Experience Area</label>
-				</div>
+			<div id="COE_clusters" class="clusters">
+				<p><strong>GE Cluster:</strong></p>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="COE_cluster" value="cluster1">Learning and Thinking Skills Area</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="COE_cluster" value="cluster2">Humanities/Fine Arts Area</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="COE_cluster" value="cluster3">The Global Experience Area</label>
+					</div>
+			</div>
+			<div id="CIT_clusters" class="clusters">
+				<p><strong>GE Cluster:</strong></p>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CIT_cluster" value="cluster1">Humanities/Fine Arts Area</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CIT_cluster" value="cluster2">Social and Behavioural Sciences</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CIT_cluster" value="cluster3">The Global Experience Area</label>
+					</div>
+			</div>
 			<p><strong>Time Range:</strong></p>
 				<table class = "table table-responsive">
 					<tr>
@@ -145,6 +159,18 @@
 				</table>				
 			<p><button type="btn-submit" class="btn">Submit</button></p>
 		</form>
+		<!-- Script to show the clusters based on college chosen -->
+		<script>
+			function show_clusters() {
+				var college = document.getElementById("college");
+				college = college[college.selectedIndex].value;
+				var clusters = document.getElementsByClassName("clusters");
+				for(var i = 0; i < clusters.length ; i++) {
+					clusters[i].style.height = 0;
+				}
+				document.getElementById(college + "_clusters").style.height = auto;
+			}
+		</script>
 
         <h2>Updates</h2>
         <ul>

@@ -411,9 +411,9 @@ class GEScheduler():
 							 "MSC 240",
 							 "LNG 100",
 							 "LNG 110",
-							 "PHI 101"#,
-#							 "PHI 270",
-#							 "PHI 271"
+							 "PHI 101",
+							 "PHI 270",
+							 "PHI 271"
 							 ],
 						'cluster3': [
 							 "HIS 120",
@@ -426,6 +426,45 @@ class GEScheduler():
 							 "ARCH 346"
 							 ]
 					 }
+			#Extract courses for the cluster chosen
+			for cluster in self.clusters:
+					courses.extend(COE_GE[cluster])
+		if self.college == "CIT":
+			CIT_GE = {	'cluster1': [
+							"ARCH 340",
+							"HIS 133",
+							"HSR 120",
+							"HSR 130",
+							"LIT 150",
+							"TRS 200",
+							"MSC 200",
+							"MSC 240",
+							"LNG 100",
+							"LNG 110",
+							"PHI 101",
+							"PHI 270",
+							"PHI 271"
+							],
+						'cluster2': [
+							"AGRB 210",
+							"ECON 110",
+							"HSR 140",
+							"HSR 150",
+							"PSY 100",
+							"SOC 260",
+							"SWK 200"
+							],
+						'cluster3': [
+							"HIS 120",
+							"HIS 125",
+							"AGRB 360",
+							"BIOE 240",
+							"PSG 250",
+							"GEO 200",
+							"HIS 121",
+							"ARCH 346"
+							]
+			}
 			#Extract courses for the cluster chosen
 			for cluster in self.clusters:
 					courses.extend(COE_GE[cluster])

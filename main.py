@@ -126,7 +126,8 @@ def submit_GE():
 	if request.method == 'POST':
 		start = time.time()	
 		college = request.form['college']
-		clusters = request.form.getlist('cluster')
+		cluster = college + "_cluster" # Get the checkboxes only for the college selected
+		clusters = request.form.getlist(cluster)
 		gender = request.form['gender']
 		term = request.form['term']
 		# Form time range in the format "10:00 am-11:15 am"

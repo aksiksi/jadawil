@@ -140,7 +140,7 @@ def submit_GE():
 
 		# Add 4 hours to account for local time
 		d = d + timedelta(hours=4)
-		return render_template('index.html', d=d)
+		return render_template('ge_results.html', sections=GE_courses, end=end)
 
 if __name__ == '__main__':
     app.run(debug=True)

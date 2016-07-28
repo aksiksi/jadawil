@@ -132,10 +132,10 @@ def submit_GE():
 		# Form time range in the format "10:00 am-11:15 am"
 		timerange = request.form['start-time'] + ":00 " + request.form['start-am-pm'] + "-" + request.form['end-time'] + ":00 " + request.form['end-am-pm']
 		
-		GE_courses = scheduler.GEScheduler(college, cluster, gender, timerange, term).start()
+		#GE_courses = scheduler.GEScheduler(college, cluster, gender, timerange, term).start()
 		
 		end = time.time() - start
-		return render_template('ge_results.html', sections = GE_courses, end = end)
+		return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

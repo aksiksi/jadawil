@@ -135,6 +135,11 @@ def submit_GE():
 		#GE_courses = scheduler.GEScheduler(college, cluster, gender, timerange, term).start()
 		
 		#end = time.time() - start
+		with open('last.txt') as f:
+        d = datetime.fromtimestamp((float(f.readline())))
+
+    # Add 4 hours to account for local time
+    d = d + timedelta(hours=4)
 		return render_template('index.html', d=d)
 
 if __name__ == '__main__':

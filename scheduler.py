@@ -384,11 +384,12 @@ class Scheduler(object):
 # General Education Timerange Finder
 
 class GEScheduler():
-	def __init__(self, college, cluster, gender, timerange):		
+	def __init__(self, college, cluster, gender, timerange, term):		
 		self.college = college
 		self.cluster = cluster
 		self.gender = gender
 		self.timerange = timerange
+		self.term = term
 		
 	def get_course_list(self):
 		courses = []
@@ -454,7 +455,7 @@ class GEScheduler():
 	def start(self):
 		'''Start the GE Course Finder'''
 		# Get course data from file
-		with open('classes.pickle') as f:
+		with open('classes/classes-{}.pickle'.format(self.term)) as f:
 			all_courses = cPickle.load(f)
 			
 		# Get general education courses based on college and cluster	

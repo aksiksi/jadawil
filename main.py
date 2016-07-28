@@ -128,6 +128,7 @@ def submit_GE():
 		college = request.form['college']
 		cluster = request.form['cluster']
 		gender = request.form['gender']
+		term = request.form['term']
 		# Form time range in the format "10:00 am-11:15 am"
 		timerange = request.form['start-time'] + ":00 " + request.form['start-am-pm'] + "-" + request.form['end-time'] + ":00 " + request.form['end-am-pm']
 		

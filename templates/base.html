@@ -31,7 +31,6 @@
                 padding-bottom: 0.5em;
             }
 			.clusters {
-				height: 0px;
 				overflow: hidden;
 				-webkit-transition:all 1s linear;
 				-moz-transition: all 1s linear;
@@ -39,8 +38,8 @@
 				-o-transition: all 1s linear;
 				transition: all 1s linear;
 			}
-			.clusters:first {
-				height: auto;
+			.clusters ~ .clusters {
+				height: 0px;
 			}
         </style>
     </head>

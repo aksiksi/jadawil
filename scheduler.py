@@ -464,8 +464,12 @@ class GEScheduler():
 		
 		for course in courses:
 			abbrv, code = course.upper().strip(' ').split(' ')
-			course_sections = all_courses[abbrv][code]
-			
+			# If course does not exist in the course list then move on to the next one
+			try:
+				course_sections = all_courses[abbrv][code]
+			except:
+				continue
+				
             # Filter course_sections by gender and timing
 			for crn, section in course_sections.items():
 				# Get the section timing

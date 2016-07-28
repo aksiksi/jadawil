@@ -493,7 +493,7 @@ class GEScheduler():
 			}
 			#Extract courses for the cluster chosen
 			for cluster in self.clusters:
-				course.extend(CL_GE[cluster])
+				courses.extend(CL_GE[cluster])
 			# REPEAT FOR OTHER MAJORS ONCE I GET THE REST OF THE GE PLANS
 			# -----------------------------------
 		return courses	

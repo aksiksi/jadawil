@@ -1,0 +1,153 @@
+CS_GE = {				'cluster1': [ # Ethics
+							"PHI 121",
+							"PHI 122",
+							"PHI 226",
+							"PHIL 120"
+							],
+						'cluster2': [ # Thinking Skills
+							"HSS 110",
+							"PHI 180",
+							"ITBP 119",
+							"PSY 105"
+							 ],
+						'cluster3': [ # Humanities / Fine Arts
+							"ARCH 340",
+							"HIS 133",
+							"HSR 120",
+							"HSR 130",
+							"LIT 150",
+							"TRS 200",
+							"MSC 200",
+							"MSC 240",
+							"LNG 100",
+							"LNG 110",
+							"PHI 101",
+							"PHI 270",
+							"PHI 271"
+							 ],
+						'cluster4': [ # Social and Behavioral Sciences
+							"AGRB 210",
+							"ECON 110",
+							"HSR 140",
+							"HSR 150",
+							"PSY 100",
+							"SOC 260",
+							"SWK 200"
+							],
+						'cluster5': [ # The Global Experience
+							"HIS 120",
+							"HIS 125",
+							"AGRB 360",
+							"BIOE 240",
+							"PSG 250",
+							"GEO 200",
+							"HIS 121",
+							"ARCH 346"
+							]
+		}
+
+
+
+CL_GE = {				'cluster1': [
+							"HSS 110",
+							"ITBP 119",
+							"PHI 180",
+							"PSY 105"
+							],
+						'cluster2': [
+							"MATH 120",
+							"STAT 101"
+							],
+						'cluster3': [
+							"ARAG 205",
+							"ARAG 220",
+							"BION 100",
+							"CHEM 181",
+							"FDSC 250",
+							"GEOL 110",
+							"PHED 201",
+							"PHYS 100",
+							"PHYS 101"
+							]
+		}
+
+CIT_GE = {				'cluster1': [
+							"ARCH 340",
+							"HIS 133",
+							"HSR 120",
+							"HSR 130",
+							"LIT 150",
+							"TRS 200",
+							"MSC 200",
+							"MSC 240",
+							"LNG 100",
+							"LNG 110",
+							"PHI 101",
+							"PHI 270",
+							"PHI 271"
+							],
+						'cluster2': [
+							"AGRB 210",
+							"ECON 110",
+							"HSR 140",
+							"HSR 150",
+							"PSY 100",
+							"SOC 260",
+							"SWK 200"
+							],
+						'cluster3': [
+							"HIS 120",
+							"HIS 125",
+							"AGRB 360",
+							"BIOE 240",
+							"PSG 250",
+							"GEO 200",
+							"HIS 121",
+							"ARCH 346"
+							]
+		}
+
+
+_GE = {  'cluster1': [
+							"HSS 110",
+							"PHI 180",
+							"ITBP 119",
+							"PSY 105"
+							],
+						'cluster2': [
+							 "ARCH 340",
+							 "HIS 133",
+							 "HSR 120",
+							 "HSR 130",
+							 "LIT 150",
+							 "TRS 200",
+							 "MSC 200",
+							 "MSC 240",
+							 "LNG 100",
+							 "LNG 110",
+							 "PHI 101"#,
+#							 "PHI 270",
+#							 "PHI 271"
+							 ],
+						'cluster3': [
+							 "HIS 120",
+							 "HIS 125",
+							 "AGRB 360",
+							 "BIOE 240",
+							 "PSG 250",
+							 "GEO 200",
+							 "HIS 121",
+							 "ARCH 346"
+							 ]
+						'cluster4': [
+							"ARAG 205",
+							"ARAG 220",
+							"BION 100",
+							"CHEM 181",
+							"FDSC 250",
+							"GEOL 110",
+							"PHED 201",
+							"PHYS 100",
+							"PHYS 101"
+							]
+					 }

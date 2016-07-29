@@ -395,13 +395,13 @@ class GEScheduler():
 		courses = []
 		if self.college == "COE":
 			# Dictionary of COE general education courses
-			COE_GE = {  'cluster1': [
+			COE_GE = {  'cluster1': [ # Learning and thinking skills
 							"HSS 110",
 							"PHI 180",
 							"ITBP 119",
 							"PSY 105"
 							],
-						'cluster2': [
+						'cluster2': [ #Humanities / fine arts
 							 "ARCH 340",
 							 "HSR 120",
 							 "HSR 130",
@@ -415,7 +415,7 @@ class GEScheduler():
 							 "PHI 270",
 							 "PHI 271"
 							 ],
-						'cluster3': [
+						'cluster3': [ # The Global Experience
 							 "HIS 120",
 							 "HIS 125",
 							 "AGRB 360",
@@ -494,7 +494,60 @@ class GEScheduler():
 			#Extract courses for the cluster chosen
 			for cluster in self.clusters:
 				courses.extend(CL_GE[cluster])
-			# REPEAT FOR OTHER MAJORS ONCE I GET THE REST OF THE GE PLANS
+		if self.college == "CS":
+			CS_GE = {				'cluster1': [ # Ethics
+							"PHI 121",
+							"PHI 122",
+							"PHI 226",
+							"PHIL 120"
+							],
+						'cluster2': [ # Thinking Skills
+							"HSS 110",
+							"PHI 180",
+							"ITBP 119",
+							"PSY 105"
+							 ],
+						'cluster3': [ # Humanities / Fine Arts
+							"ARCH 340",
+							"HIS 133",
+							"HSR 120",
+							"HSR 130",
+							"LIT 150",
+							"TRS 200",
+							"MSC 200",
+							"MSC 240",
+							"LNG 100",
+							"LNG 110",
+							"PHI 101",
+							"PHI 270",
+							"PHI 271"
+							 ],
+						'cluster4': [ # Social and Behavioral Sciences
+							"AGRB 210",
+							"ECON 110",
+							"HSR 140",
+							"HSR 150",
+							"PSY 100",
+							"SOC 260",
+							"SWK 200"
+							],
+						'cluster5': [ # The Global Experience
+							"HIS 120",
+							"HIS 125",
+							"AGRB 360",
+							"BIOE 240",
+							"PSG 250",
+							"GEO 200",
+							"HIS 121",
+							"ARCH 346"
+							]
+					}
+			#Extract courses for the cluster chosen
+			for cluster in self.clusters:
+					courses.extend(COE_GE[cluster])
+		
+		
+		# REPEAT FOR OTHER MAJORS ONCE I GET THE REST OF THE GE PLANS
 			# -----------------------------------
 		return courses	
 		

@@ -495,7 +495,7 @@ class GEScheduler():
 			for cluster in self.clusters:
 				courses.extend(CL_GE[cluster])
 		if self.college == "CS":
-			CS_GE = {				'cluster1': [ # Ethics
+			CS_GE = {	'cluster1': [ # Ethics
 							"PHI 121",
 							"PHI 122",
 							"PHI 226",
@@ -544,7 +544,7 @@ class GEScheduler():
 					}
 			#Extract courses for the cluster chosen
 			for cluster in self.clusters:
-					courses.extend(COE_GE[cluster])
+					courses.extend(CS_GE[cluster])
 		
 		
 		# REPEAT FOR OTHER MAJORS ONCE I GET THE REST OF THE GE PLANS

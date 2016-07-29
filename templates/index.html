@@ -76,7 +76,7 @@
 				<select name="college" id="college" onchange="show_clusters()">
 					<option value="COE">College of Engineering</option>
 					<!-- <option value="CBE">College of Business and Economics</option> -->
-					<!-- <option value="CS">College of Science</option> -->
+					<option value="CS">College of Science</option>
 					<!-- <option value="CHSS">College of Humanities and Social Sciences</option> -->
 					<option value="CIT">College of Information Technology</option>
 					<!-- <option value="CED">College of Education</option> -->
@@ -98,13 +98,13 @@
 			<div id="CIT_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CIT_cluster" value="cluster1">Humanities/Fine Arts Area</label>
+					  <label><input type="checkbox" name="CIT_cluster" value="cluster1">Humanities/Fine Arts</label>
 					</div>
 					<div class="checkbox">
 					  <label><input type="checkbox" name="CIT_cluster" value="cluster2">Social and Behavioural Sciences</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CIT_cluster" value="cluster3">The Global Experience Area</label>
+					  <label><input type="checkbox" name="CIT_cluster" value="cluster3">The Global Experience</label>
 					</div>
 			</div>
 			<div id="CL_clusters" class="clusters">
@@ -118,6 +118,25 @@
 					<div class="checkbox">
 					  <label><input type="checkbox" name="CL_cluster" value="cluster3">The Natural World - Natural Sciences</label>
 					</div>
+			</div>
+			<div id="CS_clusters" class="clusters">
+				<p><strong>GE Cluster:</strong></p>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CS_cluster" value="cluster1">Values to Live By - Ethics</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CS_cluster" value="cluster2">Skills for Life - Thinking Skills</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CS_cluster" value="cluster3">Humanities/Fine Arts</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CS_cluster" value="cluster4">Social and Behavioural Sciences<span class="danger small"><em>*do not check if <strong>math</strong> major</em></span></label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CS_cluster" value="cluster5">The Global Experience <span class="danger small"><em>*do not check if <strong>biology</strong> major</em></span></label>
+					</div>
+					
 			</div>
 			<p><strong>Time Range:</strong></p>
 							<select name="start-time">

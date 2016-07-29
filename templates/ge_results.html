@@ -25,6 +25,9 @@
 				</tr>
 			</thead>
             <tbody>
+				{% if sections|len|int == 0 %}
+				<strong>No courses found in the time range given.</strong>
+				{% endif %}
 				{% for key, value in sections.iteritems() %}
 						{% if (value['remaining']|int) < 1 %}
 						<tr class="danger">

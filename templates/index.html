@@ -74,6 +74,7 @@
 				</select>
 			<p><strong>College:</strong></p>
 				<select name="college" id="college" onchange="show_majors()">
+					<option value="-">-</option>
 					<option value="COE">College of Engineering</option>
 					<option value="CBE">College of Business and Economics</option>
 					<option value="CS">College of Science</option>
@@ -255,7 +256,7 @@
 								<option value="am">AM</option>
 								<option value="pm">PM</option>
 							</select>			
-			<p><button type="btn-submit" class="btn" onload="show_majors()">Submit</button></p>
+			<p><button type="btn-submit" class="btn">Submit</button></p>
 		</form>
 		<!-- Script to show the clusters based on college chosen -->
 		<script>

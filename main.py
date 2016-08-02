@@ -126,6 +126,8 @@ def submit_GE():
 	if request.method == 'POST':
 		start = time.time()	
 		college = request.form['college']
+		if college == "-":
+			return
 		major = request.form[college+ '_major']
 		cluster = college + "_cluster" # Get the checkboxes only for the college selected
 		clusters = request.form.getlist(cluster)

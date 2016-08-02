@@ -262,11 +262,11 @@
 			function show_majors() {
 				var college = document.getElementById("college");
 				college = college[college.selectedIndex].value;
-				var majors = document.getElementByClassName("majors");
+				var majors = document.getElementsByClassName("majors");
 				for(var i = 0; i < majors.length ; i++) {
 					majors[i].style.height = "0px";
 				}
-				document.getElementById(college + "_MAJORS").style.height = "200px";
+				document.getElementById(college + "_MAJORS").style.height = "auto";
 			}
 
 			function show_clusters() {

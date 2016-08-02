@@ -58,7 +58,7 @@
 		
 		<hr>
 		<h2>Find a General Education Course</h2>
-		<form action="/submit_GE" method="POST" onunload="show_clusters()">
+		<form action="/submit_GE" method="POST">
 			<p><strong>Semester</strong></p>
             <select name="term">
                 <option value="201710">Fall 2016</option>
@@ -86,25 +86,25 @@
 			<div id="COE_MAJORS" class="majors">
 				<p><strong>Major:</strong></p>
 					<select name="COE_major" id="COE_major" onchange="show_clusters()">
-						<option value="OTHER">All majors</option>
+						<option value="OTHER">-</option>
 					</select>
 			</div>
 			<div id="CBE_MAJORS" class="majors">
 				<p><strong>Major:</strong></p>
 					<select name="CBE_major" id="CBE_major" onchange="show_clusters()">
-						<option value="OTHER">All majors</option>
+						<option value="OTHER">-</option>
 					</select>
 			</div>	
 			<div id="CL_MAJORS" class="majors">
 				<p><strong>Major:</strong></p>
 					<select name="CL_major" id="CL_major" onchange="show_clusters()">
-						<option value="OTHER">All majors</option>
+						<option value="OTHER">-</option>
 					</select>
 			</div>
 			<div id="CIT_MAJORS" class="majors">
 				<p><strong>Major:</strong></p>
 					<select name="CIT_major" id="CIT_major" onchange="show_clusters()">
-						<option value="OTHER">All majors</option>
+						<option value="OTHER">-</option>
 					</select>
 			</div>			
 			<div id="CS_MAJORS" class="majors">
@@ -255,7 +255,7 @@
 								<option value="am">AM</option>
 								<option value="pm">PM</option>
 							</select>			
-			<p><button type="btn-submit" class="btn">Submit</button></p>
+			<p><button type="btn-submit" class="btn" onload="show_majors()">Submit</button></p>
 		</form>
 		<!-- Script to show the clusters based on college chosen -->
 		<script>

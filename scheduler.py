@@ -494,7 +494,7 @@ class GEScheduler():
 			#Extract courses for the cluster chosen
 			for cluster in self.clusters:
 				courses.extend(CL_GE[cluster])
-		if self.college == "CS":
+		if self.college == "CS": # CHANGE THIS, MATH HAS A DIFFERENT ETHICS GROUP, introduce majors.
 			CS_GE = {	'cluster1': [ # Ethics
 							"PHI 121",
 							"PHI 122",
@@ -545,8 +545,54 @@ class GEScheduler():
 			#Extract courses for the cluster chosen
 			for cluster in self.clusters:
 					courses.extend(CS_GE[cluster])
-		
-		
+		if self.college == "CBE":
+			CBE_GE = {				'cluster1': [ # Thinking Skills
+							"HSS 110",
+							"PHI 180",
+							"ITBP 119",
+							"PSY 105"
+							 ],
+						'cluster2': [ # Humanities / Fine Arts
+							"ARCH 340",
+							"HIS 133",
+							"HSR 120",
+							"HSR 130",
+							"LIT 150",
+							"TRS 200",
+							"MSC 200",
+							"MSC 240",
+							"LNG 100",
+							"LNG 110",
+							"PHI 101",
+							"PHI 270",
+							"PHI 271"
+							 ],
+						'cluster3': [ # The Global Experience
+							"HIS 120",
+							"HIS 125",
+							"AGRB 360",
+							"BIOE 240",
+							"PSG 250",
+							"GEO 200",
+							"HIS 121",
+							"ARCH 346"
+							],
+						'cluster4': [ # The Natural World - Natural Sciences
+							"ARAG 205",
+							"ARAG 220",
+							"BION 100",
+							"CHEM 181",
+							"FDSC 250",
+							"GEOL 110",
+							"PHED 201",
+							"PHYS 100",
+							"PHYS 101"
+							]
+					}
+			#Extract courses for the cluster chosen
+			for cluster in self.clusters:
+					courses.extend(CBE_GE[cluster])
+
 		# REPEAT FOR OTHER MAJORS ONCE I GET THE REST OF THE GE PLANS
 			# -----------------------------------
 		return courses	

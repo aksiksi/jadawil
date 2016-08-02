@@ -80,7 +80,7 @@
 					<option value="CS">College of Science</option>
 					<!-- <option value="CHSS">College of Humanities and Social Sciences</option> -->
 					<option value="CIT">College of Information Technology</option>
-					<!-- <option value="CED">College of Education</option> -->
+					<option value="CEDU">College of Education</option>
 					<option value="CL">College of Law</option>
 					<option value="CFA">College of Food and Agriculture</option>
 				</select>
@@ -120,7 +120,16 @@
 				<p><strong>Major:</strong></p>
 					<select name="CFA_major" id="CFA_major" onchange="show_clusters()">
 						<option value="AGRIBUS">Agribusiness</option>
-						<option value="OTHER">All other food and agriculture majors</option>
+						<option value="OTHER">All other majors</option>
+					</select>
+			</div>
+			<div id="CEDU_MAJORS" class="majors">
+				<p><strong>Major:</strong></p>
+					<select name="CEDU_major" id="CEDU_major" onchange="show_clusters()">
+						<option value="ART">Art Education</option>
+						<option value="HEALTH">Health & Physical Education</option>
+						<option value="SPECHI">Special Edu./ Early Childhood Edu.</option>
+						<option value="ELE">Elementary Education</option>
 					</select>
 			</div>
 			
@@ -252,6 +261,66 @@
 					</div>
 					<div class="checkbox">
 					  <label><input type="checkbox" name="CFA_AGRIBUS_cluster" value="cluster3">Humanities/Fine Arts</label>
+					</div>
+			</div>
+			<div id="CEDU_ART_clusters" class="clusters">
+				<p><strong>GE Cluster:</strong></p>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_ART_cluster" value="cluster1">Thinking Skills</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_ART_cluster" value="cluster2">Humanities/Fine Arts</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_ART_cluster" value="cluster3">The Global Experience</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_ART_cluster" value="cluster4">The Natural World - Mathematics</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_ART_cluster" value="cluster5">The Natural World - Natural Sciences</label>
+					</div>
+			</div>
+			<div id="CEDU_HEALTH_clusters" class="clusters">
+				<p><strong>GE Cluster:</strong></p>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_HEALTH_cluster" value="cluster1">Humanities/Fine Arts</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_HEALTH_cluster" value="cluster2">The Global Experience</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_HEALTH_cluster" value="cluster3">The Natural World - Natural Sciences</label>
+					</div>
+			</div>
+			<div id="CEDU_SPECHI_clusters" class="clusters">
+				<p><strong>GE Cluster:</strong></p>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_SPECHI_cluster" value="cluster1">Humanities/Fine Arts</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_SPECHI_cluster" value="cluster2">The Global Experience</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_SPECHI_cluster" value="cluster3">The Natural World - Mathematics</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_SPECHI_cluster" value="cluster4">The Natural World - Natural Sciences</label>
+					</div>
+			</div>
+			<div id="CEDU_ELE_clusters" class="clusters">
+				<p><strong>GE Cluster:</strong></p>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_ELE_cluster" value="cluster1">Humanities/Fine Arts</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_ELE_cluster" value="cluster2">The Global Experience</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_ELE_cluster" value="cluster3">The Natural World - Mathematics</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CEDU_ELE_cluster" value="cluster4">The Natural World - Natural Sciences</label>
 					</div>
 			</div>
 			<p><strong>Time Range:</strong></p>

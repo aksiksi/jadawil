@@ -1,3 +1,219 @@
+CEDU_ELE_GE = {				
+						'cluster1': [ # Humanities / Fine Arts
+							"ARCH 340",
+							"HIS 133",
+							"HSR 120",
+							"HSR 130",
+							"LIT 150",
+							"TRS 200",
+							"MSC 200",
+							"MSC 240",
+							"LNG 100",
+							"LNG 110",
+							"PHI 101",
+							"PHI 270",
+							"PHI 271"
+							 ],
+						'cluster2': [ # The Global Experience
+							"HIS 120",
+							"HIS 125",
+							"AGRB 360",
+							"BIOE 240",
+							"PSG 250",
+							"GEO 200",
+							"HIS 121",
+							"ARCH 346"
+							],
+						'cluster3': [ # Mathematics
+							"MATH 120",
+							"STAT 101"
+							],
+						'cluster4': [ # The Natural World - Natural Sciences
+							"ARAG 205",
+							"ARAG 220",
+							"BION 100",
+							"CHEM 181",
+							"FDSC 250",
+							"GEOL 110",
+							"PHYS 100",
+							"PHYS 101"
+							]
+		}
+
+CEDU_SPECHI_GE = {				
+						'cluster1': [ # Humanities / Fine Arts
+							"ARCH 340",
+							"HIS 133",
+							"HSR 120",
+							"HSR 130",
+							"LIT 150",
+							"TRS 200",
+							"MSC 200",
+							"MSC 240",
+							"LNG 100",
+							"LNG 110",
+							"PHI 101",
+							"PHI 270",
+							"PHI 271"
+							 ],
+						'cluster2': [ # The Global Experience
+							"HIS 120",
+							"HIS 125",
+							"AGRB 360",
+							"BIOE 240",
+							"PSG 250",
+							"GEO 200",
+							"HIS 121",
+							"ARCH 346"
+							],
+						'cluster3': [ # Mathematics
+							"MATH 120",
+							"STAT 101"
+							],
+						'cluster4': [ # The Natural World - Natural Sciences
+							"ARAG 205",
+							"ARAG 220",
+							"BION 100",
+							"CHEM 181",
+							"FDSC 250",
+							"GEOL 110",
+							"PHED 201",
+							"PHYS 100",
+							"PHYS 101"
+							]
+		}
+
+CEDU_HEALTH_GE = {				
+						'cluster1': [ # Humanities / Fine Arts
+							"ARCH 340",
+							"HSR 120",
+							"HSR 130",
+							"HIS 133",
+							"LIT 150",
+							"TRS 200",
+							"MSC 200",
+							"MSC 240",
+							"LNG 100",
+							"LNG 110",
+							"PHI 101"
+							 ],
+						'cluster2': [ # The Global Experience
+							"HIS 120",
+							"HIS 125",
+							"AGRB 360",
+							"BIOE 240",
+							"PSG 250",
+							"GEO 200",
+							"ARCH 346"
+							],
+						'cluster3': [ # The Natural World - Natural Sciences
+							"ARAG 205",
+							"ARAG 220",
+							"BION 100",
+							"CHEM 181",
+							"FDSC 250",
+							"GEOL 110",
+							"PHYS 100",
+							"PHYS 101",
+							"PHED 201"
+							]
+		}
+
+CEDU_ART_GE = {				
+						'cluster1': [ # Thinking Skills
+							"PHI 180",
+							"PSY 105"
+							 ],
+						'cluster2': [ # Humanities / Fine Arts
+							"ARCH 340",
+							"HSR 120",
+							"HSR 130",
+							"LIT 150",
+							"TRS 200",
+							"MSC 200",
+							"MSC 240",
+							"LNG 100",
+							"LNG 110",
+							"PHI 101",
+							"PHI 270",
+							"PHI 271"
+							 ],
+						'cluster3': [ # The Global Experience
+							"HIS 120",
+							"HIS 125",
+							"AGRB 360",
+							"BIOE 240",
+							"PSG 250",
+							"GEO 200",
+							"HIS 121",
+							"ARCH 346"
+							],
+						'cluster4': [ # Mathematics
+							"MATH 120",
+							"STAT 101"
+							],
+						'cluster5': [ # The Natural World - Natural Sciences
+							"ARAG 205",
+							"ARAG 220",
+							"BION 100",
+							"CHEM 181",
+							"FDSC 250",
+							"GEOL 110",
+							"PHYS 100",
+							"PHYS 101"
+							]
+		}
+
+
+
+CFA_GE = {				
+						'cluster1': [ # Ethics
+							"PHI 121",
+							"PHI 122",
+							"PHI 226",
+							"PHIL 120"
+							],
+						'cluster2': [ # Thinking Skills
+							"HSS 110",
+							"PHI 180",
+							"ITBP 119",
+							"PSY 105"
+							 ],
+						'cluster3': [ # Humanities / Fine Arts
+							"ARCH 340",
+							"HIS 133",
+							"HSR 120",
+							"HSR 130",
+							"LIT 150",
+							"TRS 200",
+							"MSC 200",
+							"MSC 240",
+							"LNG 100",
+							"LNG 110",
+							"PHI 101",
+							"PHI 270",
+							"PHI 271"
+							 ],
+						'cluster4': [ # Social and Behavioral Sciences
+							"AGRB 210",
+							"ECON 110",
+							"HSR 140",
+							"HSR 150",
+							"PSY 100",
+							"SOC 260",
+							"SWK 200"
+							],
+						'cluster5': [ # The Global Experience
+							"HIS 120",
+							"HIS 125",
+							"AGRB 360",
+							"BIOE 240",
+							"PSG 250",
+							"GEO 200",
+							"HIS 121",
+							"ARCH 346"
+							]
+		}
 CBE_GE = {				'cluster1': [ # Thinking Skills
 							"HSS 110",
 							"PHI 180",

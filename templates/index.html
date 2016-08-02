@@ -74,7 +74,7 @@
 				</select>
 			<p><strong>College:</strong></p>
 				<select name="college" id="college" onchange="show_majors()">
-					<option value="-">-</option>
+					<!-- <option value="-">-</option> -->
 					<option value="COE">College of Engineering</option>
 					<option value="CBE">College of Business and Economics</option>
 					<option value="CS">College of Science</option>
@@ -82,7 +82,7 @@
 					<option value="CIT">College of Information Technology</option>
 					<!-- <option value="CED">College of Education</option> -->
 					<option value="CL">College of Law</option>
-					<!-- <option value="CFA">College of Food and Agriculture</option> -->
+					<option value="CFA">College of Food and Agriculture</option>
 				</select>
 			<div id="COE_MAJORS" class="majors">
 				<p><strong>Major:</strong></p>
@@ -116,106 +116,142 @@
 						<option value="OTHER">All other science majors</option>
 					</select>
 			</div>
-			
+			<div id="CFA_MAJORS" class="majors">
+				<p><strong>Major:</strong></p>
+					<select name="CFA_major" id="CFA_major" onchange="show_clusters()">
+						<option value="AGRIBUS">Agribusiness</option>
+						<option value="OTHER">All other food and agriculture majors</option>
+					</select>
+			</div>
 			
 			
 			<div id="COE_OTHER_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="COE_cluster" value="cluster1">Learning and Thinking Skills Area</label>
+					  <label><input type="checkbox" name="COE_OTHER_cluster" value="cluster1">Learning and Thinking Skills Area</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="COE_cluster" value="cluster2">Humanities/Fine Arts Area</label>
+					  <label><input type="checkbox" name="COE_OTHER_cluster" value="cluster2">Humanities/Fine Arts Area</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="COE_cluster" value="cluster3">The Global Experience Area</label>
+					  <label><input type="checkbox" name="COE_OTHER_cluster" value="cluster3">The Global Experience Area</label>
 					</div>
 			</div>
 			<div id="CIT_OTHER_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CIT_cluster" value="cluster1">Humanities/Fine Arts</label>
+					  <label><input type="checkbox" name="CIT_OTHER_cluster" value="cluster1">Humanities/Fine Arts</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CIT_cluster" value="cluster2">Social and Behavioural Sciences</label>
+					  <label><input type="checkbox" name="CIT_OTHER_cluster" value="cluster2">Social and Behavioural Sciences</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CIT_cluster" value="cluster3">The Global Experience</label>
+					  <label><input type="checkbox" name="CIT_OTHER_cluster" value="cluster3">The Global Experience</label>
 					</div>
 			</div>
 			<div id="CL_OTHER_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CL_cluster" value="cluster1">Skills for Life - Thinking Skills</label>
+					  <label><input type="checkbox" name="CL_OTHER_cluster" value="cluster1">Skills for Life - Thinking Skills</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CL_cluster" value="cluster2">The Natural World - Mathematics</label>
+					  <label><input type="checkbox" name="CL_OTHER_cluster" value="cluster2">The Natural World - Mathematics</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CL_cluster" value="cluster3">The Natural World - Natural Sciences</label>
+					  <label><input type="checkbox" name="CL_OTHER_cluster" value="cluster3">The Natural World - Natural Sciences</label>
 					</div>
 			</div>
 			<div id="CS_MATH_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster1">Values to Live By - Ethics</label>
+					  <label><input type="checkbox" name="CS_MATH_cluster" value="cluster1">Values to Live By - Ethics</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster2">Skills for Life - Thinking Skills</label>
+					  <label><input type="checkbox" name="CS_MATH_cluster" value="cluster2">Skills for Life - Thinking Skills</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster3">Humanities/Fine Arts</label>
+					  <label><input type="checkbox" name="CS_MATH_cluster" value="cluster3">Humanities/Fine Arts</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster4">The Global Experience</label>
+					  <label><input type="checkbox" name="CS_MATH_cluster" value="cluster4">The Global Experience</label>
 					</div>		
 			</div>
 			<div id="CS_BIO_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster1">Values to Live By - Ethics</label>
+					  <label><input type="checkbox" name="CS_BIO_cluster" value="cluster1">Values to Live By - Ethics</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster2">Skills for Life - Thinking Skills</label>
+					  <label><input type="checkbox" name="CS_BIO_cluster" value="cluster2">Skills for Life - Thinking Skills</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster3">Humanities/Fine Arts</label>
+					  <label><input type="checkbox" name="CS_BIO_cluster" value="cluster3">Humanities/Fine Arts</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster4">Social and Behavioural Sciences</label>
+					  <label><input type="checkbox" name="CS_BIO_cluster" value="cluster4">Social and Behavioural Sciences</label>
 					</div>	
 			</div>
 			<div id="CS_OTHER_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster1">Values to Live By - Ethics</label>
+					  <label><input type="checkbox" name="CS_OTHER_cluster" value="cluster1">Values to Live By - Ethics</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster2">Skills for Life - Thinking Skills</label>
+					  <label><input type="checkbox" name="CS_OTHER_cluster" value="cluster2">Skills for Life - Thinking Skills</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster3">Humanities/Fine Arts</label>
+					  <label><input type="checkbox" name="CS_OTHER_cluster" value="cluster3">Humanities/Fine Arts</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster4">Social and Behavioural Sciences</label>
+					  <label><input type="checkbox" name="CS_OTHER_cluster" value="cluster4">Social and Behavioural Sciences</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster5">The Global Experience</label>
+					  <label><input type="checkbox" name="CS_OTHER_cluster" value="cluster5">The Global Experience</label>
 					</div>		
 			</div>
 			<div id="CBE_OTHER_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CBE_cluster" value="cluster1">Skills for Life - Thinking Skills</label>
+					  <label><input type="checkbox" name="CBE_OTHER_cluster" value="cluster1">Skills for Life - Thinking Skills</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CBE_cluster" value="cluster2">Humanities/Fine Arts</label>
+					  <label><input type="checkbox" name="CBE_OTHER_cluster" value="cluster2">Humanities/Fine Arts</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CBE_cluster" value="cluster3">The Global Experience</label>
+					  <label><input type="checkbox" name="CBE_OTHER_cluster" value="cluster3">The Global Experience</label>
 					</div>		
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CL_cluster" value="cluster4">The Natural World - Natural Sciences</label>
+					  <label><input type="checkbox" name="CBE_OTHER_cluster" value="cluster4">The Natural World - Natural Sciences</label>
+					</div>
+			</div>
+			<div id="CFA_OTHER_clusters" class="clusters">
+				<p><strong>GE Cluster:</strong></p>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CFA_OTHER_cluster" value="cluster1">Ethics</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CFA_OTHER_cluster" value="cluster2">Thinking Skills</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CFA_OTHER_cluster" value="cluster3">Humanities/Fine Arts</label>
+					</div>		
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CFA_OTHER_cluster" value="cluster4">Social and behavioural Sciences</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CFA_OTHER_cluster" value="cluster5">The Global Experience</label>
+					</div>
+			</div>
+			<div id="CFA_AGRIBUS_clusters" class="clusters">
+				<p><strong>GE Cluster:</strong></p>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CFA_AGRIBUS_cluster" value="cluster1">Ethics</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CFA_AGRIBUS_cluster" value="cluster2">Thinking Skills</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CFA_AGRIBUS_cluster" value="cluster3">Humanities/Fine Arts</label>
 					</div>
 			</div>
 			<p><strong>Time Range:</strong></p>

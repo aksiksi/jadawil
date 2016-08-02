@@ -679,7 +679,91 @@ class GEScheduler():
 			#Extract courses for the cluster chosen
 			for cluster in self.clusters:
 					courses.extend(CBE_GE[cluster])
-
+		if self.college == "CFA":
+			CFA_OTHER_GE = { # All majors other than agribusiness		
+						'cluster1': [ # Ethics
+							"PHI 121",
+							"PHI 122",
+							"PHI 226",
+							"PHIL 120"
+							],
+						'cluster2': [ # Thinking Skills
+							"HSS 110",
+							"PHI 180",
+							"ITBP 119",
+							"PSY 105"
+							 ],
+						'cluster3': [ # Humanities / Fine Arts
+							"ARCH 340",
+							"HIS 133",
+							"HSR 120",
+							"HSR 130",
+							"LIT 150",
+							"TRS 200",
+							"MSC 200",
+							"MSC 240",
+							"LNG 100",
+							"LNG 110",
+							"PHI 101",
+							"PHI 270",
+							"PHI 271"
+							 ],
+						'cluster4': [ # Social and Behavioral Sciences
+							"AGRB 210",
+							"ECON 110",
+							"HSR 140",
+							"HSR 150",
+							"PSY 100",
+							"SOC 260",
+							"SWK 200"
+							],
+						'cluster5': [ # The Global Experience
+							"HIS 120",
+							"HIS 125",
+							"AGRB 360",
+							"BIOE 240",
+							"PSG 250",
+							"GEO 200",
+							"HIS 121",
+							"ARCH 346"
+							]
+			}
+			CFA_AGRIBUS_GE = {	# Agribusiness major			
+						'cluster1': [ # Ethics
+							"PHI 121",
+							"PHI 122",
+							"PHI 226",
+							"PHIL 120"
+							],
+						'cluster2': [ # Thinking Skills
+							"HSS 110",
+							"PHI 180",
+							"ITBP 119",
+							"PSY 105"
+							 ],
+						'cluster3': [ # Humanities / Fine Arts
+							"ARCH 340",
+							"HIS 133",
+							"HSR 120",
+							"HSR 130",
+							"LIT 150",
+							"TRS 200",
+							"MSC 200",
+							"MSC 240",
+							"LNG 100",
+							"LNG 110",
+							"PHI 101",
+							"PHI 270",
+							"PHI 271"
+							 ]
+			}
+			#Extract courses for the cluster chosen
+			if(self.major == "AGRIBUS"):
+				for cluster in self.clusters:
+					courses.extend(CFA_AGRIBUS_GE[cluster])
+			else:
+				for cluster in self.clusters:
+					courses.extend(CFA_OTHER_GE[cluster])
 		# REPEAT FOR OTHER MAJORS ONCE I GET THE REST OF THE GE PLANS
 			# -----------------------------------
 		return courses	

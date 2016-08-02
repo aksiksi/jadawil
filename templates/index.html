@@ -365,7 +365,7 @@
 		</form>
 		<!-- Script to show the clusters based on college chosen -->
 		<script>
-			document.getElementById("college").onload = show_majors();
+			document.getElementById("college").onload = function() {show_majors()};
 			function show_majors() {
 				var college = document.getElementById("college");
 				college = college[college.selectedIndex].value;

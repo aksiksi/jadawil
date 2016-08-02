@@ -14,7 +14,36 @@
         <h1>Welcome to Jadawil!</h1>
         <p style="font-size: 1.2em;">A simple course scheduler for UAEU students.</p>
     </div> -->
+		<!-- Script to show the clusters based on college chosen -->
+		<script type="text/javascript">
+			function show_majors() {
+				var college = document.getElementById("college");
+				college = college[college.selectedIndex].value;
+				var majors = document.getElementsByClassName("majors");
+				for(var i = 0; i < majors.length ; i++) {
+					majors[i].style.height = "0px";
+				}
+				if (college != "-") {
+					document.getElementById(college + "_MAJORS").style.height = "auto";
+				}
+				show_clusters();
+			}
 
+			function show_clusters() {
+				var college = document.getElementById("college");
+				college = college[college.selectedIndex].value;
+				var major = document.getElementById(college + "_major");
+				major = major[major.selectedIndex].value;
+				var clusters = document.getElementsByClassName("clusters");
+				for(var i = 0; i < clusters.length ; i++) {
+					clusters[i].style.height = "0px";
+				}
+				if (college != "-") {
+					document.getElementById(college + "_" + major + "_clusters").style.height = "auto";
+				}
+			}
+		</script>
+		
     <div class="well">
         <form action="/submit" method="POST">
             <p><strong>Semester</strong></p>
@@ -363,36 +392,6 @@
 							</select>			
 			<p><button type="btn-submit" class="btn">Submit</button></p>
 		</form>
-		<!-- Script to show the clusters based on college chosen -->
-		<script type="text/javascript">
-			document.getElementById("college").onload = function() {show_majors()};
-			function show_majors() {
-				var college = document.getElementById("college");
-				college = college[college.selectedIndex].value;
-				var majors = document.getElementsByClassName("majors");
-				for(var i = 0; i < majors.length ; i++) {
-					majors[i].style.height = "0px";
-				}
-				if (college != "-") {
-					document.getElementById(college + "_MAJORS").style.height = "auto";
-				}
-				show_clusters();
-			}
-
-			function show_clusters() {
-				var college = document.getElementById("college");
-				college = college[college.selectedIndex].value;
-				var major = document.getElementById(college + "_major");
-				major = major[major.selectedIndex].value;
-				var clusters = document.getElementsByClassName("clusters");
-				for(var i = 0; i < clusters.length ; i++) {
-					clusters[i].style.height = "0px";
-				}
-				if (college != "-") {
-					document.getElementById(college + "_" + major + "_clusters").style.height = "auto";
-				}
-			}
-		</script>
 
         <h2>Updates</h2>
         <ul>

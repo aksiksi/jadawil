@@ -73,7 +73,7 @@
 					<option value="G">Female</option>
 				</select>
 			<p><strong>College:</strong></p>
-				<select name="college" id="college" onchange="show_clusters()">
+				<select name="college" id="college" onchange="show_majors()">
 					<option value="COE">College of Engineering</option>
 					<option value="CBE">College of Business and Economics</option>
 					<option value="CS">College of Science</option>
@@ -83,7 +83,42 @@
 					<option value="CL">College of Law</option>
 					<!-- <option value="CFA">College of Food and Agriculture</option> -->
 				</select>
-			<div id="COE_clusters" class="clusters">
+			<div id="COE_MAJORS" class="majors">
+				<p><strong>Major:</strong></p>
+					<select name="COE_major" id="COE_major" onchange="show_clusters('COE')">
+						<option value="OTHER">All majors</option>
+					</select>
+			</div>
+			<div id="CBE_MAJORS" class="majors">
+				<p><strong>Major:</strong></p>
+					<select name="CBE_major" id="CBE_major" onchange="show_clusters('CBE')">
+						<option value="OTHER">All majors</option>
+					</select>
+			</div>	
+			<div id="CL_MAJORS" class="majors">
+				<p><strong>Major:</strong></p>
+					<select name="CL_major" id="CL_major" onchange="show_clusters('CL')">
+						<option value="OTHER">All majors</option>
+					</select>
+			</div>
+			<div id="CIT_MAJORS" class="majors">
+				<p><strong>Major:</strong></p>
+					<select name="CIT_major" id="CIT_major" onchange="show_clusters('CIT')">
+						<option value="OTHER">All majors</option>
+					</select>
+			</div>			
+			<div id="CS_MAJORS" class="majors">
+				<p><strong>Major:</strong></p>
+					<select name="CS_major" id="CS_major" onchange="show_clusters('CS')">
+						<option value="BIO">Biology</option>
+						<option value="MATH">Mathematics</option>
+						<option value="OTHER">All other science majors</option>
+					</select>
+			</div>
+			
+			
+			
+			<div id="COE_OTHER_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
 					<div class="checkbox">
 					  <label><input type="checkbox" name="COE_cluster" value="cluster1">Learning and Thinking Skills Area</label>
@@ -95,7 +130,7 @@
 					  <label><input type="checkbox" name="COE_cluster" value="cluster3">The Global Experience Area</label>
 					</div>
 			</div>
-			<div id="CIT_clusters" class="clusters">
+			<div id="CIT_OTHER_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
 					<div class="checkbox">
 					  <label><input type="checkbox" name="CIT_cluster" value="cluster1">Humanities/Fine Arts</label>
@@ -107,7 +142,7 @@
 					  <label><input type="checkbox" name="CIT_cluster" value="cluster3">The Global Experience</label>
 					</div>
 			</div>
-			<div id="CL_clusters" class="clusters">
+			<div id="CL_OTHER_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
 					<div class="checkbox">
 					  <label><input type="checkbox" name="CL_cluster" value="cluster1">Skills for Life - Thinking Skills</label>
@@ -118,6 +153,36 @@
 					<div class="checkbox">
 					  <label><input type="checkbox" name="CL_cluster" value="cluster3">The Natural World - Natural Sciences</label>
 					</div>
+			</div>
+			<div id="CS_MATH_clusters" class="clusters">
+				<p><strong>GE Cluster:</strong></p>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CS_cluster" value="cluster1">Values to Live By - Ethics</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CS_cluster" value="cluster2">Skills for Life - Thinking Skills</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CS_cluster" value="cluster3">Humanities/Fine Arts</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CS_cluster" value="cluster4">The Global Experience</label>
+					</div>		
+			</div>
+			<div id="CS_BIO_clusters" class="clusters">
+				<p><strong>GE Cluster:</strong></p>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CS_cluster" value="cluster1">Values to Live By - Ethics</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CS_cluster" value="cluster2">Skills for Life - Thinking Skills</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CS_cluster" value="cluster3">Humanities/Fine Arts</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CS_cluster" value="cluster4">Social and Behavioural Sciences</label>
+					</div>	
 			</div>
 			<div id="CS_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
@@ -131,13 +196,13 @@
 					  <label><input type="checkbox" name="CS_cluster" value="cluster3">Humanities/Fine Arts</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster4">Social and Behavioural Sciences<p class="text-danger"><small><em>*do not check if <mark><strong>math</strong></mark> major</em></small></p></label>
+					  <label><input type="checkbox" name="CS_cluster" value="cluster4">Social and Behavioural Sciences</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" name="CS_cluster" value="cluster5">The Global Experience <p class="text-danger"><small><em>*do not check if <mark><strong>biology</strong></mark> major</em></small></p></label>
+					  <label><input type="checkbox" name="CS_cluster" value="cluster5">The Global Experience</label>
 					</div>		
 			</div>
-			<div id="CBE_clusters" class="clusters">
+			<div id="CBE_OTHER_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
 					<div class="checkbox">
 					  <label><input type="checkbox" name="CBE_cluster" value="cluster1">Skills for Life - Thinking Skills</label>
@@ -194,14 +259,24 @@
 		</form>
 		<!-- Script to show the clusters based on college chosen -->
 		<script>
-			function show_clusters() {
+			function show_majors() {
 				var college = document.getElementById("college");
 				college = college[college.selectedIndex].value;
+				var majors = document.getElementByClassName("majors");
+				for(var i = 0; i < majors.length ; i++) {
+					majors[i].style.height = "0px";
+				}
+				document.getElementById(college + "_major").style.height = "auto";
+			}
+
+			function show_clusters(college) {
+				var major = document.getElementById(college + "_major");
+				major = major[major.selectedIndex].value;
 				var clusters = document.getElementsByClassName("clusters");
 				for(var i = 0; i < clusters.length ; i++) {
 					clusters[i].style.height = "0px";
 				}
-				document.getElementById(college + "_clusters").style.height = "auto";
+				document.getElementById(college + "_" + major + "_clusters").style.height = "auto";
 			}
 		</script>
 

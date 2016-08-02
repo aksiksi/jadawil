@@ -384,8 +384,9 @@ class Scheduler(object):
 # General Education Timerange Finder
 
 class GEScheduler():
-	def __init__(self, college, clusters, gender, timerange, term):		
+	def __init__(self, college, major, clusters, gender, timerange, term):		
 		self.college = college
+		self.major = major
 		self.clusters = clusters
 		self.gender = gender
 		self.timerange = timerange
@@ -494,8 +495,9 @@ class GEScheduler():
 			#Extract courses for the cluster chosen
 			for cluster in self.clusters:
 				courses.extend(CL_GE[cluster])
-		if self.college == "CS": # CHANGE THIS, MATH HAS A DIFFERENT ETHICS GROUP, introduce majors.
-			CS_GE = {	'cluster1': [ # Ethics
+		if self.college == "CS":
+			CS_OTHER_GE = {	# MAJORS OTHER THAN MATH/BIO
+						'cluster1': [ # Ethics
 							"PHI 121",
 							"PHI 122",
 							"PHI 226",
@@ -542,9 +544,94 @@ class GEScheduler():
 							"ARCH 346"
 							]
 					}
+			CS_MATH_GE = {	# MATH MAJORS
+						'cluster1': [ # Ethics
+							"FOED 102",
+							"PHI 121",
+							"PHI 122",
+							"PHI 226",
+							"PHIL 120"
+							],
+						'cluster2': [ # Thinking Skills
+							"HSS 110",
+							"PHI 180",
+							"ITBP 119",
+							"PSY 105"
+							 ],
+						'cluster3': [ # Humanities / Fine Arts
+							"ARCH 340",
+							"HIS 133",
+							"HSR 120",
+							"HSR 130",
+							"LIT 150",
+							"TRS 200",
+							"MSC 200",
+							"MSC 240",
+							"LNG 100",
+							"LNG 110",
+							"PHI 101",
+							"PHI 270",
+							"PHI 271"
+							 ],
+						'cluster4': [ # The Global Experience
+							"HIS 120",
+							"HIS 125",
+							"AGRB 360",
+							"BIOE 240",
+							"PSG 250",
+							"GEO 200",
+							"HIS 121",
+							"ARCH 346"
+							]
+					}
+			CS_BIO_GE = {	# BIOLOGY MAJORS
+						'cluster1': [ # Ethics
+							"PHI 121",
+							"PHI 122",
+							"PHI 226",
+							"PHIL 120"
+							],
+						'cluster2': [ # Thinking Skills
+							"HSS 110",
+							"PHI 180",
+							"ITBP 119",
+							"PSY 105"
+							 ],
+						'cluster3': [ # Humanities / Fine Arts
+							"ARCH 340",
+							"HIS 133",
+							"HSR 120",
+							"HSR 130",
+							"LIT 150",
+							"TRS 200",
+							"MSC 200",
+							"MSC 240",
+							"LNG 100",
+							"LNG 110",
+							"PHI 101",
+							"PHI 270",
+							"PHI 271"
+							 ],
+						'cluster4': [ # Social and Behavioral Sciences
+							"AGRB 210",
+							"ECON 110",
+							"HSR 140",
+							"HSR 150",
+							"PSY 100",
+							"SOC 260",
+							"SWK 200"
+							]
+					}
 			#Extract courses for the cluster chosen
-			for cluster in self.clusters:
-					courses.extend(CS_GE[cluster])
+			if(self.major == "MATH"):
+				for cluster in self.clusters:
+					courses.extend(CS_MATH_GE[cluster])
+			elif self.major == "BIO":
+				for cluster in self.clusters:
+					courses.extend(CS_BIO_GE[cluster])
+			else:
+				for cluster in self.clusters:
+					courses.extend(CS_OTHER_GE[cluster])
 		if self.college == "CBE":
 			CBE_GE = {				'cluster1': [ # Thinking Skills
 							"HSS 110",

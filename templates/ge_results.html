@@ -30,6 +30,11 @@
 						<td><strong>No courses found in the time range given.</strong></td>
 					</tr>
 				{% endif %}
+				{% if error %}
+					<tr>
+						<td><strong><h4>ERROR - Please select a college.</h4></strong></td>
+					</tr>
+				{% endif %}
 				{% for key, value in sections.iteritems() %}
 						{% if (value['remaining']|int) < 1 %}
 						<tr class="danger">

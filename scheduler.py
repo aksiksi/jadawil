@@ -941,8 +941,7 @@ class GEScheduler():
 				for cluster in self.clusters:
 					courses.extend(CEDU_ELE_GE[cluster])
 
-		# REPEAT FOR OTHER MAJORS ONCE I GET THE REST OF THE GE PLANS
-			# -----------------------------------
+		# REPEAT FOR COLLEGE OF HUMANITIES AND SS MAJOR
 		return courses	
 		
 	def compare_timeranges(self, section_time):

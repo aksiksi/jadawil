@@ -58,7 +58,7 @@
 		
 		<hr>
 		<h2>Find a General Education Course</h2>
-		<form action="/submit_GE" method="POST" onload="show_majors();">
+		<form action="/submit_GE" method="POST"">
 			<p><strong>Semester</strong></p>
             <select name="term">
                 <option value="201710">Fall 2016</option>
@@ -365,6 +365,7 @@
 		</form>
 		<!-- Script to show the clusters based on college chosen -->
 		<script>
+			document.getElementById("college").onload = show_majors();
 			function show_majors() {
 				var college = document.getElementById("college");
 				college = college[college.selectedIndex].value;

@@ -126,21 +126,19 @@ def submit_GE():
 	if request.method == 'POST':
 		start = time.time()	
 		college = request.form['college']
-		if college == "-": # Error, user didnt pick a college
-			pass
-			#return render_template('ge_results.html', error=True, end=end)
-		major = request.form[college+ '_major']
-		cluster = college + "_cluster" # Get the checkboxes only for the college selected
-		clusters = request.form.getlist(cluster)
-		gender = request.form['gender']
-		term = request.form['term']
-		# Form time range in the format "10:00 am-11:15 am"
-		timerange = request.form['start-time'] + ":00 " + request.form['start-am-pm'] + "-" + request.form['end-time'] + ":00 " + request.form['end-am-pm']
-		
-		GE_courses = scheduler.GEScheduler(college, major, clusters, gender, timerange, term).start()
-		
-		end = time.time() - start
-		return render_template('ge_results.html', sections=GE_courses, error=False, end=end)
+		if college != "-": 
+			major = request.form[college+ '_major']
+			cluster = college + "_cluster" # Get the checkboxes only for the college selected
+			clusters = request.form.getlist(cluster)
+			gender = request.form['gender']
+			term = request.form['term']
+			# Form time range in the format "10:00 am-11:15 am"
+			timerange = request.form['start-time'] + ":00 " + request.form['start-am-pm'] + "-" + request.form['end-time'] + ":00 " + request.form['end-am-pm']
+			
+			GE_courses = scheduler.GEScheduler(college, major, clusters, gender, timerange, term).start()
+			
+			end = time.time() - start
+			return render_template('ge_results.html', sections=GE_courses, end=end)
 
 if __name__ == '__main__':
     app.run(debug=True)

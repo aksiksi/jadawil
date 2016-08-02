@@ -127,7 +127,7 @@ def submit_GE():
 		start = time.time()	
 		college = request.form['college']
 		if college == "-": # Error, user didnt pick a college
-			return render_template('ge_results.html', error = True, end = end)
+			return render_template('ge_results.html', error=True, end=end)
 		major = request.form[college+ '_major']
 		cluster = college + "_cluster" # Get the checkboxes only for the college selected
 		clusters = request.form.getlist(cluster)
@@ -139,12 +139,7 @@ def submit_GE():
 		GE_courses = scheduler.GEScheduler(college, major, clusters, gender, timerange, term).start()
 		
 		end = time.time() - start
-		with open('last.txt') as f:
-			d = datetime.fromtimestamp((float(f.readline())))
-
-		# Add 4 hours to account for local time
-		d = d + timedelta(hours=4)
-		return render_template('ge_results.html', sections=GE_courses, end=end)
+		return render_template('ge_results.html', sections=GE_courses, error=False, end=end)
 
 if __name__ == '__main__':
     app.run(debug=True)

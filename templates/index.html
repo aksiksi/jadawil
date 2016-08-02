@@ -267,8 +267,10 @@
 				for(var i = 0; i < majors.length ; i++) {
 					majors[i].style.height = "0px";
 				}
-				document.getElementById(college + "_MAJORS").style.height = "auto";
-				show_clusters();
+				if (college != "-") {
+					document.getElementById(college + "_MAJORS").style.height = "auto";
+					show_clusters();
+				}
 			}
 
 			function show_clusters() {

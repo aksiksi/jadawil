@@ -791,7 +791,7 @@ class GEScheduler():
 							],
 						'cluster4': [ # Social and behavioural sciences
 							"AGRB 210", "ECON 110", "HSR 140", "HSR 150", "PSY 100", "SOC 260", "SWK 200"
-							]
+							],
 						'cluster5': [ # The global experience
 							"AGRB 360", "ARCH 346", "BIOE 240", "GEO 200", "HIS 120", "HIS 121", "HIS 122", "HIS 125", "PSG 250"
 							],

@@ -130,7 +130,7 @@ def submit_GE():
 		if college == "CHSS":
 			if major == "HIS" or major == "POL" or major == "SOC" or major == "GEO":
 				cluster = college + "_2_cluster" # Get the checkboxes only for the college and major selected
-			if major == "MC" or major == "PHI":
+			elif major == "MC" or major == "PHI":
 				cluster = college + "_3_cluster"
 			else:
 				cluster = college + "_1_cluster" 

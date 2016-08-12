@@ -14,39 +14,7 @@
         <h1>Welcome to Jadawil!</h1>
         <p style="font-size: 1.2em;">A simple course scheduler for UAEU students.</p>
     </div> -->
-		<!-- Script to show the clusters based on college chosen -->
-		<script type="text/javascript">
-			function show_majors() {
-				var college = document.getElementById("college");
-				college = college[college.selectedIndex].value;
-				var majors = document.getElementsByClassName("majors");
-				for(var i = 0; i < majors.length ; i++) {
-					majors[i].style.height = "0px";
-				}
-				if (college != "-") {
-					document.getElementById(college + "_MAJORS").style.height = "auto";
-				}
-				show_clusters();
-			}
 
-			function show_clusters() {
-				var college = document.getElementById("college");
-				college = college[college.selectedIndex].value;
-				var major = document.getElementById(college + "_major");
-				major = major[major.selectedIndex].value;
-				var clusters = document.getElementsByClassName("clusters");
-				for(var i = 0; i < clusters.length ; i++) {
-					clusters[i].style.height = "0px";
-				}
-				if (college != "-") {
-					document.getElementById(college + "_" + major + "_clusters").style.height = "auto";
-				}
-			}
-			window.onload = function {
-				show_majors();
-			}
-		</script>
-		
     <div class="well">
         <form action="/submit" method="POST">
             <p><strong>Semester</strong></p>
@@ -90,7 +58,7 @@
 		
 		<hr>
 		<h2>Find a General Education Course</h2>
-		<form action="/submit_GE" method="POST" onload="show_majors()">
+		<form action="/submit_GE" method="POST">
 			<p><strong>Semester</strong></p>
             <select name="term">
                 <option value="201710">Fall 2016</option>
@@ -110,7 +78,7 @@
 					<option value="COE">College of Engineering</option>
 					<option value="CBE">College of Business and Economics</option>
 					<option value="CS">College of Science</option>
-					<!-- <option value="CHSS">College of Humanities and Social Sciences</option> -->
+					<option value="CHSS">College of Humanities and Social Sciences</option>
 					<option value="CIT">College of Information Technology</option>
 					<option value="CEDU">College of Education</option>
 					<option value="CL">College of Law</option>
@@ -164,7 +132,25 @@
 						<option value="ELE">Elementary Education</option>
 					</select>
 			</div>
-			
+			<div id="CHSS_MAJORS" class="majors">
+				<p><strong>Major:</strong></p>
+					<select name="CHSS_major" id="CHSS_major" onchange="show_clusters()">
+						<option value="ARBLIT">Arabic Language & Literature</option>
+						<option value="ENGLIT">English Literature</option>
+						<option value="GEO">Geography</option>
+						<option value="TOU">Tourism Studies</option>
+						<option value="HIS">History</option>
+						<option value="LNG">Linguistics</option>
+						<option value="APPLNG">Applied Linguistics (TESOL)</option>
+						<option value="MC">Mass Communication</option>
+						<option value="PHI">Philosophy</option>
+						<option value="POL">Political Science</option>
+						<option value="PSY">Psychology</option>
+						<option value="SW">Social Work</option>
+						<option value="SOC">Sociology</option>
+						<option value="TRN">Translation Studies</option>
+					</select>
+			</div>			
 			
 			<div id="COE_OTHER_clusters" class="clusters">
 				<p><strong>GE Cluster:</strong></p>
@@ -355,6 +341,63 @@
 					  <label><input type="checkbox" name="CEDU_ELE_cluster" value="cluster4">The Natural World - Natural Sciences</label>
 					</div>
 			</div>
+			<div id="CHSS_1_clusters" class="clusters">
+				<p><strong>GE Cluster:</strong></p>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_1_cluster" value="cluster1">Ethics</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_1_cluster" value="cluster2">Thinking Skills</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_1_cluster" value="cluster3">Humanities/Fine Arts</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_1_cluster" value="cluster4">Social and Behavioural Sciences</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_1_cluster" value="cluster5">The Global Experience</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_1_cluster" value="cluster6">The Natural World - Natural Sciences</label>
+					</div>
+			</div>
+			<div id="CHSS_2_clusters" class="clusters"> <!-- clusters for geography, political science, history, and sociology majors -->
+				<p><strong>GE Cluster:</strong></p>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_2_cluster" value="cluster1">Ethics</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_2_cluster" value="cluster2">Thinking Skills</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_2_cluster" value="cluster3">Humanities/Fine Arts</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_2_cluster" value="cluster4">Social and Behavioural Sciences</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_2_cluster" value="cluster6">The Natural World - Natural Sciences</label>
+					</div>
+			</div>
+			<div id="CHSS_3_clusters" class="clusters"> <!-- clusters for mass comm and philosophy -->
+				<p><strong>GE Cluster:</strong></p>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_3_cluster" value="cluster2">Thinking Skills</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_3_cluster" value="cluster3">Humanities/Fine Arts</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_3_cluster" value="cluster4">Social and Behavioural Sciences</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_3_cluster" value="cluster5">The Global Experience</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" name="CHSS_3_cluster" value="cluster6">The Natural World - Natural Sciences</label>
+					</div>
+			</div>
 			<p><strong>Time Range:</strong></p>
 							<select name="start-time">
 								<option value="1">1:00</option>
@@ -395,6 +438,46 @@
 							</select>			
 			<p><button type="btn-submit" class="btn">Submit</button></p>
 		</form>
+		<!-- Script to show the clusters based on college chosen -->
+		<script type="text/javascript">
+			function show_majors() {
+				var college = document.getElementById("college");
+				college = college[college.selectedIndex].value;
+				var majors = document.getElementsByClassName("majors");
+				for(var i = 0; i < majors.length ; i++) {
+					majors[i].style.height = "0px";
+				}
+				if (college != "-") {
+					document.getElementById(college + "_MAJORS").style.height = "auto";
+				}
+				show_clusters();
+			}
+
+			function show_clusters() {
+				var college = document.getElementById("college");
+				college = college[college.selectedIndex].value;
+				var major = document.getElementById(college + "_major");
+				major = major[major.selectedIndex].value;
+				var clusters = document.getElementsByClassName("clusters");
+				for(var i = 0; i < clusters.length ; i++) {
+					clusters[i].style.height = "0px";
+				}
+				
+				if (college == "CHSS") {
+					if (major == "GEO" || major == "SOC" || major == "HIS" || major == "POL") {
+						document.getElementById(college + "_2_clusters").style.height = "auto";
+					}
+					else if (major == "MC" || major == "PHI") {
+						document.getElementById(college + "_3_clusters").style.height = "auto";
+					}
+					else 
+						document.getElementById(college + "_1_clusters").style.height = "auto";
+					
+				} else if (college != "-") {
+					document.getElementById(college + "_" + major + "_clusters").style.height = "auto";
+				}
+			}
+		</script>
 
         <h2>Updates</h2>
         <ul>

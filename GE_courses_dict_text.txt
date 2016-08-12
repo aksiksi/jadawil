@@ -1,3 +1,31 @@
+CHSS_ARBLIT_GE = {
+						'cluster1': [ # Values to live by ethics
+							"FOED 102",	"PHI 121", "PHI 122", "PHI 226", "PHIL 120"
+							],
+						'cluster2': [ # Skills for life thinking skills
+							"HSS 110", "ITBP 119", "PSY 105", "PHI 180"
+							],
+						'cluster3': [ #Humanities/Fine Arts	
+							"ARCH 340", "HIS 133", "HSR 120", "HSR 130", "LIT 150", "TRS 200", "MSC 200", "MSC 240",
+							"LNG 100", "LNG 110", "PHI 101", "PHI 270", "PHI 271"
+							],
+						'cluster4': [ # Social and behavioural sciences
+							"AGRB 210", "ECON 110", "HSR 140", "HSR 150", "PSY 100", "SOC 260", "SWK 200"
+							]
+						'cluster5': [ # The global experience
+							"AGRB 360", "ARCH 346", "BIOE 240", "GEO 200", "HIS 120", "HIS 121", "HIS 122", "HIS 125", "PSG 250"
+							],
+						'cluster6': [ # Natural Sciences
+							"ARAG 205", "ARAG 220", "BION 100", "CHEM 181", "FDSC 250", "GEOL 110", "PHED 201", "PHYS 100", "PHYS 101"
+							]
+		}
+
+
+
+
+
+
+
 CEDU_ELE_GE = {				
 						'cluster1': [ # Humanities / Fine Arts
 							"ARCH 340",

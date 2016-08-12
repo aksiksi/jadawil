@@ -397,34 +397,14 @@ class GEScheduler():
 		if self.college == "COE":
 			# Dictionary of COE general education courses
 			COE_GE = {  'cluster1': [ # Learning and thinking skills
-							"HSS 110",
-							"PHI 180",
-							"ITBP 119",
-							"PSY 105"
+							"HSS 110", "PHI 180", "ITBP 119", "PSY 105"
 							],
 						'cluster2': [ #Humanities / fine arts
-							 "ARCH 340",
-							 "HSR 120",
-							 "HSR 130",
-							 "LIT 150",
-							 "TRS 200",
-							 "MSC 200",
-							 "MSC 240",
-							 "LNG 100",
-							 "LNG 110",
-							 "PHI 101",
-							 "PHI 270",
-							 "PHI 271"
+							 "ARCH 340", "HSR 120", "HSR 130", "LIT 150", "TRS 200", "MSC 200", "MSC 240", "LNG 100",
+							 "LNG 110", "PHI 101", "PHI 270", "PHI 271"
 							 ],
 						'cluster3': [ # The Global Experience
-							 "HIS 120",
-							 "HIS 125",
-							 "AGRB 360",
-							 "BIOE 240",
-							 "PSG 250",
-							 "GEO 200",
-							 "HIS 121",
-							 "ARCH 346"
+							 "HIS 120", "HIS 125", "AGRB 360", "BIOE 240", "PSG 250", "GEO 200", "HIS 121", "ARCH 346"
 							 ]
 					 }
 			#Extract courses for the cluster chosen
@@ -432,38 +412,14 @@ class GEScheduler():
 					courses.extend(COE_GE[cluster])
 		if self.college == "CIT":
 			CIT_GE = {	'cluster1': [
-							"ARCH 340",
-							"HIS 133",
-							"HSR 120",
-							"HSR 130",
-							"LIT 150",
-							"TRS 200",
-							"MSC 200",
-							"MSC 240",
-							"LNG 100",
-							"LNG 110",
-							"PHI 101",
-							"PHI 270",
-							"PHI 271"
+							"ARCH 340", "HIS 133", "HSR 120", "HSR 130", "LIT 150", "TRS 200", "MSC 200", "MSC 240",
+							"LNG 100", "LNG 110", "PHI 101", "PHI 270", "PHI 271"
 							],
 						'cluster2': [
-							"AGRB 210",
-							"ECON 110",
-							"HSR 140",
-							"HSR 150",
-							"PSY 100",
-							"SOC 260",
-							"SWK 200"
+							"AGRB 210",	"ECON 110",	"HSR 140", "HSR 150", "PSY 100", "SOC 260", "SWK 200"
 							],
 						'cluster3': [
-							"HIS 120",
-							"HIS 125",
-							"AGRB 360",
-							"BIOE 240",
-							"PSG 250",
-							"GEO 200",
-							"HIS 121",
-							"ARCH 346"
+							"HIS 120", "HIS 125", "AGRB 360", "BIOE 240", "PSG 250", "GEO 200", "HIS 121", "ARCH 346"
 							]
 			}
 			#Extract courses for the cluster chosen
@@ -471,25 +427,13 @@ class GEScheduler():
 					courses.extend(CIT_GE[cluster])
 		if self.college == "CL":
 			CL_GE = {	'cluster1': [
-							"HSS 110",
-							"ITBP 119",
-							"PHI 180",
-							"PSY 105"
+							"HSS 110", "ITBP 119", "PHI 180", "PSY 105"
 							],
 						'cluster2': [
-							"MATH 120",
-							"STAT 101"
+							"MATH 120",	"STAT 101"
 							],
 						'cluster3': [
-							"ARAG 205",
-							"ARAG 220",
-							"BION 100",
-							"CHEM 181",
-							"FDSC 250",
-							"GEOL 110",
-							"PHED 201",
-							"PHYS 100",
-							"PHYS 101"
+							"ARAG 205",	"ARAG 220",	"BION 100",	"CHEM 181",	"FDSC 250", "GEOL 110",	"PHED 201",	"PHYS 100",	"PHYS 101"
 							]
 			}
 			#Extract courses for the cluster chosen
@@ -498,128 +442,50 @@ class GEScheduler():
 		if self.college == "CS":
 			CS_OTHER_GE = {	# MAJORS OTHER THAN MATH/BIO
 						'cluster1': [ # Ethics
-							"PHI 121",
-							"PHI 122",
-							"PHI 226",
-							"PHIL 120"
+							"PHI 121", "PHI 122", "PHI 226", "PHIL 120"
 							],
 						'cluster2': [ # Thinking Skills
-							"HSS 110",
-							"PHI 180",
-							"ITBP 119",
-							"PSY 105"
+							"HSS 110", "PHI 180", "ITBP 119", "PSY 105"
 							 ],
 						'cluster3': [ # Humanities / Fine Arts
-							"ARCH 340",
-							"HIS 133",
-							"HSR 120",
-							"HSR 130",
-							"LIT 150",
-							"TRS 200",
-							"MSC 200",
-							"MSC 240",
-							"LNG 100",
-							"LNG 110",
-							"PHI 101",
-							"PHI 270",
-							"PHI 271"
+							"ARCH 340", "HIS 133", "HSR 120", "HSR 130", "LIT 150", "TRS 200", "MSC 200", "MSC 240", "LNG 100",
+							"LNG 110", "PHI 101", "PHI 270", "PHI 271"
 							 ],
 						'cluster4': [ # Social and Behavioral Sciences
-							"AGRB 210",
-							"ECON 110",
-							"HSR 140",
-							"HSR 150",
-							"PSY 100",
-							"SOC 260",
-							"SWK 200"
+							"AGRB 210", "ECON 110", "HSR 140", "HSR 150", "PSY 100", "SOC 260", "SWK 200"
 							],
 						'cluster5': [ # The Global Experience
-							"HIS 120",
-							"HIS 125",
-							"AGRB 360",
-							"BIOE 240",
-							"PSG 250",
-							"GEO 200",
-							"HIS 121",
-							"ARCH 346"
+							"HIS 120", "HIS 125", "AGRB 360", "BIOE 240", "PSG 250", "GEO 200", "HIS 121", "ARCH 346"
 							]
 					}
 			CS_MATH_GE = {	# MATH MAJORS
 						'cluster1': [ # Ethics
-							"FOED 102",
-							"PHI 121",
-							"PHI 122",
-							"PHI 226",
-							"PHIL 120"
+							"FOED 102", "PHI 121", "PHI 122", "PHI 226", "PHIL 120" 
 							],
 						'cluster2': [ # Thinking Skills
-							"HSS 110",
-							"PHI 180",
-							"ITBP 119",
-							"PSY 105"
+							"HSS 110", "PHI 180", "ITBP 119", "PSY 105"
 							 ],
 						'cluster3': [ # Humanities / Fine Arts
-							"ARCH 340",
-							"HIS 133",
-							"HSR 120",
-							"HSR 130",
-							"LIT 150",
-							"TRS 200",
-							"MSC 200",
-							"MSC 240",
-							"LNG 100",
-							"LNG 110",
-							"PHI 101",
-							"PHI 270",
-							"PHI 271"
+							"ARCH 340", "HIS 133", "HSR 120", "HSR 130", "LIT 150", "TRS 200", "MSC 200", "MSC 240",
+							"LNG 100", "LNG 110", "PHI 101", "PHI 270", "PHI 271"
 							 ],
 						'cluster4': [ # The Global Experience
-							"HIS 120",
-							"HIS 125",
-							"AGRB 360",
-							"BIOE 240",
-							"PSG 250",
-							"GEO 200",
-							"HIS 121",
-							"ARCH 346"
+							"HIS 120", "HIS 125", "AGRB 360", "BIOE 240", "PSG 250", "GEO 200", "HIS 121", "ARCH 346"
 							]
 					}
 			CS_BIO_GE = {	# BIOLOGY MAJORS
 						'cluster1': [ # Ethics
-							"PHI 121",
-							"PHI 122",
-							"PHI 226",
-							"PHIL 120"
+							"PHI 121", "PHI 122", "PHI 226", "PHIL 120" 
 							],
 						'cluster2': [ # Thinking Skills
-							"HSS 110",
-							"PHI 180",
-							"ITBP 119",
-							"PSY 105"
+							"HSS 110", "PHI 180", "ITBP 119", "PSY 105"
 							 ],
 						'cluster3': [ # Humanities / Fine Arts
-							"ARCH 340",
-							"HIS 133",
-							"HSR 120",
-							"HSR 130",
-							"LIT 150",
-							"TRS 200",
-							"MSC 200",
-							"MSC 240",
-							"LNG 100",
-							"LNG 110",
-							"PHI 101",
-							"PHI 270",
-							"PHI 271"
+							"ARCH 340", "HIS 133", 	"HSR 120", "HSR 130", "LIT 150", "TRS 200", "MSC 200", "MSC 240",
+							"LNG 100", "LNG 110", "PHI 101", "PHI 270", "PHI 271"
 							 ],
 						'cluster4': [ # Social and Behavioral Sciences
-							"AGRB 210",
-							"ECON 110",
-							"HSR 140",
-							"HSR 150",
-							"PSY 100",
-							"SOC 260",
-							"SWK 200"
+							"AGRB 210", "ECON 110", "HSR 140", "HSR 150", "PSY 100", "SOC 260", "SWK 200"
 							]
 					}
 			#Extract courses for the cluster chosen
@@ -634,46 +500,17 @@ class GEScheduler():
 					courses.extend(CS_OTHER_GE[cluster])
 		if self.college == "CBE":
 			CBE_GE = {				'cluster1': [ # Thinking Skills
-							"HSS 110",
-							"PHI 180",
-							"ITBP 119",
-							"PSY 105"
+							"HSS 110", "PHI 180", "ITBP 119", "PSY 105"
 							 ],
 						'cluster2': [ # Humanities / Fine Arts
-							"ARCH 340",
-							"HIS 133",
-							"HSR 120",
-							"HSR 130",
-							"LIT 150",
-							"TRS 200",
-							"MSC 200",
-							"MSC 240",
-							"LNG 100",
-							"LNG 110",
-							"PHI 101",
-							"PHI 270",
-							"PHI 271"
+							"ARCH 340", "HIS 133", "HSR 120", "HSR 130", "LIT 150", "TRS 200", "MSC 200", "MSC 240",
+							"LNG 100", "LNG 110", "PHI 101", "PHI 270", "PHI 271"
 							 ],
 						'cluster3': [ # The Global Experience
-							"HIS 120",
-							"HIS 125",
-							"AGRB 360",
-							"BIOE 240",
-							"PSG 250",
-							"GEO 200",
-							"HIS 121",
-							"ARCH 346"
+							"HIS 120", "HIS 125", "AGRB 360", "BIOE 240", "PSG 250", "GEO 200", "HIS 121", "ARCH 346"
 							],
 						'cluster4': [ # The Natural World - Natural Sciences
-							"ARAG 205",
-							"ARAG 220",
-							"BION 100",
-							"CHEM 181",
-							"FDSC 250",
-							"GEOL 110",
-							"PHED 201",
-							"PHYS 100",
-							"PHYS 101"
+							"ARAG 205", "ARAG 220", "BION 100", "CHEM 181", "FDSC 250", "GEOL 110", "PHED 201", "PHYS 100", "PHYS 101"
 							]
 					}
 			#Extract courses for the cluster chosen
@@ -940,8 +777,84 @@ class GEScheduler():
 			elif self.major == "ELE":
 				for cluster in self.clusters:
 					courses.extend(CEDU_ELE_GE[cluster])
-
-		# REPEAT FOR COLLEGE OF HUMANITIES AND SS MAJOR
+		if self.college == "CHSS":
+			CHSS_GE = {
+						'cluster1': [ # Values to live by ethics
+							"FOED 102",	"PHI 121", "PHI 122", "PHI 226", "PHIL 120"
+							],
+						'cluster2': [ # Skills for life thinking skills
+							"HSS 110", "ITBP 119", "PSY 105", "PHI 180"
+							],
+						'cluster3': [ #Humanities/Fine Arts	
+							"ARCH 340", "HIS 133", "HSR 120", "HSR 130", "LIT 150", "TRS 200", "MSC 200", "MSC 240",
+							"LNG 100", "LNG 110", "PHI 101", "PHI 270", "PHI 271"
+							],
+						'cluster4': [ # Social and behavioural sciences
+							"AGRB 210", "ECON 110", "HSR 140", "HSR 150", "PSY 100", "SOC 260", "SWK 200"
+							]
+						'cluster5': [ # The global experience
+							"AGRB 360", "ARCH 346", "BIOE 240", "GEO 200", "HIS 120", "HIS 121", "HIS 122", "HIS 125", "PSG 250"
+							],
+						'cluster6': [ # Natural Sciences
+							"ARAG 205", "ARAG 220", "BION 100", "CHEM 181", "FDSC 250", "GEOL 110", "PHED 201", "PHYS 100", "PHYS 101"
+							]
+			}
+			# CHSS_GE is the same for the majors: Arabic Literature
+			
+			if self.major == "ENGLIT": # English literature major
+				CHSS_GE['cluster3'].remove('LIT 150') # Remove Introduction to Literature as it is not offered for this major
+				CHSS_GE['cluster5'].add('PSG 270')
+				CHSS_GE['cluster5'].add('SOC 201')
+			
+			if self.major == "GEO": # Geography major
+				del CHSS_GE['cluster5'] # Remove global experienece
+				# Update new natural sciences list
+				CHSS_GE['cluster6'] = ["PHYS 100", "PHYS 101", "FDSC 250", "GEOL 110", "ARAG 205", "ARAG 220", "BION 100", "PHED 201", "CHEM 181"]
+			
+			if self.major == "TOU": # Tourism studies
+				CHSS_GE['cluster3'].remove('HIS 133') # Introduction to art history
+				CHSS_GE['cluster5'].remove('HIS 122') # Modern world history
+			
+			if self.major == "HIS" or self.major == "POL" or self.major == "SOC": # History / Political science / Sociology
+				del CHSS_GE['cluster5'] # Remove global experience
+			
+			if self.major == "LNG": # Linguistics
+				CHSS_GE['cluster3'].remove('LNG 100') # Introduction to linguistics
+				CHSS_GE['cluster5'].remove('HIS 122') # Modern world history
+			
+			if self.major == "APPLNG": # Applied linguistics
+				CHSS_GE['cluster3'].remove('LNG 100') # Introduction to linguistics
+				CHSS_GE['cluster3'].remove('LNG 110') # Language society and culture
+				CHSS_GE['cluster5'].remove('HIS 122') # Modern world history
+			
+			if self.major == "MC": # Mass communication
+				del CHSS_GE['cluster1'] # Remove ethics
+				CHSS_GE['cluster3'].remove('MSC 200') # Intro to mass media
+				CHSS_GE['cluster3'].remove('MSC 240') # World and arab media
+				CHSS_GE['cluster5'].remove('HIS 122') # Modern world history
+			
+			if self.major == "PHI": # Philosophy
+				del CHSS_GE['cluster1'] # Remove ethics
+				CHSS_GE['cluster3'].remove('PHI 270') # Philosophy of education
+				CHSS_GE['cluster3'].remove('PHI 271') # History and philosophy of science
+				CHSS_GE['cluster5'].remove('HIS 122') # Modern world history
+			
+			if self.major == "PSY": # Psychology
+				CHSS_GE['cluster4'].remove("PSY 100") # Introduction to psychology
+				CHSS_GE['cluster5'].remove('HIS 122') # Modern world history
+			
+			if self.major == "SW": # Social work
+				CHSS_GE['cluster4'].remove('SWK 200') # Social welfare
+				CHSS_GE['cluster5'].remove('HIS 122') # Modern world history
+			
+			if self.major == "TRN": # Translational studies
+				CHSS_GE['cluster3'].remove('TRN 200') # Introduction to translation
+				CHSS_GE['cluster5'].remove('HIS 122') # Modern world history
+			
+			#Extract courses for the cluster chosen
+			for cluster in self.clusters:
+				courses.extend(CHSS_GE[cluster])
+			
 		return courses	
 		
 	def compare_timeranges(self, section_time):

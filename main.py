@@ -127,7 +127,15 @@ def submit_GE():
 		start = time.time()	
 		college = request.form['college']
 		major = request.form[college+ '_major']
-		cluster = college + "_" + major + "_cluster" # Get the checkboxes only for the college and major selected
+		if college == "CHSS":
+			if major == "HIS" or major == "POL" or major == "SOC" or major == "GEO":
+				cluster = college + "_2_cluster" # Get the checkboxes only for the college and major selected
+			if major == "MC" or major == "PHI":
+				cluster = college + "_3_cluster"
+			else:
+				cluster = college + "_1_cluster" 
+		else:
+			cluster = college + "_" + major + "_cluster" # Get the checkboxes only for the college and major selected
 		clusters = request.form.getlist(cluster)
 		gender = request.form['gender']
 		term = request.form['term']

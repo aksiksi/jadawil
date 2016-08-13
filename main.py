@@ -121,7 +121,6 @@ def submit():
 
             return render_template('results.html', schedules=s.results, conflicts=s.conflicts, final_conflicts=s.final_conflicts, end=end)
 
-<<<<<<< HEAD
 @app.route('/submit_GE', methods=['POST'])
 def submit_GE():
 	if request.method == 'POST':
@@ -148,7 +147,5 @@ def submit_GE():
 		end = time.time() - start
 		return render_template('ge_results.html', sections=GE_courses, end=end)
 
-=======
->>>>>>> ce3780e4d598b15e139ade42e9e23aa405b0858a
 if __name__ == '__main__':
     app.run(debug=True)

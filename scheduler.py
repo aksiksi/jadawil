@@ -804,8 +804,8 @@ class GEScheduler():
 			
 			if self.major == "ENGLIT": # English literature major
 				CHSS_GE['cluster3'].remove('LIT 150') # Remove Introduction to Literature as it is not offered for this major
-				CHSS_GE['cluster5'].add('PSG 270')
-				CHSS_GE['cluster5'].add('SOC 201')
+				CHSS_GE['cluster5'].append('PSG 270')
+				CHSS_GE['cluster5'].append('SOC 201')
 			
 			if self.major == "GEO": # Geography major
 				del CHSS_GE['cluster5'] # Remove global experienece
@@ -849,7 +849,7 @@ class GEScheduler():
 				CHSS_GE['cluster5'].remove('HIS 122') # Modern world history
 			
 			if self.major == "TRN": # Translational studies
-				CHSS_GE['cluster3'].remove('TRN 200') # Introduction to translation
+				CHSS_GE['cluster3'].remove('TRS 200') # Introduction to translation
 				CHSS_GE['cluster5'].remove('HIS 122') # Modern world history
 			
 			#Extract courses for the cluster chosen

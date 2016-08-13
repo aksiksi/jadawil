@@ -381,6 +381,7 @@ class Scheduler(object):
         if self.results:
             self.success = True
 
+<<<<<<< HEAD
 # General Education Timerange Finder
 
 class GEScheduler():
@@ -897,6 +898,8 @@ class GEScheduler():
 						filtered_course_sections[crn] = section
 		return filtered_course_sections
 			
+=======
+>>>>>>> ce3780e4d598b15e139ade42e9e23aa405b0858a
 if __name__ == '__main__':
     pass
     # s = Scheduler(['math 1110', 'phys 1110', 'math 1120'], [], 'B').start()

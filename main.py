@@ -1,8 +1,9 @@
 # Flask app that serves the Jadawil website
+from __future__ import print_function
+
 import time
 import json
 from datetime import datetime, timedelta
-from __future__ import print_function
 
 from flask import request, render_template, url_for, redirect, Flask
 
@@ -124,32 +125,32 @@ def submit():
 
 @app.route('/submit_GE', methods=['POST'])
 def submit_GE():
-	if request.method == 'POST':
-		start = time.time()
+    if request.method == 'POST':
+        start = time.time()
 
         college = request.form['college']
-		major = request.form[college + '_major']
+        major = request.form[college + '_major']
 
         if college == "CHSS":
-			if major == "HIS" or major == "POL" or major == "SOC" or major == "GEO":
-				cluster = college + "_2_cluster" # Get the checkboxes only for the college and major selected
-			elif major == "MC" or major == "PHI":
-				cluster = college + "_3_cluster"
-			else:
-				cluster = college + "_1_cluster"
-		else:
-			cluster = college + "_" + major + "_cluster" # Get the checkboxes only for the college and major selected
+            if major == "HIS" or major == "POL" or major == "SOC" or major == "GEO":
+                cluster = college + "_2_cluster" # Get the checkboxes only for the college and major selected
+            elif major == "MC" or major == "PHI":
+                cluster = college + "_3_cluster"
+            else:
+                cluster = college + "_1_cluster"
+        else:
+            cluster = college + "_" + major + "_cluster" # Get the checkboxes only for the college and major selected
 
         clusters = request.form.getlist(cluster)
-		gender = request.form['gender']
-		term = request.form['term']
+        gender = request.form['gender']
+        term = request.form['term']
 
         # Form time range in the format "10:00 am-11:15 am"
-		timerange = request.form['start-time'] + ":00 " + request.form['start-am-pm'] + "-" + request.form['end-time'] + ":00 " + request.form['end-am-pm']
+        timerange = request.form['start-time'] + ":00 " + request.form['start-am-pm'] + "-" + request.form['end-time'] + ":00 " + request.form['end-am-pm']
 
-		GE_courses = scheduler.GEScheduler(college, major, clusters, gender, timerange, term).start()
+        GE_courses = scheduler.GEScheduler(college, major, clusters, gender, timerange, term).start()
 
-		end = time.time() - start
+        end = time.time() - start
 
         return render_template('ge_results.html', sections=GE_courses, end=end)
 

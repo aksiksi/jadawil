@@ -9,7 +9,7 @@ from collections import defaultdict
 from secret import username, password
 
 # Terms
-terms = ['201720', '201710', '201620', '201610', '201520', '201510']
+terms = ['201810', '201720', '201710', '201620', '201610', '201520', '201510']
 
 def html_to_pickle(source, term):
     '''Collect data from HTML source and write it to a pickle.'''

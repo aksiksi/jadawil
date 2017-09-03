@@ -154,5 +154,9 @@ def submit_GE():
 
         return render_template('ge_results.html', sections=GE_courses, end=end)
 
+@app.route('/.well-known/acme-challenge/H7WCimQ-jLrKcFGykyO1rBD4D5_GxXw4mRbO_0OvAx8')
+def letsencryptauth():
+    return 'H7WCimQ-jLrKcFGykyO1rBD4D5_GxXw4mRbO_0OvAx8.rRrGS2G_wyzBmiIMUivkdPMyDFfmhqIrx-mvRZZqAM4'
+
 if __name__ == '__main__':
     app.run(debug=True)

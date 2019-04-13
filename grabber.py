@@ -9,12 +9,6 @@ from bs4 import BeautifulSoup
 from collections import defaultdict
 from secret import username, password
 
-# Terms
-terms = [
-    # Latest: Fall 2020
-    '202010', '201920', '201910', '201820', '201810',
-    '201720', '201710', '201620', '201610', '201520', '201510'
-]
 
 def html_to_pickle(source, term):
     '''Collect data from HTML source and write it to a pickle.'''
@@ -157,10 +151,6 @@ def html_to_pickle(source, term):
     with open('classes/classes-{}.pickle'.format(term), 'wb') as f:
         pickle.dump(courses_by_abbrev, f)
 
-    # TESTING
-    # with open('testingabc.pickle', 'wb') as f:
-    #     pickle.dump(courses_by_abbrev, f)
-
 def source_grabber(term):
     '''Grab the course search source code using a Mechanize browser.'''
     # Browser instance
@@ -193,10 +183,15 @@ def source_grabber(term):
 
     # Choose current term by manipulating first form on page then submit
     br.select_form(nr=1)
-    br['p_term'] = [term]
-    br.submit()
+    terms = br.possible_items('p_term')
+
+    # Grab latest term by default
+    if term is None:
+        term = terms[1]
 
     print("Selected term {}".format(term))
+    br['p_term'] = [term]
+    br.submit()
 
     # Move to advanced search page
     br.select_form(nr=1)
@@ -215,13 +210,18 @@ def source_grabber(term):
     response = br.response()
     source = response.read()
 
-    return source
+    return (source, term)
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-t', '--term', default=terms[0])
+    parser.add_argument('-t', '--term')
     args = parser.parse_args()
 
     # Get source, collect data from it, then write it to pickle
-    html_to_pickle(source_grabber(args.term), args.term)
+    # If no term provided, fetch latest term data
+    source, term = source_grabber(args.term)
+    html_to_pickle(source, term)
+
+if __name__ == '__main__':
+    main()
 

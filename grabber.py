@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+import argparse
 import mechanize
 import cookielib
 import cPickle as pickle
@@ -216,16 +217,11 @@ def source_grabber(term):
 
     return source
 
-def main():
-    # Get source, collect data from it, then write it to pickle
-    html_to_pickle(source_grabber(terms[0]), terms[0])
-
-    # for term in terms:
-    #     html_to_pickle(source_grabber(term), term)
-
-    #TESTING
-    # with open('testingabc.html') as f:
-    #     html_to_pickle(f.read(), '201610')
-
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-t', '--term', default=terms[0])
+    args = parser.parse_args()
+
+    # Get source, collect data from it, then write it to pickle
+    html_to_pickle(source_grabber(args.term), args.term)
+

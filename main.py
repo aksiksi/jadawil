@@ -1,6 +1,7 @@
 # Flask app that serves the Jadawil website
 from __future__ import print_function
 
+import os
 import time
 import json
 from datetime import datetime, timedelta
@@ -71,7 +72,30 @@ def main():
     # Add 4 hours to convert from UTC to local (UAE) time
     d = d + timedelta(hours=4)
 
-    return render_template('index.html', d=d)
+    # Build list of available terms
+    class_pickles = sorted(os.listdir('classes/'), reverse=True)
+    terms = []
+    for filename in class_pickles:
+        # classes-202010.pickle -> 202010
+        term = filename.split('.')[0].split('-')[1]
+        assert len(term) == 6
+
+        # Convert term to full name; e.g. 202010 -> Fall 2019
+        year = term[:4]
+        semester = term[-2:]
+
+        if semester == '10':
+            name = 'Fall %s' % year
+        elif semester == '20':
+            name = 'Spring %s' % year
+        elif semester == '30':
+            name = 'Summer %s' % year
+        else:
+            continue
+
+        terms.append((term, name))
+
+    return render_template('index.html', d=d, terms=terms)
 
 @app.route('/getstarted')
 def getstarted():

@@ -14,20 +14,9 @@
         <form action="/submit" method="POST">
             <p><strong>Semester</strong></p>
             <select name="term">
-                <!-- <option value="202120">Spring 2021</option>
-                <option value="202110">Fall 2020</option>
-                <option value="202020">Spring 2020</option>-->
-                <option value="202010">Fall 2019</option>
-                <option value="201920">Spring 2019</option>
-                <option value="201910">Fall 2018</option>
-                <option value="201820">Spring 2018</option>
-                <option value="201810">Fall 2017</option>
-                <option value="201720">Spring 2017</option>
-                <option value="201710">Fall 2016</option>
-                <option value="201620">Spring 2016</option>
-                <option value="201610">Fall 2015</option>
-                <option value="201520">Spring 2015</option>
-                <option value="201510">Fall 2014</option>
+                {% for term, name in terms %}
+                <option value="{{ term }}">{{ name }}</option>
+                {% endfor %}
             </select>
             <p><strong>Gender</strong></p>
             <select name="gender">

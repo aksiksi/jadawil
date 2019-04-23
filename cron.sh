@@ -4,10 +4,10 @@
 VENV_PATH=~/.venv/main2
 REPO_PATH=~/Repos/jadawil
 
-echo "source $VENV_PATH/bin/activate"
 source $VENV_PATH/bin/activate
 
-echo "python $REPO_PATH/updatepickle.py"
+cd $REPO_PATH
+
 python $REPO_PATH/updatepickle.py
 if [ $? -ne 0 ]; then
     echo "Update pickle failed!"

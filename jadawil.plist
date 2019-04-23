@@ -1,14 +1,18 @@
 <!--
-    Place this file under /Library/LaunchAgents/ on macOS to setup a cron job
+    Place this file under /Library/LaunchAgents/ on macOS to setup a cron job.
 
-    Make sure you have the permissions setup as follows:
+    First, copy "cron.sh" somewhere and modify the path below to point to it.
+
+    Next, make sure you have the .plist permissions setup as follows:
 
     sudo chown root:wheel /Library/LaunchAgents/jadawil.plist
     sudo chmod 644 /Library/LaunchAgents/jadawil.plist
 
-    Then load it:
+    Finally, load it:
 
     sudo launchctl load /Library/LaunchAgents/jadawil.plist
+
+    By default, this script will run every Sunday at midnight.
 -->
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -16,12 +20,8 @@
 <dict>
   <key>Label</key>
   <string>me.assil.jadawil</string>
-  <key>ProgramArguments</key>
-  <array>
-    <string>bash</string>
-    <string>-c</string>
-    <string>source /Users/aksiksi/.virtualenvs/main2/bin/activate; python /Users/aksiksi/Projects/Python/jadawil/updatepickle.py</string>
-  </array>
+  <key>Program</key>
+  <string>/Users/aksiksi/Projects/Python/jadawil/cron.sh</string>
   <key>StartCalendarInterval</key>
   <dict>
     <key>Hour</key>
@@ -31,7 +31,11 @@
     <integer>0</integer>
 
     <key>Weekday</key>
-    <integer>6</integer>
+    <integer>0</integer>
   </dict>
+  <key>StandardOutPath</key>
+  <string>/tmp/jadawil.stdout</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/jadawil.stderr</string>
 </dict>
 </plist>

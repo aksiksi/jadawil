@@ -3,12 +3,13 @@
 # Paths below should be absolute
 VENV_PATH=~/.venv/main2
 REPO_PATH=~/Repos/jadawil
+LOGFILE=/tmp/jadawil.log
 
 source $VENV_PATH/bin/activate
 
 cd $REPO_PATH
 
-python $REPO_PATH/updatepickle.py
+python $REPO_PATH/updatepickle.py &> $LOGFILE
 if [ $? -ne 0 ]; then
     echo "Update pickle failed!"
 else

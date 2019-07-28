@@ -6,6 +6,7 @@ REPO_PATH=~/Repos/jadawil
 LOGFILE=/tmp/jadawil.log
 
 source $VENV_PATH/bin/activate
+pip install -r requirements.txt
 
 cd $REPO_PATH
 

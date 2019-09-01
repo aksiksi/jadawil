@@ -9,6 +9,8 @@ from bs4 import BeautifulSoup
 from collections import defaultdict
 from secret import username, password
 
+HERE = os.path.dirname(os.path.realpath(__file__))
+
 
 def html_to_pickle(source, term):
     '''Collect data from HTML source and write it to a pickle.'''
@@ -148,7 +150,7 @@ def html_to_pickle(source, term):
             courses[index] = info
 
     # Write final dict to pickle dir
-    with open('classes/classes-{}.pickle'.format(term), 'wb') as f:
+    with open(os.path.join(HERE, 'classes/classes-{}.pickle'.format(term)), 'wb') as f:
         pickle.dump(courses_by_abbrev, f)
 
 def source_grabber(term):
@@ -224,4 +226,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

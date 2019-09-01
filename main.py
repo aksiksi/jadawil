@@ -81,15 +81,15 @@ def main():
         assert len(term) == 6
 
         # Convert term to full name; e.g. 202010 -> Fall 2019
-        year = term[:4]
-        semester = term[-2:]
+        year = int(term[:4])
+        semester = int(term[-2:])
 
-        if semester == '10':
-            name = 'Fall %s' % year
-        elif semester == '20':
-            name = 'Spring %s' % year
-        elif semester == '30':
-            name = 'Summer %s' % year
+        if semester == 10:
+            name = 'Fall %d' % (year-1)
+        elif semester == 20:
+            name = 'Spring %d' % year
+        elif semester == 30:
+            name = 'Summer %d' % year
         else:
             continue
 

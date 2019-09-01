@@ -18,4 +18,6 @@ A web application running with Flask that allows UAEU students to schedule their
 
 ## Term Format
 
-For Fall, the format is `YYYY10`, where `YYYY` is the current year.  For example, Fall 2019 -> `201910`. For Spring, `YYYY20`, where `YYYY` is the current year.
+For Fall, the format is `YYYY10`, where `YYYY` is the *next* year.  For example, Fall 2019 -> `202010`.
+
+For Spring, `YYYY20`, where `YYYY` is the current year. Summer is the same, but with `YYYY30`.

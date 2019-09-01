@@ -26,5 +26,8 @@ def main():
     # Push to heroku
     subprocess.call(['git', 'push', 'heroku', 'master'])
 
+    # Push to GH
+    subprocess.call(['git', 'push', 'origin', 'master'])
+
 if __name__ == '__main__':
     main()

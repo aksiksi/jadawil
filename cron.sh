@@ -12,7 +12,9 @@ echo "source $VENV_PATH/bin/activate"
 source $VENV_PATH/bin/activate
 pip install -r requirements.txt
 
+# Pull any changes from remote
 cd $REPO_PATH
+git pull origin master
 
 echo "python $REPO_PATH/updatepickle.py"
 python $REPO_PATH/updatepickle.py &> $LOGFILE

@@ -6,7 +6,7 @@ REPO_PATH=~/Repos/jadawil
 LOGFILE=/tmp/jadawil.log
 
 # Override $HOME to detect Git creds
-export HOME=/home/aksiksi
+# export HOME=/home/htpc
 
 echo "source $VENV_PATH/bin/activate"
 source $VENV_PATH/bin/activate

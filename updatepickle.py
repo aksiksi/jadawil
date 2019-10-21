@@ -21,11 +21,6 @@ def main():
     # Commit changes
     subprocess.call(['git', 'commit', '-m', 'Update class pickles'])
 
-    print("Pushing to Heroku...")
-
-    # Push to heroku
-    subprocess.call(['git', 'push', 'heroku', 'master'])
-
     # Push to GH
     subprocess.call(['git', 'push', 'origin', 'master'])
 

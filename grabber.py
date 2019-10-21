@@ -7,7 +7,13 @@ import cPickle as pickle
 import os
 from bs4 import BeautifulSoup
 from collections import defaultdict
-from secret import username, password
+
+try:
+    from secret import username, password
+except:
+    import os
+    username = os.getenv('UAEU_USERNAME')
+    password = os.getenv('UAEU_PASSWORD')
 
 HERE = os.path.dirname(os.path.realpath(__file__))
 

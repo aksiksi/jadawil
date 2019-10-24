@@ -1,84 +1,134 @@
+import asyncio
 import os
 import random
 import string
 import time
 
+import aiohttp
 import requests
 
-from selenium import webdriver
 
-ESERVICES_REG_PAGE = "https://eservices.uaeu.ac.ae/StudentRegistrationSsb/ssb/registration"
-USERNAME = os.getenv("BANNER_USERNAME")
-PASSWORD = os.getenv("BANNER_PASSWORD")
-SESSION_CHARS = string.ascii_lowercase + string.digits
+UAEU_BASE_URL = "eservices.uaeu.ac.ae"
 
 
-def get_new_timestamp():
-    return str(int(time.time() * 1000))
+def get_session_id():
+    session_id = "".join(random.sample(string.ascii_lowercase, 5)) + str(int(time.time() * 1000))
+    return session_id
 
 
-print("Starting up Selenium...")
-options = webdriver.FirefoxOptions()
-options.add_argument('--headless')
-driver = webdriver.Firefox(options=options)
-driver.delete_all_cookies()
+class CourseGrabber:
+    """Grabs courses for one or more terms.
 
-print("Getting first page...")
-driver.get(ESERVICES_REG_PAGE)
+    Args:
+        loop: asyncio event loop
+        base_url (str): Base Banner URL for university (e.g., eservices.uaeu.ac.ae)"
+    """
+    def __init__(self, base_url):
+        self.session = None
 
-# Authenticate via SAML/SSO
-# Go to auth. only page
-#elem = driver.find_element_by_id("preRegLink")
-#elem.click()
-#
-## Enter user/pass and submit
-#print("Authenticating...")
-#user = driver.find_element_by_name("username")
-#password = driver.find_element_by_name("password")
-#user.send_keys(USERNAME)
-#password.send_keys(PASSWORD)
-#driver.find_element_by_class_name("credentials_input_submit").click()
+        # Build university-specific URLs
+        self.terms_url = "https://%s/StudentRegistrationSsb/ssb/classSearch/getTerms" \
+                         "?dataType=json&searchTerm=&offset=1&max=-1" % base_url
+        self.start_search_url = \
+            "https://%s/StudentRegistrationSsb/ssb/term/search?mode=search" % base_url
+        self.reset_search_url = \
+            "https://%s/StudentRegistrationSsb/ssb/classSearch/resetDataForm" % base_url
+        self.subjects_url = \
+            "https://%s/StudentRegistrationSsb/ssb/classSearch/get_subject" \
+            "?dataType=json&term={term}&offset=1&max=-1&uniqueSessionId=" \
+            "{session_id}" % base_url
+        self.courses_url = \
+            "https://%s/StudentRegistrationSsb/ssb/searchResults/searchResults" \
+            "?txt_subject={subject}&txt_term={term}&startDatepicker=&endDatepi" \
+            "cker=&pageOffset=0&pageMaxSize=1000&sortColumn=subjectDescription&" \
+            "sortDirection=asc&uniqueSessionId={session_id}" % base_url
 
-# Store cookies in a Requests session
-session = requests.Session()
-# cookies = driver.get_cookies()
-# print(cookies)
-# for cookie in cookies:
-#     session.cookies.set(cookie["name"], cookie["value"])
+    def get_terms(self):
+        return [each["code"] for each in requests.get(self.terms_url).json()]
 
-# Get all available terms
-resp = session.get("https://eservices.uaeu.ac.ae/StudentRegistrationSsb/ssb/classSearch/getTerms?dataType=json&searchTerm=&offset=1&max=-1")
-latest_term = resp.json()[2]["code"]
-print(resp.json())
+    async def get_subjects(self, term, client):
+        """Get all subjects for a given term."""
+        args = {"session_id": self.session_id, "term": term}
+        url = self.subjects_url.format(**args)
 
-# Generate a random 18 character session ID
-# From Banner JS: combine a random 5-letter string with current timestamp
-session_id = "".join(random.sample(string.ascii_lowercase, 5)) + get_new_timestamp()
+        async with client.get(url) as resp:
+            data = await resp.json()
+            print(data)
 
-# Start a search
-data = {
-    "uniqueSessionId": session_id,
-    "dataType": "json",
-    "term": latest_term,
-}
-resp = session.post("https://eservices.uaeu.ac.ae/StudentRegistrationSsb/ssb/term/search?mode=search", data=data)
-print(resp)
+        return data
 
-# Get all available subjects for latest term
-resp = session.get(f"https://eservices.uaeu.ac.ae/StudentRegistrationSsb/ssb/classSearch/get_subject?dataType=json&term={latest_term}&offset=1&max=-1&uniqueSessionId={session_id}&_={get_new_timestamp()}")
-print(resp.json())
+    async def get_courses(self, term, subject, session_id, client):
+        args = {"session_id": session_id, "term": term, "subject": subject}
+        url = self.courses_url.format(**args)
 
-subject = "MATH"
+        async with client.get(url) as resp:
+            data = await resp.json()
 
-# Get MATH subject
-resp = session.get(f"https://eservices.uaeu.ac.ae/StudentRegistrationSsb/ssb/classSearch/get_subject?dataType=json&term={latest_term}&offset=1&max=10&searchTerm={subject}&uniqueSessionId={session_id}&_={get_new_timestamp()}")
-print(resp.json())
+        if not data["success"]:
+            return {}
 
-resp = session.get(f"https://eservices.uaeu.ac.ae/StudentRegistrationSsb/ssb/searchResults/searchResults?txt_subject={subject}&txt_term={latest_term}&startDatepicker=&endDatepicker=&pageOffset=0&pageMaxSize=10&sortColumn=subjectDescription&sortDirection=asc&uniqueSessionId={session_id}")
-print(resp.json().keys())
+        # Transform list to dict of subject -> course number -> data
+        transformed = {}
 
-# To start another search
-resp = session.post("https://eservices.uaeu.ac.ae/StudentRegistrationSsb/ssb/classSearch/resetDataForm", data={"uniqueSessionId": session_id})
+        for info in data["data"]:
+            course_number = info["courseNumber"]
+            if subject in transformed:
+                transformed[subject][course_number] = info
+            else:
+                transformed[subject] = {course_number: info}
 
-resp = session.get(f"https://eservices.uaeu.ac.ae/StudentRegistrationSsb/ssb/searchResults/searchResults?txt_subject=ELEC&txt_term={latest_term}&startDatepicker=&endDatepicker=&pageOffset=0&pageMaxSize=10&sortColumn=subjectDescription&sortDirection=asc&uniqueSessionId={session_id}")
-print(resp.json().keys())
+        return transformed
+
+    async def search(self, term, subjects, client):
+        """Start a new Banner course search for a given term."""
+        loop = asyncio.get_running_loop()
+
+        # Start new search session
+        session_id = get_session_id()
+        payload = {
+            "uniqueSessionId": session_id,
+            "dataType": "json",
+            "term": term,
+        }
+
+        async with client.post(self.start_search_url, data=payload) as resp:
+            data = await resp.json()
+
+        # Get all subjects for this term
+        if not subjects:
+            subjects = [each["code"] for each in
+                        await self.get_subjects(term, client)]
+
+        # Get courses for all subjects in the term
+        tasks = [self.get_courses(term, subject, session_id, client) for subject in subjects]
+        results = []
+
+        for result in await asyncio.gather(*tasks, loop=loop):
+            results += result
+
+        # Reset the session
+        async with client.post(self.reset_search_url,
+                               data={"uniqueSessionId": session_id}) as resp:
+            data = await resp.text()
+
+        return results
+
+    async def fetch(self, terms, subjects=[]):
+        """Start searching for courses in one or more terms."""
+        loop = asyncio.get_running_loop()
+
+        async with aiohttp.ClientSession(loop=loop) as client:
+            tasks = [self.search(term, subjects, client) for term in terms]
+            results = await asyncio.gather(*tasks, loop=loop)
+
+        return results
+
+def main():
+    grabber = CourseGrabber(base_url=UAEU_BASE_URL)
+    terms = grabber.get_terms()
+    output = asyncio.run(grabber.fetch(["202010"], ["MATH,ELEC"]))
+
+    print(output)
+
+if __name__ == "__main__":
+    main()

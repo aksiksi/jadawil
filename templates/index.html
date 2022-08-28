@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Jadawil{% endblock %}
+
+{% block nav %}
+<li class="active"><a href="/">Home</a></li>
+<li><a href="/getstarted">Get Started</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="https://www.facebook.com/jadawil.ae" style="color: #1B9294; text-decoration: underline;">Jadawil on Facebook</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="well">
+        <form action="/submit" method="POST">
+            <p><strong>Semester</strong></p>
+            <select name="term">
+                {% for term, name in terms %}
+                <option value="{{ term }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+            <p><strong>Campus</strong></p>
+            <select name="campus">
+                <option value="B">Male</option>
+                <option value="G">Female</option>
+            </select>
+            <p><strong>Courses</strong></p>
+                <input type="text" name="1" placeholder="Example: MATH 1110"/>
+                <input type="text" name="2" />
+                <input type="text" name="3" />
+                <input type="text" name="4" />
+                <br />
+                <input type="text" name="5" />
+                <input type="text" name="6" />
+                <input type="text" name="7" />
+                <input type="text" name="8" />
+            <p><strong>Constant CRNs</strong></p>
+                <input type="text" name="9" placeholder="Example: 27010"/>
+                <input type="text" name="10" />
+                <input type="text" name="11" />
+                <input type="text" name="12" />
+                <br />
+                <input type="text" name="13" />
+                <input type="text" name="14" />
+                <input type="text" name="15" />
+                <input type="text" name="16" />
+
+                <p align="center" style="margin-top: 15px;"><button type="btn-submit" style="font-size: 1.3em; height: 1.7em; width: 5em;" class="btn">Submit</button></p>
+        </form>
+
+        <p style="font-size: 10px;">Course data last updated on <b>{{ d|date }}</b>.</p>
+
+        <h2>Updates</h2>
+        <ul>
+            <li><b>[25/10/2019]</b> - Updated Jadawil to work with new Banner/eServices design.</li>
+            <li><b>[13/04/2019]</b> - Added course data for Fall 2019.</li>
+            <li><b>[16/03/2018]</b> - Added course data for Fall 2018.</li>
+            <li><b>[26/10/2017]</b> - Added course data for Spring 2018.</li>
+            <li><b>[09/04/2017]</b> - Added course data for Fall 2017.</li>
+            <li><b>[10/10/2016]</b> - Added course data for Spring 2017.</li>
+            <li><b>[13/08/2016]</b> - <a href="https://www.facebook.com/Billy97">Bilal Hejase</a> implemented a new feature that makes it easier to find suitable general education courses for all majors. Try it out!</li>
+            <li><b>[11/04/2016]</b> - Added course data for Fall 2016.</li>
+            <li><b>[25/10/2015]</b> - Added course data for Spring 2016.</li>
+            <li><b>[03/05/2015]</b> - Jadawil now checks for final exam conflicts. If there are any, they will be displayed at the top of results page.</li>
+            <li><b>[26/04/2015]</b> - Added course data for Fall 2015.</li>
+            <li><b>[08/11/2014]</b> - Updated course data for Spring 2015, added term selection option, made some small fixes.</li>
+            <li><b>[07/05/2014]</b> - The course data has been updated for Fall 2014.</li>
+            <li><b>[18/11/2013]</b> - Updated course data and added seats taken to each section in results.</li>
+            <li><b>[08/11/2013]</b> - Updated course data to Spring 2014 and added section conflict finder. Direct conflicts will be displayed if no schedules are found.</li>
+            <li><b>[13/09/2013]</b> - Updated the eServices course scraper to work with the new design and added an intro video.</li>
+        </ul>
+
+        <h2>Contributors</h2>
+
+        <h4><a href="https://www.facebook.com/Billy97">Bilal Hejase</a> - EE student at UAEU</h4>
+    </div>
+
+    <div class="well">
+        <h2>Discussion</h2>
+
+        <div id="disqus_thread"></div>
+        <script>
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+            var disqus_config = function () {
+                this.page.url = 'http://jadawil.xyz';  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = 'jadawil'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+
+            (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//jadawil.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+        </script>
+
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>
+{% endblock %}

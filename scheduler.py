@@ -1,3 +1,4 @@
+import logging
 import itertools
 import random
 import time
@@ -5,6 +6,8 @@ from datetime import datetime
 from collections import defaultdict, OrderedDict
 
 import jsonlines
+
+logger = logging.getLogger(__name__)
 
 
 DAYS_OF_WEEK = [
@@ -49,6 +52,10 @@ class CombinationError(Exception):
 
 
 class MissingInfoError(Exception):
+    pass
+
+
+class NoCoursesError(Exception):
     pass
 
 
@@ -370,6 +377,10 @@ class Scheduler:
 
     def find_exam_conflicts(self, courses):
         """Quick check between courses to ensure no final exam date conflicts."""
+        if len(courses) == 0:
+            logger.error("No courses specified")
+            return []
+
         samples = []
 
         # Store pairs of conflicted (LOL) courses
@@ -434,6 +445,10 @@ class Scheduler:
             else:
                 course_info = info
             courses[code] = course_info
+
+        if not courses:
+            logging.error(f"No courses found from input: courses={self.courses} unfiltered={unfiltered_courses} constants={self.constants}")
+            raise NoCoursesError
 
         # Make sure possible combinations not too high
         product = 1

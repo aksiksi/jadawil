@@ -136,6 +136,9 @@ def submit():
                 return render_template("results.html", schedules=[], num_schedules=num_schedules)
             except scheduler.MissingInfoError:
                 return render_template("results.html", schedules=[], num_schedules=-2)
+            except scheduler.NoCoursesError:
+                # I know - this is dumb.
+                return render_template("results.html", schedules=[], num_schedules=-3)
 
             end = time.time() - start
             num_schedules = len(s.results)

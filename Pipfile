@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+gunicorn = ">=19.9.0"
+aiohttp = ">=3.6.2"
+flask = ">=1.1.1"
+jinja2 = ">=2.10.3"
+requests = ">=2.22.0"
+jsonlines = ">=1.2.0"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"

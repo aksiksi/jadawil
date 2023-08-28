@@ -13,6 +13,7 @@ import requests
 BASE_URL = "eservices.uaeu.ac.ae"
 PAGE_SIZE = 50
 MAX_TIMEOUT = 10
+MAX_RESULTS = 100_000
 
 # Setup a basic stdout logger
 log = logging.getLogger(__name__)
@@ -45,14 +46,14 @@ class CourseGrabber:
 
         # Build university-specific URLs
         self.terms_url = "https://%s/StudentRegistrationSsb/ssb/classSearch/getTerms" \
-                         "?dataType=json&searchTerm=&offset=1&max=-1" % base_url
+                         "?dataType=json&searchTerm=&offset=1&max=%d" % (base_url, MAX_RESULTS)
         self.start_search_url = \
             "https://%s/StudentRegistrationSsb/ssb/term/search?mode=search" % base_url
         self.reset_search_url = \
             "https://%s/StudentRegistrationSsb/ssb/classSearch/resetDataForm" % base_url
         self.subjects_url = \
             "https://%s/StudentRegistrationSsb/ssb/classSearch/get_subject" \
-            "?dataType=json&term={term}&offset=1&max=-1" % base_url
+            "?dataType=json&term={term}&offset=1&max=%d" % (base_url, MAX_RESULTS)
         self.courses_url = \
             "https://%s/StudentRegistrationSsb/ssb/searchResults/searchResults" \
             "?txt_subject={subject}&txt_term={term}&startDatepicker=&endDatepi" \
